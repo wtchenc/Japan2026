@@ -151,12 +151,12 @@
                 date: "01/28 (三)",
                 title: "Day 1: 抵達沖繩 & 居酒屋體驗",
                 area: "沖繩那霸",
-                route: "https://www.google.com/maps/dir/Naha+Airport/THE+NEST+HOTEL+NAHA/Mikado+Naha/Jack's+Steak+House",
+                route: "https://www.google.com/maps/dir/Naha+Airport/THE+NEST+HOTEL+NAHA/Mikado+Naha/Steak+House+88+Tsuji",
                 mapFocus: "Mikado Naha",
                 events: [
                     { time: "19:20", title: "抵達那霸機場 (OKA)", desc: "搭計程車前往飯店 (約20分)", icon: "fa-plane-arrival", highlight: true },
                     { time: "20:30", title: "Check-in THE NEST", desc: "放行李", icon: "fa-hotel" },
-                    { time: "晚餐", title: "三笠食堂 (Mikado) / 傑克牛排", desc: "Mikado 強棒飯離飯店近；Jack's 營業至深夜但需排隊", icon: "fa-utensils", link: "Mikado Naha" }
+                    { time: "晚餐", title: "三笠食堂 / 88牛排 (辻本店)", desc: "Mikado 強棒飯離飯店近；88牛排營業至深夜 (Jack's 週三公休)", icon: "fa-utensils", link: "Steak House 88 Tsuji" }
                 ]
             },
             {
@@ -810,6 +810,83 @@
                                     </div>
                                     <span class="text-xs text-gray-400 bg-gray-100 px-2 py-0.5 rounded">CI 0121</span>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Rental Car Info -->
+                    <div class="bg-white rounded-xl shadow-sm border border-muji-border p-5">
+                        <h3 class="font-bold text-muji-text mb-3 flex items-center">
+                            <i class="fa-solid fa-car text-muji-primary mr-2"></i> 租車資訊
+                        </h3>
+                        <div class="space-y-6">
+                            <!-- OTS Okinawa -->
+                            <div class="border-l-2 border-muji-primary pl-3 relative">
+                                <div class="flex justify-between items-start">
+                                    <div>
+                                        <p class="text-[10px] text-muji-secondary font-bold mb-1">沖繩 (臨空豐崎營業所)</p>
+                                        <p class="font-bold text-muji-text text-sm">OTS Rent-a-car (HC級別)</p>
+                                    </div>
+                                    <span class="bg-orange-100 text-orange-600 text-[10px] px-2 py-1 rounded border border-orange-200 font-bold">當地支付</span>
+                                </div>
+                                
+                                <div class="mt-2 text-xs text-gray-600 space-y-1.5 font-mono bg-gray-50 p-3 rounded border border-gray-100">
+                                    <div class="flex justify-between">
+                                        <span class="text-gray-400">預約號碼</span>
+                                        <span class="font-bold text-lg text-muji-text">OTS1382312</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span class="text-gray-400">取車時間</span>
+                                        <span>01/29 08:30</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span class="text-gray-400">還車時間</span>
+                                        <span>01/31 19:00</span>
+                                    </div>
+                                    <div class="flex justify-between border-t border-dashed border-gray-300 pt-1 mt-1">
+                                        <span class="text-gray-400">支付金額</span>
+                                        <span class="font-bold">¥23,130</span>
+                                    </div>
+                                    <div class="text-[10px] text-gray-400 pt-1">
+                                        *含豪華安心險、定額ETC
+                                    </div>
+                                </div>
+                                <button onclick="openMap('OTS Rent-a-car Rinku Toyosaki')" class="mt-2 text-xs flex items-center text-muji-primary hover:text-muji-accent transition-colors w-full justify-center py-2 bg-muji-bg rounded border border-muji-border">
+                                    <i class="fa-solid fa-location-arrow mr-1.5"></i> 導航至臨空豐崎
+                                </button>
+                            </div>
+
+                            <!-- Toyota Fukuoka -->
+                            <div class="border-l-2 border-muji-accent pl-3 relative">
+                                <div class="flex justify-between items-start">
+                                    <div>
+                                        <p class="text-[10px] text-muji-secondary font-bold mb-1">九州 (福岡機場店)</p>
+                                        <p class="font-bold text-muji-text text-sm">TOYOTA Rent a Car</p>
+                                    </div>
+                                    <span class="bg-muji-bg text-muji-accent text-[10px] px-2 py-1 rounded border border-muji-border font-bold">已結算</span>
+                                </div>
+                                
+                                <div class="mt-2 text-xs text-gray-600 space-y-1.5 font-mono bg-gray-50 p-3 rounded border border-gray-100">
+                                    <div class="flex justify-between">
+                                        <span class="text-gray-400">預約號碼</span>
+                                        <span class="font-bold text-lg text-muji-text">99903633500</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span class="text-gray-400">取車時間</span>
+                                        <span>02/01 13:30</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span class="text-gray-400">還車時間</span>
+                                        <span>02/03 18:00</span>
+                                    </div>
+                                    <div class="flex justify-between border-t border-dashed border-gray-300 pt-1 mt-1">
+                                        <span class="text-gray-400">結算金額</span>
+                                        <span class="font-bold">¥47,932</span>
+                                    </div>
+                                </div>
+                                <button onclick="openMap('Toyota Rent a Car Fukuoka Airport')" class="mt-2 text-xs flex items-center text-muji-primary hover:text-muji-accent transition-colors w-full justify-center py-2 bg-muji-bg rounded border border-muji-border">
+                                    <i class="fa-solid fa-location-arrow mr-1.5"></i> 導航至福岡機場店
+                                </button>
                             </div>
                         </div>
                     </div>
