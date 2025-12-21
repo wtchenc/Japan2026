@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>2025 日本家族旅行</title>
+    
+    <!-- Google Fonts: Noto Sans TC -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind Config for Muji Style -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        muji: {
+                            bg: '#f9f9f9',      // 極淺灰背景
+                            card: '#ffffff',    // 純白卡片
+                            primary: '#736d66', // 亞麻棕 (主色)
+                            secondary: '#a6a29e', // 淺灰 (次要)
+                            accent: '#9a3412',  // 磚紅 (強調重點)
+                            text: '#333333',    // 深灰黑文字
+                            border: '#e5e7eb'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['"Noto Sans TC"', 'sans-serif'],
+                        mono: ['"Roboto"', 'monospace'], // 數字用
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Global Reset & Utility */
+        body {
+            background-color: #f9f9f9;
+            color: #333333;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        /* Hidden Scrollbar but functional */
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        /* Smooth Transition */
+        .fade-in {
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Custom Input Styles */
+        .muji-input {
+            appearance: none;
+            border: 1px solid #e5e5e5;
+            background: #fff;
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            width: 100%;
+            outline: none;
+            transition: all 0.2s;
+        }
+        .muji-input:focus {
+            border-color: #736d66;
+            box-shadow: 0 0 0 2px rgba(115, 109, 102, 0.1);
+        }
+
+        /* Timeline Connector */
+        .timeline-line::before {
+            content: '';
+            position: absolute;
+            top: 2rem;
+            bottom: -1rem;
+            left: 1rem;
+            width: 2px;
+            background: #e5e5e5;
+            z-index: 0;
+        }
+        .last-item .timeline-line::before {
+            display: none;
+        }
+    </style>
+</head>
+<body class="flex flex-col h-screen overflow-hidden text-muji-text">
+
+    <!-- Top Header -->
+    <header class="flex-none bg-muji-card border-b border-muji-border px-6 py-4 flex justify-between items-center shadow-sm z-20">
+        <div>
+            <h1 class="text-xl font-bold tracking-widest text-muji-primary">TRIP 2025</h1>
+            <p class="text-xs text-muji-secondary tracking-wider">沖繩・九州・福岡</p>
+        </div>
+        <div class="text-xs font-mono bg-muji-bg px-3 py-1 rounded-full text-muji-primary border border-muji-border">
+            Day <span id="current-day-display">1</span>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main id="app-container" class="flex-1 overflow-y-auto hide-scrollbar p-4 pb-24 relative">
+        <!-- Content will be injected here by JS -->
+    </main>
+
+    <!-- Bottom Navigation -->
+    <nav class="flex-none bg-white border-t border-muji-border pb-safe pt-2 px-2 shadow-[0_-2px_10px_rgba(0,0,0,0.02)] z-30">
+        <div class="flex justify-around items-center h-16">
+            <button onclick="switchTab('plan')" class="nav-btn w-full flex flex-col items-center justify-center space-y-1 text-muji-secondary active:scale-95 transition-transform" data-target="plan">
+                <i class="fa-regular fa-calendar-check text-xl"></i>
+                <span class="text-[10px]">行程</span>
+            </button>
+            <button onclick="switchTab('guide')" class="nav-btn w-full flex flex-col items-center justify-center space-y-1 text-muji-secondary active:scale-95 transition-transform" data-target="guide">
+                <i class="fa-solid fa-book-open text-xl"></i>
+                <span class="text-[10px]">導覽</span>
+            </button>
+            <button onclick="switchTab('food')" class="nav-btn w-full flex flex-col items-center justify-center space-y-1 text-muji-secondary active:scale-95 transition-transform" data-target="food">
+                <i class="fa-solid fa-utensils text-xl"></i>
+                <span class="text-[10px]">美食</span>
+            </button>
+            <button onclick="switchTab('lists')" class="nav-btn w-full flex flex-col items-center justify-center space-y-1 text-muji-secondary active:scale-95 transition-transform" data-target="lists">
+                <i class="fa-solid fa-list-check text-xl"></i>
+                <span class="text-[10px]">清單</span>
+            </button>
+            <button onclick="switchTab('info')" class="nav-btn w-full flex flex-col items-center justify-center space-y-1 text-muji-secondary active:scale-95 transition-transform" data-target="info">
+                <i class="fa-solid fa-circle-info text-xl"></i>
+                <span class="text-[10px]">資訊</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // --- Data: Itinerary ---
+        const tripData = [
+            {
+                date: "01/28 (三)",
+                title: "Day 1: 抵達沖繩 & 居酒屋體驗",
+                area: "沖繩那霸",
+                route: "https://www.google.com/maps/dir/Naha+Airport/THE+NEST+HOTEL+NAHA/Mikado+Naha/Jack's+Steak+House",
+                mapFocus: "Mikado Naha",
+                events: [
+                    { time: "19:20", title: "抵達那霸機場 (OKA)", desc: "搭計程車前往飯店 (約20分)", icon: "fa-plane-arrival", highlight: true },
+                    { time: "20:30", title: "Check-in THE NEST", desc: "放行李", icon: "fa-hotel" },
+                    { time: "晚餐", title: "三笠食堂 (Mikado) / 傑克牛排", desc: "Mikado 強棒飯離飯店近；Jack's 營業至深夜但需排隊", icon: "fa-utensils", link: "Mikado Naha" }
+                ]
+            },
+            {
+                date: "01/29 (四)",
+                title: "Day 2: 敘敘苑海景午餐 & 中部",
+                area: "沖繩中部",
+                route: "https://www.google.com/maps/dir/THE+NEST+HOTEL+NAHA/OTS+Rent-a-car+Rinku+Toyosaki/PARCO+CITY/American+Village/Aeon+Mall+Okinawa+Rycom",
+                mapFocus: "PARCO CITY",
+                events: [
+                    { time: "08:30", title: "OTS 取車 (Prius)", desc: "前往臨空豐崎營業所", icon: "fa-car", highlight: true, alert: "important" },
+                    { time: "10:00", title: "Parco City", desc: "3F 吉卜力、樂高、寶可夢中心", icon: "fa-bag-shopping" },
+                    { time: "11:00", title: "敘敘苑燒肉", desc: "【已預約】窗邊座位，午間套餐CP值高", icon: "fa-fire", link: "Jojoen Parco City" },
+                    { time: "14:00", title: "美國村", desc: "大國藥妝、Blue Seal 冰淇淋", icon: "fa-camera", link: "American Village Okinawa" },
+                    { time: "17:00", title: "永旺夢樂城 Rycom", desc: "看超大水族箱 (視時間而定)", icon: "fa-fish" },
+                    { time: "晚餐", title: "塔可飯 / A&W", desc: "Kijimuna 歐姆蛋塔可飯 或 A&W 麥根沙士", icon: "fa-burger" }
+                ]
+            },
+            {
+                date: "01/30 (五)",
+                title: "Day 3: 北部遠征：鯨鯊與恐龍",
+                area: "沖繩北部",
+                route: "https://www.google.com/maps/dir/THE+NEST+HOTEL+NAHA/Okinawa+Churaumi+Aquarium/Kouri+Shrimp/DINO+Dinosaur+Park+Yanbaru/Motobu+Ranch",
+                mapFocus: "Okinawa Churaumi Aquarium",
+                events: [
+                    { time: "09:00", title: "高速公路北上", desc: "車程約 1.5 - 2 小時", icon: "fa-road" },
+                    { time: "11:00", title: "美麗海水族館", desc: "黑潮之海 (鯨鯊餵食秀 13:00/15:00)、戶外海豚", icon: "fa-water", link: "Okinawa Churaumi Aquarium", highlight: true },
+                    { time: "13:30", title: "古宇利蝦蝦飯", desc: "蒜香奶油蝦，去橋下沙灘踩水看心形岩", icon: "fa-shrimp", link: "Kouri Shrimp" },
+                    { time: "15:30", title: "DINO 恐龍公園", desc: "山原亞熱帶之森，找暴龍！(名護御菓子御殿旁)", icon: "fa-dragon", link: "DINO Dinosaur Park Yanbaru Subtropical Forest" },
+                    { time: "晚餐", title: "燒肉本部牧場 / 琉球之牛", desc: "和牛推薦", icon: "fa-fire", link: "Motobu Ranch" }
+                ]
+            },
+            {
+                date: "01/31 (六)",
+                title: "Day 4: 南部探險 & DMM 水族館",
+                area: "沖繩南部",
+                route: "https://www.google.com/maps/dir/THE+NEST+HOTEL+NAHA/Gyokusendo+Cave/Itoman+Fish+Market/DMM+Kariyushi+Aquarium/OTS+Rent-a-car+Rinku+Toyosaki/Ramen+Danbo+Naha",
+                mapFocus: "Okinawa World",
+                events: [
+                    { time: "09:30", title: "玉泉洞", desc: "日本第二大鐘乳石洞", icon: "fa-mountain", link: "Okinawa World" },
+                    { time: "12:30", title: "系滿魚市場", desc: "戶外吃焗烤龍蝦、海膽，海鮮天堂", icon: "fa-fish", link: "Itoman Fish Market" },
+                    { time: "14:30", title: "DMM 水族館 & iias", desc: "聲光科技互動，地板透明水槽", icon: "fa-mobile-screen", link: "DMM Kariyushi Aquarium" },
+                    { time: "18:30", title: "OTS 還車", desc: "臨空豐崎營業所 (就在 iias 旁)", icon: "fa-check-circle", alert: "important" },
+                    { time: "晚餐", title: "暖暮 / 通堂拉麵", desc: "回那霸市區吃拉麵", icon: "fa-bowl-rice" }
+                ]
+            },
+            {
+                date: "02/01 (日)",
+                title: "Day 5: 移動日 & 鬼滅地獄巡禮",
+                area: "九州別府",
+                route: "https://www.google.com/maps/dir/Fukuoka+Airport/Yamada+SA/Kamado+Jigoku/Jigoku+Mushi+Kobo+Kannawa/AMANEK+Beppu+YULA-RE",
+                mapFocus: "Kamado Jigoku",
+                events: [
+                    { time: "10:10", title: "起飛 OKA -> FUK", desc: "12:00 抵達福岡", icon: "fa-plane-departure" },
+                    { time: "13:30", title: "博多取車 (Sienta)", desc: "前往別府，中途停山田 SA 買優酪乳", icon: "fa-car", highlight: true, alert: "important" },
+                    { time: "16:00", title: "地獄巡禮", desc: "灶地獄 (鬼滅相關/喝溫泉水)、海地獄 (蒂芬妮藍)", icon: "fa-volcano", link: "Kamado Jigoku" },
+                    { time: "晚餐", title: "地獄蒸工房 鐵輪", desc: "體驗用溫泉蒸氣蒸熟食材", icon: "fa-carrot", link: "Jigoku Mushi Kobo Kannawa" },
+                    { time: "住宿", title: "AMANEK YULA-RE", desc: "頂樓無邊際溫泉泳池", icon: "fa-hotel" }
+                ]
+            },
+            {
+                date: "02/02 (一)",
+                title: "Day 6: 叢林巴士 & 雪山絕景",
+                area: "別府",
+                route: "https://www.google.com/maps/dir/AMANEK+Beppu+YULA-RE/African+Safari/Beppu+Ropeway/Hachiman+Kamado+Shrine/Kamesho+Kururu+Sushi",
+                mapFocus: "African Safari Japan",
+                events: [
+                    { time: "09:30", title: "九州自然動物園", desc: "【已預約】Jungle Bus 餵獅子/熊/大象", icon: "fa-paw", link: "African Safari Japan", highlight: true },
+                    { time: "13:00", title: "午餐", desc: "園內餐廳 或 別府冷麵 胡月", icon: "fa-utensils" },
+                    { time: "14:30", title: "別府纜車 (鶴見岳)", desc: "上山看霧冰與玩雪 (備手套帽子)", icon: "fa-snowflake", link: "Beppu Ropeway" },
+                    { time: "17:00", title: "八幡竈門神社", desc: "鬼滅之刃發源地，看繪馬", icon: "fa-torii-gate", link: "Hachiman Kamado Shrine" },
+                    { time: "晚餐", title: "龜正壽司 / 東洋軒", desc: "龜正不能預約，建議 17:00 前抽號碼牌", icon: "fa-fish" }
+                ]
+            },
+            {
+                date: "02/03 (二)",
+                title: "Day 7: 門司港鐵道遊 & 返福岡",
+                area: "北九州/福岡",
+                route: "https://www.google.com/maps/dir/AMANEK+Beppu+YULA-RE/Kyushu+Railway+History+Museum/Mojiko+Retro/Hakata+Station/Richmond+Hotel+Fukuoka+Tenjin",
+                mapFocus: "Mojiko Retro",
+                events: [
+                    { time: "09:30", title: "前往門司港", desc: "車程約 1.5 - 2 小時", icon: "fa-car" },
+                    { time: "11:30", title: "九州鐵道紀念館", desc: "必玩：迷你火車駕駛體驗", icon: "fa-train", link: "Kyushu Railway History Museum" },
+                    { time: "13:00", title: "午餐: 燒咖哩", desc: "Princess Phi Phi 或 Bear Fruits", icon: "fa-bowl-rice" },
+                    { time: "14:30", title: "門司港懷舊區", desc: "藍翼橋開合、香蕉人合照", icon: "fa-camera", link: "Mojiko Retro" },
+                    { time: "18:00", title: "博多還車", desc: "晚餐：博多一雙 (泡泡系豚骨) 或 一幸舍", icon: "fa-check", alert: "important" },
+                    { time: "住宿", title: "Richmond Tenjin", desc: "入住福岡", icon: "fa-hotel" }
+                ]
+            },
+            {
+                date: "02/04 (三)",
+                title: "Day 8: 科學館 & 天神購物 (無車)",
+                area: "福岡天神",
+                route: "https://www.google.com/maps/dir/Richmond+Hotel+Fukuoka+Tenjin/Fukuoka+City+Science+Museum/Hyotan+Sushi/Mina+Tenjin/ShinShin+Ramen+Tenjin",
+                mapFocus: "Mina Tenjin",
+                events: [
+                    { time: "10:00", title: "福岡市科學館", desc: "六本松站。無重力訓練器、互動裝置", icon: "fa-flask", link: "Fukuoka City Science Museum" },
+                    { time: "12:30", title: "葫蘆壽司 (Hyotan)", desc: "午間套餐CP值高，活車蝦/星鰻", icon: "fa-sushi", link: "Hyotan Sushi" },
+                    { time: "14:30", title: "Mina Tenjin", desc: "Coca, Uniqlo, Loft (飯店對面)", icon: "fa-bag-shopping" },
+                    { time: "17:00", title: "天神地下街", desc: "Bake Cheese Tart, Salut! 雜貨", icon: "fa-store" },
+                    { time: "晚餐", title: "ShinShin 拉麵", desc: "天神本店，細麵清甜湯頭", icon: "fa-bowl-rice" }
+                ]
+            },
+            {
+                date: "02/05 (四)",
+                title: "Day 9: 鋼彈與博多漫遊",
+                area: "福岡博多",
+                route: "https://www.google.com/maps/dir/Richmond+Hotel+Fukuoka+Tenjin/LaLaport+Fukuoka/Kushida+Shrine/Canal+City+Hakata/Hanamidori+Hakata+Station",
+                mapFocus: "LaLaport Fukuoka",
+                events: [
+                    { time: "10:00", title: "LaLaport 福岡", desc: "1:1 RX-93ff 鋼彈 (整點會動)、Jump Shop", icon: "fa-robot", link: "LaLaport Fukuoka", highlight: true },
+                    { time: "13:00", title: "午餐", desc: "LaLaport 美食街 (久留米拉麵/金子半之助)", icon: "fa-utensils" },
+                    { time: "15:00", title: "櫛田神社", desc: "看巨大山笠，逛川端通商店街", icon: "fa-torii-gate", link: "Kushida Shrine" },
+                    { time: "17:30", title: "博多運河城", desc: "看音樂水舞秀", icon: "fa-water" },
+                    { time: "晚餐", title: "博多華味鳥", desc: "水炊雞肉鍋，膠原蛋白滿滿", icon: "fa-pot-food", link: "Hanamidori" }
+                ]
+            },
+            {
+                date: "02/06 (五)",
+                title: "Day 10: 重返沖繩",
+                area: "福岡 -> 沖繩",
+                route: "https://www.google.com/maps/dir/Richmond+Hotel+Fukuoka+Tenjin/Hakata+Station/Fukuoka+Airport/Naha+Airport/THE+NEST+HOTEL+NAHA",
+                mapFocus: "Hakata Station",
+                events: [
+                    { time: "上午", title: "睡飽 / 博多站", desc: "買努努雞 (冷炸雞) 當點心", icon: "fa-bed" },
+                    { time: "午餐", title: "博多站牛舌 / 牛腸鍋", desc: "Tanya HAKATA 或 Oyama", icon: "fa-utensils" },
+                    { time: "15:30", title: "前往福岡機場", desc: "國內線最後採買 (明太子仙貝)", icon: "fa-plane-departure" },
+                    { time: "17:55", title: "起飛 FUK -> OKA", desc: "19:50 抵達沖繩，搭計程車回飯店", icon: "fa-plane-arrival" },
+                    { time: "晚餐", title: "居酒屋 / A&W", desc: "飯店附近覓食", icon: "fa-beer" }
+                ]
+            },
+            {
+                date: "02/07 (六)",
+                title: "Day 11: 牧志市場海鮮宴",
+                area: "沖繩那霸",
+                route: "https://www.google.com/maps/dir/THE+NEST+HOTEL+NAHA/Naminoue+Shrine/Makishi+Public+Market/Kokusai-dori/Umikaji+Terrace+Senagajima",
+                mapFocus: "Makishi Public Market",
+                events: [
+                    { time: "10:00", title: "波上宮", desc: "海邊神社，買書包御守", icon: "fa-torii-gate", link: "Naminoue Shrine" },
+                    { time: "12:00", title: "牧志公設市場", desc: "1F挑海鮮(夜光貝/刺身)，2F代客料理", icon: "fa-fish", link: "Makishi Public Market", highlight: true },
+                    { time: "14:30", title: "國際通", desc: "唐吉訶德、Calbee+ 現炸薯條", icon: "fa-bag-shopping" },
+                    { time: "17:00", title: "瀨長島", desc: "Umikaji Terrace 看飛機降落與夕陽", icon: "fa-plane" },
+                    { time: "晚餐", title: "幸福鬆餅 / 傑克牛排", desc: "看夕陽吃鬆餅 或 回市區吃肉", icon: "fa-utensils" }
+                ]
+            },
+            {
+                date: "02/08 (日)",
+                title: "Day 12: 飯糰與回家",
+                area: "歸途",
+                route: "https://www.google.com/maps/dir/THE+NEST+HOTEL+NAHA/Naha+Airport",
+                mapFocus: "Naha Airport",
+                events: [
+                    { time: "09:30", title: "退房前往機場", desc: "搭計程車", icon: "fa-taxi" },
+                    { time: "10:30", title: "豬肉蛋飯糰 (Potama)", desc: "國內線航廈，必吃炸蝦口味", icon: "fa-rice-cracker" },
+                    { time: "11:55", title: "起飛 CI 0121", desc: "OKA -> TPE", icon: "fa-plane-departure", highlight: true }
+                ]
+            }
+        ];
+
+        // --- Data: Checklist ---
+        const checklistData = [
+            "護照 (確認效期)", "日本駕照譯本", "台灣駕照正本", "VJW 登錄 (Visit Japan Web)",
+            "行動電源 & 線", "行動網卡 (eSIM)", 
+            "九州租車：確認雪胎 (Studless Tires)", "預約：African Safari Jungle Bus", 
+            "預約餐廳：敘敘苑, 本部牧場, 華味鳥", "保暖衣物 (九州2-10度/手套帽子)",
+            "泳衣 (別府飯店用)", "信用卡 & 日幣現金"
+        ];
+
+        // --- Guide Content ---
+        const guideContent = [
+            {
+                title: "Mina Tenjin 購物攻略",
+                mapQuery: "Mina Tenjin Fukuoka",
+                content: "位於天神北側，2023年重新改裝。重點品牌集中在低樓層：<br><b>1F:</b> JINS 眼鏡、UNIQLO<br><b>2F:</b> GU (超大型店鋪)<br><b>3F:</b> <b>COCA</b> (日系平價休閒風，必逛！)<br><b>4F:</b> Loft 生活雜貨<br>飯店過馬路即達，非常方便。"
+            },
+            {
+                title: "九州自然動物園",
+                mapQuery: "Kyushu Natural Zoological Park African Safari",
+                content: "African Safari 最大的特色是可以搭乘 Jungle Bus (叢林巴士) 進入野生動物區。你可以用夾子直接餵食獅子、大象和黑熊。<br><br><b>重要提醒：</b>務必在 1/2 (一個月前) 上網預約 Jungle Bus 座位。若遇上下雪，請確認租車公司提供無釘防滑雪胎 (Studless Tires)。"
+            },
+            {
+                title: "TeamLab Forest 福岡",
+                mapQuery: "TeamLab Forest Fukuoka",
+                content: "位於福岡巨蛋旁的 E-ZO FUKUOKA 內。這裡與一般的展覽不同，強調「捕捉」與「運動」。<br><b>捕捉森林：</b>下載 APP 後，可以用手機捕捉牆上的動物，非常適合小孩。<br><b>運動森林：</b>需要跳躍、踩踏的互動光影，是讓孩子放電的好地方。"
+            },
+            {
+                title: "波上宮 (懸崖上的神社)",
+                mapQuery: "Naminoue Shrine",
+                content: "那霸市區唯一的沙灘旁，聳立在懸崖上的紅瓦神社，是沖繩八社之首。<br><b>拍照點：</b>建議走到旁邊的「波之上跨海大橋」人行道，可以拍到神社聳立在懸崖與大海之上的絕美角度。<br><b>御守：</b>這裡有可愛的書包造型御守，很適合買給小學生當護身符。"
+            },
+            {
+                title: "門司港懷舊區",
+                mapQuery: "Mojiko Retro",
+                content: "充滿大正浪漫風格的紅磚建築群。<br><b>必看：</b>門司港車站 (日本重要文化財)、藍翼橋 (整點會開合)。<br><b>必吃：</b>燒咖哩 (Baked Curry)，濃郁起司與蛋液包裹著咖哩飯，是這裡的靈魂美食。"
+            },
+            {
+                title: "美麗海 vs DMM 水族館",
+                content: `這趟旅程安排了兩個截然不同的水族館：<br><br>
+                <div class="flex items-center justify-between mb-1">
+                    <b class="text-muji-text">1. 美麗海水族館 (北部)</b>
+                    <button onclick="openMap('Okinawa Churaumi Aquarium')" class="text-xs bg-gray-50 border border-muji-border px-2 py-1 rounded text-muji-secondary hover:text-muji-primary transition"><i class="fa-solid fa-map-location-dot mr-1"></i>地圖</button>
+                </div>
+                特色是「壯闊」。擁有世界級的「黑潮之海」巨大水槽與鯨鯊，戶外有免費海豚秀與海龜館，適合欣賞大自然的宏偉。<br><br>
+                <div class="flex items-center justify-between mb-1">
+                    <b class="text-muji-text">2. DMM Kariyushi 水族館 (南部)</b>
+                    <button onclick="openMap('DMM Kariyushi Aquarium')" class="text-xs bg-gray-50 border border-muji-border px-2 py-1 rounded text-muji-secondary hover:text-muji-primary transition"><i class="fa-solid fa-map-location-dot mr-1"></i>地圖</button>
+                </div>
+                特色是「互動與科技」。結合聲光投影，地板有透明玻璃可看下方水槽，還可以近距離觸摸與餵食樹懶、水豚等動物，體驗感更強。`
+            },
+            {
+                title: "別府地獄巡禮精選",
+                mapQuery: "Umi Jigoku",
+                content: "別府有七大地獄，時間有限建議挑選 2-3 個代表性即可：<br><b>1. 海地獄 (Umi Jigoku)：</b> 必去！規模最大，泉水呈現夢幻的蒂芬妮藍 (Cobalt Blue)，庭園造景也很美。<br><b>2. 灶地獄 (Kamado Jigoku)：</b> CP值最高。一處就能看到多種顏色的溫泉，還有可以喝的溫泉水、蒸氣敷臉，且與《鬼滅之刃》炭治郎有淵源。<br><b>3. 血池地獄：</b> 泉水呈現鮮紅色，非常特別。"
+            },
+            {
+                title: "沖繩自駕小撇步",
+                content: "1. <b>右駕：</b> 雨刷和方向燈跟台灣相反，記得口訣「靠左開」。<br>2. <b>導航：</b> 輸入 MapCode 最準確。<br>3. <b>紅綠燈：</b> 日本紅燈通常不能左轉，需等綠燈箭頭。<br>4. <b>停車：</b> 務必停在收費停車場，不可路邊違停。"
+            }
+        ];
+
+        // --- Food Map Data ---
+        const foodData = [
+            {
+                area: "沖繩 - 北部 (Okinawa North)",
+                spots: [
+                    { name: "Captain Kangaroo", type: "漢堡", icon: "fa-burger", desc: "名護人氣No.1漢堡，排隊名店", link: "Captain Kangaroo Hamburger" },
+                    { name: "古宇利蝦蝦飯", type: "蝦飯", icon: "fa-shrimp", desc: "必吃蒜香奶油蝦餐車", link: "Kouri Shrimp" },
+                    { name: "岸本食堂 (Kishimoto Soba)", type: "麵食", icon: "fa-bowl-rice", desc: "百年老店，木灰麵條有嚼勁", link: "Kishimoto Soba" },
+                    { name: "燒肉本部牧場", type: "燒肉", icon: "fa-fire", desc: "沖繩和牛指定店", link: "Motobu Ranch" }
+                ]
+            },
+            {
+                area: "沖繩 - 中部 (Okinawa Central)",
+                spots: [
+                    { name: "oHacorte 港川店", type: "甜點", icon: "fa-cake-candles", desc: "外人住宅區的夢幻水果塔", link: "oHacorte Minatogawa" },
+                    { name: "敘敘苑燒肉 (Parco City)", type: "燒肉", icon: "fa-fire", desc: "無敵海景燒肉，午間套餐CP值高", link: "Jojoen Parco City" },
+                    { name: "A&W 漢堡 (牧港店)", type: "漢堡", icon: "fa-burger", desc: "美式風格，必喝麥根沙士", link: "A&W Makiminato" },
+                    { name: "King Tacos (長田店)", type: "塔可飯", icon: "fa-bowl-rice", desc: "塔可飯創始店，份量巨大", link: "King Tacos Nagata" },
+                    { name: "Taco Rice Cafe Kijimuna", type: "塔可飯", icon: "fa-bowl-rice", desc: "歐姆蛋塔可飯 (美國村)", link: "Taco Rice Cafe Kijimuna" }
+                ]
+            },
+            {
+                area: "沖繩 - 南部 (Okinawa South)",
+                spots: [
+                    { name: "傑克牛排 (Jack's Steak House)", type: "牛排", icon: "fa-utensils", desc: "美式老店，口感軟嫩", link: "Jack's Steak House" },
+                    { name: "牧志公設市場", type: "海鮮", icon: "fa-fish", desc: "現挑現煮，夜光貝/龍蝦", link: "Makishi Public Market" },
+                    { name: "豬肉蛋飯糰 (Potama)", type: "飯糰", icon: "fa-rice-cracker", desc: "那霸機場/國際通，炸蝦口味", link: "Potama Naha Airport" },
+                    { name: "暖暮 / 通堂拉麵", type: "拉麵", icon: "fa-bowl-rice", desc: "沖繩人氣拉麵代表", link: "Ramen Danbo Naha" },
+                    { name: "系滿魚市場", type: "海鮮", icon: "fa-fish", desc: "戶外吃焗烤龍蝦、海膽", link: "Itoman Fish Market" },
+                    { name: "C&C Breakfast", type: "早午餐", icon: "fa-mug-hot", desc: "國際通人氣舒芙蕾鬆餅", link: "C&C Breakfast Okinawa" },
+                    { name: "Blue Seal 冰淇淋", type: "甜點", icon: "fa-ice-cream", desc: "沖繩必吃，推薦鹽金楚糕口味", link: "Blue Seal Okinawa" }
+                ]
+            },
+            {
+                area: "九州 - 別府 & 門司港 (Beppu & Mojiko)",
+                spots: [
+                    { name: "東洋軒 (Toyoken)", type: "炸雞", icon: "fa-drumstick-bite", desc: "大分名物「炸雞天婦羅」發源地", link: "Toyoken Beppu" },
+                    { name: "龜正迴轉壽司", type: "壽司", icon: "fa-fish", desc: "別府CP值最高，魚料超厚", link: "Kamesho Kururu Sushi" },
+                    { name: "友永麵包 (Tomonaga Pan)", type: "麵包", icon: "fa-bread-slice", desc: "別府百年老店，奶油麵包", link: "Tomonaga Pan" },
+                    { name: "地獄蒸工房 鐵輪", type: "體驗", icon: "fa-carrot", desc: "溫泉蒸氣蒸熟食材", link: "Jigoku Mushi Kobo Kannawa" },
+                    { name: "岡本屋賣店", type: "甜點", icon: "fa-spoon", desc: "地獄蒸布丁創始店", link: "Okamotoya Shop" },
+                    { name: "別府冷麵 胡月", type: "麵食", icon: "fa-bowl-rice", desc: "口感Q彈的特色冷麵", link: "Kogetsu Cold Noodles" },
+                    { name: "門司港燒咖哩", type: "咖哩", icon: "fa-bowl-rice", desc: "濃郁起司焗烤，小孩最愛", link: "Mojiko Retro Grilled Curry" }
+                ]
+            },
+            {
+                area: "福岡 - 天神 (Fukuoka Tenjin)",
+                spots: [
+                    { name: "極味耶 (Kiwamiya)", type: "漢堡排", icon: "fa-fire", desc: "超人氣鐵板漢堡排，需排隊", link: "Kiwamiya Parco Tenjin" },
+                    { name: "Full Full (天神店)", type: "麵包", icon: "fa-bread-slice", desc: "明太子法國麵包，逛街補給", link: "Full Full Tenjin" },
+                    { name: "stock (Pain Stock)", type: "麵包", icon: "fa-bread-slice", desc: "福岡最強麵包店，明太子麵包", link: "stock Tenjin" },
+                    { name: "葫蘆壽司 (Hyotan)", type: "壽司", icon: "fa-sushi", desc: "排隊名店，活車蝦超鮮甜", link: "Hyotan Sushi" },
+                    { name: "ShinShin 拉麵", type: "拉麵", icon: "fa-bowl-rice", desc: "博多細麵，口味清甜", link: "ShinShin Ramen Tenjin" },
+                    { name: "元祖博多明太重", type: "蓋飯", icon: "fa-bowl-rice", desc: "豪華整條明太子蓋飯", link: "Ganso Hakata Mentaiju" }
+                ]
+            },
+            {
+                area: "福岡 - 博多 (Fukuoka Hakata)",
+                spots: [
+                    { name: "Il Forno del Mignon", type: "可頌", icon: "fa-bread-slice", desc: "博多站排隊小可頌，秤重賣", link: "Il Forno del Mignon Hakata" },
+                    { name: "Full Full (博多店)", type: "麵包", icon: "fa-bread-slice", desc: "近博多運河城", link: "The Full Full Hakata" },
+                    { name: "Full Full (機場店)", type: "麵包", icon: "fa-bread-slice", desc: "國內線航廈，最後補貨", link: "Full Full Fukuoka Airport" },
+                    { name: "博多一雙", type: "拉麵", icon: "fa-bowl-rice", desc: "泡泡系豚骨，湯頭超濃郁", link: "Hakata Issou" },
+                    { name: "博多華味鳥", type: "鍋物", icon: "fa-pot-food", desc: "水炊雞肉鍋，膠原蛋白", link: "Hanamidori" },
+                    { name: "牛腸鍋 Oyama", type: "鍋物", icon: "fa-pot-food", desc: "博多名物，油脂豐富", link: "Motsunabe Oyama" },
+                    { name: "努努雞", type: "炸雞", icon: "fa-drumstick-bite", desc: "冰著吃的炸雞，伴手禮", link: "NuNu Chicken" }
+                ]
+            }
+        ];
+
+        // --- State Management ---
+        const STATE = {
+            tab: 'plan',
+            checklist: JSON.parse(localStorage.getItem('tripChecklist')) || {},
+            memo: localStorage.getItem('tripMemo') || ""
+        };
+
+        // --- Functions ---
+
+        function init() {
+            render();
+            // Calculate Day number based on today
+            const start = new Date("2025-01-28");
+            const now = new Date();
+            const diffTime = now - start;
+            // Add check to not show negative days or crazy numbers if checking way before/after
+            // Simple logic: if within trip range or shortly after
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
+            if(diffDays >= 1 && diffDays <= 12) {
+                document.getElementById('current-day-display').innerText = diffDays;
+            } else {
+                 document.getElementById('current-day-display').innerText = "-";
+            }
+        }
+
+        function switchTab(tabName) {
+            STATE.tab = tabName;
+            // Update UI
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                if(btn.dataset.target === tabName) {
+                    btn.classList.add('text-muji-primary');
+                    btn.classList.remove('text-muji-secondary');
+                } else {
+                    btn.classList.remove('text-muji-primary');
+                    btn.classList.add('text-muji-secondary');
+                }
+            });
+            render();
+        }
+
+        function render() {
+            const container = document.getElementById('app-container');
+            container.innerHTML = ''; // Clear
+
+            switch(STATE.tab) {
+                case 'plan':
+                    renderPlan(container);
+                    break;
+                case 'guide':
+                    renderGuide(container);
+                    break;
+                case 'food':
+                    renderFoodMap(container);
+                    break;
+                case 'lists':
+                    renderLists(container);
+                    break;
+                case 'info':
+                    renderInfo(container);
+                    break;
+            }
+            window.scrollTo(0,0);
+        }
+
+        // --- Render: PLAN ---
+        function renderPlan(container) {
+            let html = `<div class="space-y-6 fade-in pb-4">`;
+            
+            tripData.forEach((day, index) => {
+                const mapEmbedUrl = `https://maps.google.com/maps?q=${encodeURIComponent(day.mapFocus)}&t=&z=13&ie=UTF8&iwloc=&output=embed`;
+                
+                html += `
+                    <div class="bg-white rounded-xl shadow-sm border border-muji-border overflow-hidden">
+                        <div class="bg-muji-bg px-4 py-3 border-b border-muji-border flex justify-between items-center sticky top-0 z-10">
+                            <div>
+                                <h3 class="font-bold text-muji-text text-lg">${day.date}</h3>
+                                <p class="text-xs text-muji-primary">${day.title}</p>
+                            </div>
+                            <span class="text-[10px] bg-white border border-muji-border px-2 py-1 rounded text-muji-secondary">${day.area}</span>
+                        </div>
+                        
+                        <!-- Small Map Section -->
+                        <div class="relative w-full h-32 bg-gray-100 border-b border-muji-border group">
+                            <iframe 
+                                width="100%" 
+                                height="100%" 
+                                frameborder="0" 
+                                scrolling="no" 
+                                marginheight="0" 
+                                marginwidth="0" 
+                                src="${mapEmbedUrl}"
+                                loading="lazy"
+                                class="opacity-80 group-hover:opacity-100 transition-opacity"
+                            ></iframe>
+                            <a href="${day.route}" target="_blank" class="absolute bottom-2 right-2 bg-white/90 backdrop-blur text-muji-primary text-xs px-3 py-1.5 rounded-full shadow-sm hover:bg-muji-primary hover:text-white transition flex items-center border border-gray-200">
+                                <i class="fa-solid fa-diamond-turn-right mr-1.5"></i> 查看今日路線
+                            </a>
+                        </div>
+
+                        <div class="p-4 relative">
+                            <!-- Timeline items -->
+                `;
+
+                day.events.forEach((event, idx) => {
+                    const isLast = idx === day.events.length - 1;
+                    const highlightClass = event.highlight ? 'bg-orange-50 border-orange-100' : 'bg-white border-transparent';
+                    const alertText = event.alert === 'important' ? 'text-muji-accent font-bold' : 'text-muji-text';
+                    const linkBtn = event.link ? `<button onclick="openMap('${event.link}')" class="mt-2 text-xs flex items-center text-muji-primary hover:text-muji-accent transition-colors"><i class="fa-solid fa-map-location-dot mr-1"></i> Google Maps</button>` : '';
+
+                    html += `
+                        <div class="relative pl-8 pb-6 ${isLast ? 'last-item' : 'timeline-line'}">
+                            <div class="absolute left-0 top-0 w-8 flex justify-center">
+                                <div class="w-8 h-8 rounded-full bg-muji-bg border border-muji-border flex items-center justify-center text-muji-secondary z-10">
+                                    <i class="fa-solid ${event.icon} text-xs"></i>
+                                </div>
+                            </div>
+                            <div class="rounded-lg p-3 border ${event.highlight ? 'border-orange-200 bg-orange-50/50' : 'border-muji-border bg-white'}">
+                                <div class="flex justify-between items-start">
+                                    <span class="font-mono text-sm font-bold text-muji-primary bg-muji-bg px-1 rounded">${event.time}</span>
+                                </div>
+                                <h4 class="font-medium mt-1 ${alertText}">${event.title}</h4>
+                                <p class="text-xs text-gray-500 mt-1 leading-relaxed">${event.desc}</p>
+                                ${linkBtn}
+                            </div>
+                        </div>
+                    `;
+                });
+
+                html += `</div></div>`;
+            });
+            html += `</div>`;
+            container.innerHTML = html;
+        }
+
+        function openMap(query) {
+            window.open(`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`, '_blank');
+        }
+
+        // --- Render: FOOD MAP ---
+        function renderFoodMap(container) {
+             let html = `<div class="fade-in space-y-6">`;
+             
+             foodData.forEach(region => {
+                 html += `
+                    <div class="space-y-3">
+                        <h3 class="font-bold text-muji-primary text-lg px-2 border-l-4 border-muji-accent flex items-center">
+                            ${region.area}
+                        </h3>
+                        <div class="grid grid-cols-1 gap-3">
+                 `;
+                 
+                 region.spots.forEach(spot => {
+                     html += `
+                        <div class="bg-white p-4 rounded-xl shadow-sm border border-muji-border flex justify-between items-center">
+                            <div class="flex items-start space-x-3">
+                                <div class="w-10 h-10 rounded bg-orange-50 flex items-center justify-center text-orange-400 shrink-0">
+                                    <i class="fa-solid ${spot.icon}"></i>
+                                </div>
+                                <div>
+                                    <div class="flex items-center space-x-2">
+                                        <h4 class="font-bold text-muji-text text-sm">${spot.name}</h4>
+                                        <span class="text-[10px] bg-muji-bg border border-muji-border px-1.5 py-0.5 rounded text-gray-500">${spot.type}</span>
+                                    </div>
+                                    <p class="text-xs text-gray-500 mt-1 leading-relaxed">${spot.desc}</p>
+                                </div>
+                            </div>
+                            <button onclick="openMap('${spot.link}')" class="ml-2 w-10 h-10 rounded-full bg-muji-bg text-muji-primary flex items-center justify-center hover:bg-muji-primary hover:text-white transition shadow-sm active:scale-90">
+                                <i class="fa-solid fa-location-arrow text-sm"></i>
+                            </button>
+                        </div>
+                     `;
+                 });
+                 
+                 html += `</div></div>`;
+             });
+
+             html += `</div>`;
+             container.innerHTML = html;
+        }
+
+        // --- Render: LISTS ---
+        function renderLists(container) {
+            let html = `
+                <div class="fade-in space-y-6">
+                    <!-- CheckList -->
+                    <div class="bg-white rounded-xl shadow-sm border border-muji-border overflow-hidden">
+                        <div class="bg-muji-bg px-4 py-3 border-b border-muji-border">
+                            <h3 class="font-bold text-muji-text">行前清單</h3>
+                        </div>
+                        <div class="divide-y divide-muji-border">
+                            ${checklistData.map((item, idx) => `
+                                <label class="flex items-center px-4 py-3 cursor-pointer hover:bg-gray-50 transition">
+                                    <input type="checkbox" class="w-5 h-5 text-muji-primary rounded focus:ring-muji-primary border-gray-300" 
+                                        ${STATE.checklist[item] ? 'checked' : ''} 
+                                        onchange="toggleCheck('${item}')">
+                                    <span class="ml-3 text-sm ${STATE.checklist[item] ? 'text-gray-400 line-through' : 'text-muji-text'}">${item}</span>
+                                </label>
+                            `).join('')}
+                        </div>
+                    </div>
+
+                    <!-- Memo -->
+                    <div class="bg-white rounded-xl shadow-sm border border-muji-border overflow-hidden flex flex-col h-80">
+                         <div class="bg-muji-bg px-4 py-3 border-b border-muji-border flex justify-between items-center">
+                            <h3 class="font-bold text-muji-text">備忘錄</h3>
+                            <span class="text-[10px] text-gray-400">自動儲存・網址可點擊</span>
+                        </div>
+                        <textarea id="memo-area" class="flex-1 p-4 w-full resize-none focus:outline-none text-sm leading-relaxed" 
+                            placeholder="輸入筆記、網址連結..." oninput="saveMemo(this.value)">${STATE.memo}</textarea>
+                        
+                        <div class="bg-gray-50 px-4 py-2 border-t border-muji-border min-h-[40px] flex flex-wrap gap-2" id="memo-links">
+                            <!-- Links will appear here -->
+                        </div>
+                    </div>
+                </div>
+            `;
+            container.innerHTML = html;
+            updateMemoLinks(STATE.memo);
+        }
+
+        function toggleCheck(item) {
+            STATE.checklist[item] = !STATE.checklist[item];
+            localStorage.setItem('tripChecklist', JSON.stringify(STATE.checklist));
+            renderLists(document.getElementById('app-container'));
+        }
+
+        function saveMemo(val) {
+            STATE.memo = val;
+            localStorage.setItem('tripMemo', val);
+            updateMemoLinks(val);
+        }
+
+        function updateMemoLinks(text) {
+            const container = document.getElementById('memo-links');
+            if(!container) return;
+            
+            const urlRegex = /(https?:\/\/[^\s]+)/g;
+            const matches = text.match(urlRegex);
+            
+            if(matches) {
+                container.innerHTML = matches.map(url => `
+                    <a href="${url}" target="_blank" class="inline-flex items-center px-2 py-1 bg-white border border-muji-border rounded text-[10px] text-blue-600 truncate max-w-[150px]">
+                        <i class="fa-solid fa-link mr-1"></i> ${new URL(url).hostname}
+                    </a>
+                `).join('');
+            } else {
+                container.innerHTML = '';
+            }
+        }
+
+        // --- Render: GUIDE ---
+        function renderGuide(container) {
+            let html = `
+                <div class="fade-in space-y-4">
+                    <div class="bg-white rounded-xl shadow-sm border border-muji-border overflow-hidden">
+                        <iframe width="100%" height="250" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.openstreetmap.org/export/embed.html?bbox=127.6083%2C26.1556%2C128.0848%2C26.7328&amp;layer=mapnik&amp;marker=26.2124%2C127.6809" style="border: 0"></iframe>
+                        <div class="p-2 text-center text-xs text-gray-400">沖繩全島概覽</div>
+                    </div>
+
+                    ${guideContent.map(item => `
+                        <div class="bg-white rounded-xl shadow-sm border border-muji-border p-5">
+                            <div class="flex justify-between items-start mb-2">
+                                <h3 class="font-bold text-muji-primary text-lg border-l-4 border-muji-primary pl-3">${item.title}</h3>
+                                ${item.mapQuery ? 
+                                    `<button onclick="openMap('${item.mapQuery}')" class="text-muji-secondary hover:text-muji-accent transition-colors flex items-center text-xs border border-muji-border px-2 py-1 rounded bg-gray-50 active:scale-95">
+                                        <i class="fa-solid fa-map-location-dot mr-1"></i> 地圖
+                                    </button>` : ''
+                                }
+                            </div>
+                            <div class="text-sm leading-7 text-gray-600">
+                                ${item.content}
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+            container.innerHTML = html;
+        }
+
+        // --- Render: INFO ---
+        function renderInfo(container) {
+            html = `
+                <div class="fade-in space-y-4">
+                    <!-- Hotel Info -->
+                    <div class="bg-white rounded-xl shadow-sm border border-muji-border p-5">
+                        <h3 class="font-bold text-muji-text mb-4 flex items-center">
+                            <i class="fa-solid fa-hotel text-muji-primary mr-2"></i> 住宿資訊
+                        </h3>
+                        <div class="space-y-4">
+                            <div class="border-l-2 border-muji-secondary pl-3 relative">
+                                <p class="text-[10px] text-muji-accent font-bold mb-1">01/28-01/31 & 02/06-02/08</p>
+                                <p class="font-bold text-muji-text text-sm">THE NEST HOTEL NAHA</p>
+                                <button onclick="openMap('THE NEST HOTEL NAHA')" class="mt-2 text-xs flex items-center text-muji-secondary hover:text-muji-primary transition-colors">
+                                    <i class="fa-solid fa-location-dot mr-1"></i> 查看地圖
+                                </button>
+                            </div>
+                            <div class="border-l-2 border-muji-secondary pl-3 relative">
+                                <p class="text-[10px] text-muji-accent font-bold mb-1">02/01 - 02/03</p>
+                                <p class="font-bold text-muji-text text-sm">AMANEK Beppu YULA-RE</p>
+                                <p class="text-[10px] text-gray-400">別府車站旁・頂樓泳池</p>
+                                <button onclick="openMap('AMANEK Beppu YULA-RE')" class="mt-2 text-xs flex items-center text-muji-secondary hover:text-muji-primary transition-colors">
+                                    <i class="fa-solid fa-location-dot mr-1"></i> 查看地圖
+                                </button>
+                            </div>
+                            <div class="border-l-2 border-muji-secondary pl-3 relative">
+                                <p class="text-[10px] text-muji-accent font-bold mb-1">02/03 - 02/05</p>
+                                <p class="font-bold text-muji-text text-sm">Richmond Hotel Fukuoka Tenjin</p>
+                                <p class="text-[10px] text-gray-400">福岡天神・購物方便</p>
+                                <button onclick="openMap('Richmond Hotel Fukuoka Tenjin')" class="mt-2 text-xs flex items-center text-muji-secondary hover:text-muji-primary transition-colors">
+                                    <i class="fa-solid fa-location-dot mr-1"></i> 查看地圖
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Flight Info -->
+                    <div class="bg-white rounded-xl shadow-sm border border-muji-border p-5">
+                        <h3 class="font-bold text-muji-text mb-3 flex items-center">
+                            <i class="fa-solid fa-plane text-muji-primary mr-2"></i> 航班行程
+                        </h3>
+                        <div class="space-y-3">
+                            <div class="flex items-center text-sm border-b border-gray-50 pb-2">
+                                <div class="w-12 text-xs text-gray-400 font-mono">01/28</div>
+                                <div class="flex-1 font-medium text-muji-text ml-2">
+                                    <div class="flex justify-between items-center mb-1">
+                                        <span class="font-bold text-muji-accent">16:50 TPE</span>
+                                        <i class="fa-solid fa-arrow-right text-[10px] text-gray-300"></i>
+                                        <span class="font-bold text-muji-accent">19:20 OKA</span>
+                                    </div>
+                                    <span class="text-xs text-gray-400 bg-gray-100 px-2 py-0.5 rounded">CI 0122</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center text-sm border-b border-gray-50 pb-2">
+                                <div class="w-12 text-xs text-gray-400 font-mono">02/01</div>
+                                <div class="flex-1 font-medium text-muji-text ml-2">
+                                    <div class="flex justify-between items-center mb-1">
+                                        <span class="font-bold text-muji-accent">10:10 OKA</span>
+                                        <i class="fa-solid fa-arrow-right text-[10px] text-gray-300"></i>
+                                        <span class="font-bold text-muji-accent">12:00 FUK</span>
+                                    </div>
+                                    <span class="text-xs text-gray-400 bg-gray-100 px-2 py-0.5 rounded">MM282</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center text-sm border-b border-gray-50 pb-2">
+                                <div class="w-12 text-xs text-gray-400 font-mono">02/06</div>
+                                <div class="flex-1 font-medium text-muji-text ml-2">
+                                    <div class="flex justify-between items-center mb-1">
+                                        <span class="font-bold text-muji-accent">17:55 FUK</span>
+                                        <i class="fa-solid fa-arrow-right text-[10px] text-gray-300"></i>
+                                        <span class="font-bold text-muji-accent">19:50 OKA</span>
+                                    </div>
+                                    <span class="text-xs text-gray-400 bg-gray-100 px-2 py-0.5 rounded">MM289</span>
+                                </div>
+                            </div>
+                             <div class="flex items-center text-sm">
+                                <div class="w-12 text-xs text-gray-400 font-mono">02/08</div>
+                                <div class="flex-1 font-medium text-muji-text ml-2">
+                                    <div class="flex justify-between items-center mb-1">
+                                        <span class="font-bold text-muji-accent">11:55 OKA</span>
+                                        <i class="fa-solid fa-arrow-right text-[10px] text-gray-300"></i>
+                                        <span class="font-bold text-muji-accent">12:35 TPE</span>
+                                    </div>
+                                    <span class="text-xs text-gray-400 bg-gray-100 px-2 py-0.5 rounded">CI 0121</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4">
+                         <a href="https://www.jma.go.jp/bosai/forecast/" target="_blank" class="bg-white p-4 rounded-xl shadow-sm border border-muji-border flex flex-col items-center justify-center space-y-2 active:bg-gray-50">
+                            <i class="fa-solid fa-cloud-sun text-3xl text-sky-500"></i>
+                            <span class="font-bold text-sm">天氣預報</span>
+                        </a>
+                        <div class="bg-white p-4 rounded-xl shadow-sm border border-muji-border flex flex-col items-center justify-center space-y-2">
+                             <i class="fa-solid fa-phone text-3xl text-red-500"></i>
+                            <span class="font-bold text-sm">緊急: 110/119</span>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow-sm border border-muji-border p-5">
+                        <h3 class="font-bold text-muji-text mb-3">台北駐日經濟文化代表處</h3>
+                        <ul class="space-y-3 text-sm text-gray-600">
+                            <li class="flex items-start"><i class="fa-solid fa-location-dot mt-1 mr-2 text-muji-secondary"></i> 福岡分處：福岡市中央區櫻坂 3-12-42</li>
+                            <li class="flex items-start"><i class="fa-solid fa-phone mt-1 mr-2 text-muji-secondary"></i> 急難救助：090-1922-9740</li>
+                            <li class="flex items-start"><i class="fa-solid fa-location-dot mt-1 mr-2 text-muji-secondary"></i> 那霸分處：那霸市久茂地 3-15-9</li>
+                             <li class="flex items-start"><i class="fa-solid fa-phone mt-1 mr-2 text-muji-secondary"></i> 急難救助：090-1942-1107</li>
+                        </ul>
+                    </div>
+
+                     <div class="bg-muji-bg rounded-xl p-5 border border-muji-border">
+                        <h3 class="font-bold text-muji-text mb-2 text-sm">旅遊備註</h3>
+                        <p class="text-xs text-gray-500 leading-relaxed">
+                            1. 日本電壓 100V，插座為雙平腳，台灣電器通常可直接用。<br>
+                            2. 購物滿 5000 日圓 (未稅) 可退稅，需出示護照正本。<br>
+                            3. 垃圾請分類，路邊垃圾桶較少，建議自備塑膠袋帶回飯店。
+                        </p>
+                    </div>
+                </div>
+            `;
+            container.innerHTML = html;
+        }
+
+        // Start
+        init();
+
+    </script>
+</body>
+</html>
