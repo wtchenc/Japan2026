@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>2026 日本家族旅行</title>
+    <title>2026 日本旅行手帳</title>
     
-    <!-- Google Fonts: Noto Sans TC -->
+    <!-- Google Fonts: Zen Maru Gothic (圓體) & Noto Sans TC -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700&family=Noto+Sans+TC:wght@400;500&display=swap" rel="stylesheet">
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -16,25 +16,28 @@
     <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <!-- Tailwind Config for Muji Style -->
+    <!-- Tailwind Config for Journal Style -->
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        muji: {
-                            bg: '#f9f9f9',      // 極淺灰背景
-                            card: '#ffffff',    // 純白卡片
-                            primary: '#736d66', // 亞麻棕 (主色)
-                            secondary: '#a6a29e', // 淺灰 (次要)
-                            accent: '#9a3412',  // 磚紅 (強調重點)
-                            text: '#333333',    // 深灰黑文字
-                            border: '#e5e7eb'
+                        journal: {
+                            bg: '#fcf9f2',      // 米黃紙張底色
+                            card: '#ffffff',    // 純白紙張
+                            ink: '#594a4e',     // 深褐墨水色 (文字主色)
+                            brown: '#a68a80',   // 淺棕色 (次要文字)
+                            accent: '#d48872',  // 珊瑚粉 (強調色)
+                            blue: '#8db5be',    // 沖繩海藍
+                            green: '#9eb896',   // 九州山綠
+                            line: '#e0d8cc'     // 淺灰線條
                         }
                     },
                     fontFamily: {
-                        sans: ['"Noto Sans TC"', 'sans-serif'],
-                        mono: ['"Roboto"', 'monospace'], // 數字用
+                        sans: ['"Zen Maru Gothic"', '"Noto Sans TC"', 'sans-serif'],
+                    },
+                    backgroundImage: {
+                        'paper-pattern': "url('data:image/svg+xml,%3Csvg width=\\'60\\' height=\\'60\\' viewBox=\\'0 0 60 60\\' xmlns=\\'http://www.w3.org/2000/svg\\'%3E%3Cg fill=\\'none\\' fill-rule=\\'evenodd\\'%3E%3Cg fill=\\'%23d1c7b7\\' fill-opacity=\\'0.15\\'%3E%3Cpath d=\\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')",
                     }
                 }
             }
@@ -44,108 +47,132 @@
     <style>
         /* Global Reset & Utility */
         body {
-            background-color: #f9f9f9;
-            color: #333333;
+            background-color: #fcf9f2;
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23dcbba3' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
+            color: #594a4e;
             -webkit-tap-highlight-color: transparent;
         }
         
-        /* Hidden Scrollbar but functional */
-        .hide-scrollbar::-webkit-scrollbar {
-            display: none;
-        }
-        .hide-scrollbar {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-        }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
-        /* Smooth Transition */
-        .fade-in {
-            animation: fadeIn 0.3s ease-in-out;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Custom Input Styles */
-        .muji-input {
-            appearance: none;
-            border: 1px solid #e5e5e5;
+        /* Journal Card Effect */
+        .journal-card {
             background: #fff;
-            padding: 0.75rem;
-            border-radius: 0.5rem;
-            width: 100%;
-            outline: none;
-            transition: all 0.2s;
-        }
-        .muji-input:focus {
-            border-color: #736d66;
-            box-shadow: 0 0 0 2px rgba(115, 109, 102, 0.1);
+            border-radius: 12px; /* 圓角稍大 */
+            box-shadow: 2px 3px 10px rgba(0,0,0,0.05);
+            border: 1px solid rgba(0,0,0,0.02);
+            position: relative;
         }
 
-        /* Timeline Connector */
+        /* Washi Tape Effect */
+        .washi-tape-top {
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%) rotate(-1deg);
+            width: 100px;
+            height: 24px;
+            background-color: rgba(212, 136, 114, 0.3); /* 珊瑚粉半透明 */
+            border-left: 2px dashed rgba(255,255,255,0.6);
+            border-right: 2px dashed rgba(255,255,255,0.6);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            z-index: 10;
+        }
+        .washi-tape-blue { background-color: rgba(141, 181, 190, 0.4); }
+        .washi-tape-green { background-color: rgba(158, 184, 150, 0.4); }
+
+        /* Dashed Timeline */
         .timeline-line::before {
             content: '';
             position: absolute;
             top: 2rem;
             bottom: -1rem;
             left: 1rem;
-            width: 2px;
-            background: #e5e5e5;
+            width: 0px; /* 虛線用 border */
+            border-left: 2px dashed #d1c7b7; /* 虛線顏色 */
             z-index: 0;
         }
-        .last-item .timeline-line::before {
-            display: none;
+        .last-item .timeline-line::before { display: none; }
+
+        /* Hand-drawn Button */
+        .btn-hand {
+            transition: all 0.2s;
+            border-bottom: 3px solid transparent;
         }
+        .btn-hand:active {
+            transform: translateY(2px);
+            border-bottom: 0px solid transparent;
+        }
+
+        .fade-in { animation: fadeIn 0.4s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
-<body class="flex flex-col h-screen overflow-hidden text-muji-text">
+<body class="flex flex-col h-screen overflow-hidden text-journal-ink">
 
     <!-- Top Header -->
-    <header class="flex-none bg-muji-card border-b border-muji-border px-6 py-4 flex justify-between items-center shadow-sm z-20">
+    <header class="flex-none bg-journal-bg/95 backdrop-blur-sm border-b border-journal-line px-6 py-4 flex justify-between items-center z-20">
         <div>
-            <h1 class="text-xl font-bold tracking-widest text-muji-primary">TRIP 2026</h1>
-            <p class="text-xs text-muji-secondary tracking-wider">沖繩・九州・福岡</p>
+            <h1 class="text-2xl font-bold tracking-widest text-journal-ink flex items-center">
+                <i class="fa-solid fa-plane-up mr-2 text-journal-accent text-sm"></i>
+                TRIP 2026
+            </h1>
+            <p class="text-xs text-journal-brown tracking-wider mt-1">
+                <span class="bg-journal-blue/20 px-2 py-0.5 rounded-full text-journal-blue">沖繩</span> & 
+                <span class="bg-journal-green/20 px-2 py-0.5 rounded-full text-journal-green">九州</span>
+            </p>
         </div>
-        <div class="text-xs font-mono bg-muji-bg px-3 py-1 rounded-full text-muji-primary border border-muji-border">
-            Day <span id="current-day-display">1</span>
+        <div class="flex flex-col items-end">
+            <div class="text-xs text-journal-brown mb-1">Day</div>
+            <div class="text-xl font-bold text-journal-accent font-mono bg-white px-3 py-1 rounded-lg border-2 border-dashed border-journal-line shadow-sm">
+                <span id="current-day-display">1</span>
+            </div>
         </div>
     </header>
 
     <!-- Main Content Area -->
-    <main id="app-container" class="flex-1 overflow-y-auto hide-scrollbar p-4 pb-24 relative">
-        <!-- Content will be injected here by JS -->
+    <main id="app-container" class="flex-1 overflow-y-auto hide-scrollbar p-4 pb-28 relative">
+        <!-- Content injected by JS -->
     </main>
 
-    <!-- Bottom Navigation -->
-    <nav class="flex-none bg-white border-t border-muji-border pb-safe pt-2 px-2 shadow-[0_-2px_10px_rgba(0,0,0,0.02)] z-30">
-        <div class="flex justify-around items-center h-16">
-            <button onclick="switchTab('plan')" class="nav-btn w-full flex flex-col items-center justify-center space-y-1 text-muji-secondary active:scale-95 transition-transform" data-target="plan">
-                <i class="fa-regular fa-calendar-check text-xl"></i>
-                <span class="text-[10px]">行程</span>
+    <!-- Bottom Navigation (Floating) -->
+    <div class="fixed bottom-6 left-4 right-4 z-30">
+        <nav class="bg-white rounded-2xl shadow-[0_5px_20px_rgba(0,0,0,0.08)] border border-journal-line p-1.5 flex justify-around items-center">
+            <button onclick="switchTab('plan')" class="nav-btn w-full py-3 rounded-xl flex flex-col items-center justify-center space-y-1 text-journal-brown transition-colors hover:bg-journal-bg" data-target="plan">
+                <i class="fa-regular fa-calendar-check text-lg"></i>
+                <span class="text-[10px] font-medium">行程</span>
             </button>
-            <button onclick="switchTab('guide')" class="nav-btn w-full flex flex-col items-center justify-center space-y-1 text-muji-secondary active:scale-95 transition-transform" data-target="guide">
-                <i class="fa-solid fa-book-open text-xl"></i>
-                <span class="text-[10px]">導覽</span>
+            <button onclick="switchTab('guide')" class="nav-btn w-full py-3 rounded-xl flex flex-col items-center justify-center space-y-1 text-journal-brown transition-colors hover:bg-journal-bg" data-target="guide">
+                <i class="fa-solid fa-book-open text-lg"></i>
+                <span class="text-[10px] font-medium">景點</span>
             </button>
-            <button onclick="switchTab('food')" class="nav-btn w-full flex flex-col items-center justify-center space-y-1 text-muji-secondary active:scale-95 transition-transform" data-target="food">
-                <i class="fa-solid fa-utensils text-xl"></i>
-                <span class="text-[10px]">美食</span>
+            <button onclick="switchTab('food')" class="nav-btn w-full py-3 rounded-xl flex flex-col items-center justify-center space-y-1 text-journal-brown transition-colors hover:bg-journal-bg" data-target="food">
+                <i class="fa-solid fa-utensils text-lg"></i>
+                <span class="text-[10px] font-medium">美食</span>
             </button>
-            <button onclick="switchTab('lists')" class="nav-btn w-full flex flex-col items-center justify-center space-y-1 text-muji-secondary active:scale-95 transition-transform" data-target="lists">
-                <i class="fa-solid fa-list-check text-xl"></i>
-                <span class="text-[10px]">清單</span>
+            <button onclick="switchTab('lists')" class="nav-btn w-full py-3 rounded-xl flex flex-col items-center justify-center space-y-1 text-journal-brown transition-colors hover:bg-journal-bg" data-target="lists">
+                <i class="fa-solid fa-list-check text-lg"></i>
+                <span class="text-[10px] font-medium">清單</span>
             </button>
-            <button onclick="switchTab('info')" class="nav-btn w-full flex flex-col items-center justify-center space-y-1 text-muji-secondary active:scale-95 transition-transform" data-target="info">
-                <i class="fa-solid fa-circle-info text-xl"></i>
-                <span class="text-[10px]">資訊</span>
+            <button onclick="switchTab('info')" class="nav-btn w-full py-3 rounded-xl flex flex-col items-center justify-center space-y-1 text-journal-brown transition-colors hover:bg-journal-bg" data-target="info">
+                <i class="fa-solid fa-circle-info text-lg"></i>
+                <span class="text-[10px] font-medium">資訊</span>
             </button>
-        </div>
-    </nav>
+        </nav>
+    </div>
 
-    <!-- JavaScript Logic -->
+    <!-- Modal -->
+    <div id="loading-modal" class="hidden fixed inset-0 bg-journal-ink/20 z-50 flex items-center justify-center backdrop-blur-sm">
+        <div class="bg-white p-6 rounded-2xl shadow-xl flex flex-col items-center space-y-3">
+            <i class="fa-solid fa-circle-notch fa-spin text-journal-accent text-2xl"></i>
+            <span class="text-journal-ink font-medium">處理中...</span>
+        </div>
+    </div>
+
     <script>
-        // --- Data: Itinerary ---
+        // --- Data ---
+        
         const tripData = [
             {
                 date: "01/28 (三)",
@@ -167,7 +194,7 @@
                 mapFocus: "PARCO CITY",
                 events: [
                     { time: "08:30", title: "OTS 取車 (Prius)", desc: "前往臨空豐崎營業所", icon: "fa-car", highlight: true, alert: "important" },
-                    { time: "10:00", title: "Parco City", desc: "3F 吉卜力、樂高、寶可夢中心", icon: "fa-bag-shopping" },
+                    { time: "10:00", title: "Parco City", desc: "3F 吉卜力、樂高、寶可夢中心", icon: "fa-bag-shopping", link: "PARCO CITY Urasoe West Coast" },
                     { time: "11:00", title: "敘敘苑燒肉", desc: "【已預約】窗邊座位，午間套餐CP值高", icon: "fa-fire", link: "Jojoen Parco City" },
                     { time: "14:00", title: "美國村", desc: "大國藥妝、Blue Seal 冰淇淋", icon: "fa-camera", link: "American Village Okinawa" },
                     { time: "17:00", title: "永旺夢樂城 Rycom", desc: "看超大水族箱 (視時間而定)", icon: "fa-fish" },
@@ -327,31 +354,6 @@
         // --- Guide Content ---
         const guideContent = [
             {
-                title: "Mina Tenjin 購物攻略",
-                mapQuery: "Mina Tenjin Fukuoka",
-                content: "位於天神北側，2023年重新改裝。重點品牌集中在低樓層：<br><b>1F:</b> JINS 眼鏡、UNIQLO<br><b>2F:</b> GU (超大型店鋪)<br><b>3F:</b> <b>COCA</b> (日系平價休閒風，必逛！)<br><b>4F:</b> Loft 生活雜貨<br>飯店過馬路即達，非常方便。"
-            },
-            {
-                title: "九州自然動物園",
-                mapQuery: "Kyushu Natural Zoological Park African Safari",
-                content: "African Safari 最大的特色是可以搭乘 Jungle Bus (叢林巴士) 進入野生動物區。你可以用夾子直接餵食獅子、大象和黑熊。<br><br><b>重要提醒：</b>務必在 1/2 (一個月前) 上網預約 Jungle Bus 座位。若遇上下雪，請確認租車公司提供無釘防滑雪胎 (Studless Tires)。"
-            },
-            {
-                title: "TeamLab Forest 福岡",
-                mapQuery: "TeamLab Forest Fukuoka",
-                content: "位於福岡巨蛋旁的 E-ZO FUKUOKA 內。這裡與一般的展覽不同，強調「捕捉」與「運動」。<br><b>捕捉森林：</b>下載 APP 後，可以用手機捕捉牆上的動物，非常適合小孩。<br><b>運動森林：</b>需要跳躍、踩踏的互動光影，是讓孩子放電的好地方。"
-            },
-            {
-                title: "波上宮 (懸崖上的神社)",
-                mapQuery: "Naminoue Shrine",
-                content: "那霸市區唯一的沙灘旁，聳立在懸崖上的紅瓦神社，是沖繩八社之首。<br><b>拍照點：</b>建議走到旁邊的「波之上跨海大橋」人行道，可以拍到神社聳立在懸崖與大海之上的絕美角度。<br><b>御守：</b>這裡有可愛的書包造型御守，很適合買給小學生當護身符。"
-            },
-            {
-                title: "門司港懷舊區",
-                mapQuery: "Mojiko Retro",
-                content: "充滿大正浪漫風格的紅磚建築群。<br><b>必看：</b>門司港車站 (日本重要文化財)、藍翼橋 (整點會開合)。<br><b>必吃：</b>燒咖哩 (Baked Curry)，濃郁起司與蛋液包裹著咖哩飯，是這裡的靈魂美食。"
-            },
-            {
                 title: "美麗海 vs DMM 水族館",
                 content: `這趟旅程安排了兩個截然不同的水族館：<br><br>
                 <div class="flex items-center justify-between mb-1">
@@ -366,9 +368,109 @@
                 特色是「互動與科技」。結合聲光投影，地板有透明玻璃可看下方水槽，還可以近距離觸摸與餵食樹懶、水豚等動物，體驗感更強。`
             },
             {
+                title: "古宇利島 (Kouri Island)",
+                mapQuery: "Kouri Island",
+                content: "跨越古宇利大橋，行駛在碧藍海面之上，景色絕美。<br><b>必看：</b>心形岩 (Heart Rock) 是許多廣告的拍攝地。<br><b>美食：</b>知名的 Kouri Shrimp 蝦蝦飯餐車就在島上。"
+            },
+            {
+                title: "DINO 恐龍公園 (山原亞熱帶之森)",
+                mapQuery: "DINO Dinosaur Park Yanbaru Subtropical Forest",
+                content: "位於御菓子御殿名護店旁。保留了原始的筆筒樹林，並設置了許多會動會叫的恐龍模型。走在步道上彷彿進入侏羅紀公園，非常受小學生歡迎。"
+            },
+            {
+                title: "美國村 (American Village)",
+                mapQuery: "American Village Okinawa",
+                content: "位於中部的北谷町，充滿美式風情的建築群。這裡有許多個性小店、咖啡廳與「Depot Island」。傍晚時分在日落海灘 (Sunset Beach) 看夕陽非常有氣氛。"
+            },
+            {
+                title: "Parco City 浦添西海岸",
+                mapQuery: "PARCO CITY Urasoe West Coast",
+                content: "沖繩最大的購物商場，緊鄰西海岸，擁有絕美海景。這裡聚集了 Uniqlo、H&M、Zara 等流行品牌。對家庭客來說，3F 是重點戰區：有浦添最大的「寶可夢中心」、吉卜力「橡子共和國」以及樂高商店。"
+            },
+            {
+                title: "沖繩世界文化王國 (玉泉洞)",
+                mapQuery: "Okinawa World",
+                content: "園區內的「玉泉洞」是日本第二大鐘乳石洞，全長 5 公里（開放參觀 890 公尺），景觀壯麗且終年涼爽。園區另有琉球王國村可體驗玻璃吹製等工藝。"
+            },
+            {
+                title: "系滿魚市場",
+                mapQuery: "Itoman Fish Market",
+                content: "距離那霸機場不遠的海鮮天堂。這裡的海鮮價格親民，推薦購買焗烤龍蝦、海膽醬燒扇貝、生魚片，直接在戶外座位區享用。"
+            },
+            {
+                title: "瀨長島 Umikaji Terrace",
+                mapQuery: "Umikaji Terrace Senagajima",
+                content: "依山而建的純白建築群，有「沖繩小希臘」之稱。這裡聚集了許多餐廳與甜點店（如幸福鬆餅）。最大的亮點是可以近距離觀看那霸機場的飛機起降。"
+            },
+            {
+                title: "波上宮 (懸崖上的神社)",
+                mapQuery: "Naminoue Shrine",
+                content: "那霸市區唯一的沙灘旁，聳立在懸崖上的紅瓦神社，是沖繩八社之首。<br><b>拍照點：</b>建議走到旁邊的「波之上跨海大橋」人行道，可以拍到神社聳立在懸崖與大海之上的絕美角度。<br><b>御守：</b>這裡有可愛的書包造型御守，很適合買給小學生當護身符。"
+            },
+            {
+                title: "牧志公設市場",
+                mapQuery: "Makishi Public Market",
+                content: "被稱為「那霸的廚房」。氣氛熱鬧，一樓販售色彩鮮豔的沖繩魚類、石垣牛、島  rakkyo 等食材；二樓則提供代客料理服務，是體驗在地食文化的最佳地點。"
+            },
+            {
+                title: "九州自然動物園",
+                mapQuery: "Kyushu Natural Zoological Park African Safari",
+                content: "African Safari 最大的特色是可以搭乘 Jungle Bus (叢林巴士) 進入野生動物區。你可以用夾子直接餵食獅子、大象和黑熊。<br><br><b>重要提醒：</b>務必在 1/2 (一個月前) 上網預約 Jungle Bus 座位。若遇上下雪，請確認租車公司提供無釘防滑雪胎 (Studless Tires)。"
+            },
+            {
+                title: "別府纜車 (鶴見岳)",
+                mapQuery: "Beppu Ropeway",
+                content: "搭乘大型纜車只需 10 分鐘即可抵達標高 1300 公尺的山頂。冬天（12月-2月）非常有機會看到樹枝上結滿「霧淞」的銀白世界，還能俯瞰整個別府灣。"
+            },
+            {
                 title: "別府地獄巡禮精選",
                 mapQuery: "Umi Jigoku",
                 content: "別府有七大地獄，時間有限建議挑選 2-3 個代表性即可：<br><b>1. 海地獄 (Umi Jigoku)：</b> 必去！規模最大，泉水呈現夢幻的蒂芬妮藍 (Cobalt Blue)，庭園造景也很美。<br><b>2. 灶地獄 (Kamado Jigoku)：</b> CP值最高。一處就能看到多種顏色的溫泉，還有可以喝的溫泉水、蒸氣敷臉，且與《鬼滅之刃》炭治郎有淵源。<br><b>3. 血池地獄：</b> 泉水呈現鮮紅色，非常特別。"
+            },
+            {
+                title: "八幡竈門神社",
+                mapQuery: "Hachiman Kamado Shrine",
+                content: "位於別府，因與動漫《鬼滅之刃》主角姓氏相同，且有許多傳說與劇情吻合，成為粉絲朝聖地。神社內有許多鬼滅相關的繪馬與裝飾，風景也相當清幽。"
+            },
+            {
+                title: "九州鐵道紀念館",
+                mapQuery: "Kyushu Railway History Museum",
+                content: "位於門司港站旁。戶外展示了許多引退的經典火車頭。最受孩子歡迎的是「迷你鐵道公園」，可以親自駕駛迷你火車在軌道上行駛，體驗當駕駛員的樂趣。"
+            },
+            {
+                title: "門司港懷舊區",
+                mapQuery: "Mojiko Retro",
+                content: "充滿大正浪漫風格的紅磚建築群。<br><b>必看：</b>門司港車站 (日本重要文化財)、藍翼橋 (整點會開合)。<br><b>必吃：</b>燒咖哩 (Baked Curry)，濃郁起司與蛋液包裹著咖哩飯，是這裡的靈魂美食。"
+            },
+            {
+                title: "LaLaport 福岡 (實體鋼彈)",
+                mapQuery: "LaLaport Fukuoka",
+                content: "九州最新的購物地標。門口矗立著世界最高（24.8公尺）的 1:1 RX-93ff ν 鋼彈立像。每天整點會有頭部與手部動作的演出，晚上還有牆面投影秀。"
+            },
+            {
+                title: "福岡市科學館",
+                mapQuery: "Fukuoka City Science Museum",
+                content: "位於六本松蔦屋書店樓上。館內有許多關於太空、人體、物理的互動裝置，還有最新的天象儀。設計充滿未來感，非常適合小學生寓教於樂。"
+            },
+            {
+                title: "TeamLab Forest 福岡",
+                mapQuery: "TeamLab Forest Fukuoka",
+                content: "位於福岡巨蛋旁的 E-ZO FUKUOKA 內。這裡與一般的展覽不同，強調「捕捉」與「運動」。<br><b>捕捉森林：</b>下載 APP 後，可以用手機捕捉牆上的動物，非常適合小孩。<br><b>運動森林：</b>需要跳躍、踩踏的互動光影，是讓孩子放電的好地方。"
+            },
+            {
+                title: "Mina Tenjin 購物攻略",
+                mapQuery: "Mina Tenjin Fukuoka",
+                content: "位於天神北側，2023年重新改裝。重點品牌集中在低樓層：<br><b>1F:</b> JINS 眼鏡、UNIQLO<br><b>2F:</b> GU (超大型店鋪)<br><b>3F:</b> <b>COCA</b> (日系平價休閒風，必逛！)<br><b>4F:</b> Loft 生活雜貨<br>飯店過馬路即達，非常方便。"
+            },
+            {
+                title: "櫛田神社",
+                mapQuery: "Kushida Shrine",
+                content: "博多的總鎮守，深受在地人愛戴。這裡展示著博多祇園山笠祭使用的巨大裝飾山笠（高達十幾公尺），非常壯觀。就在川端通商店街旁，可以順路參拜。"
+            },
+            {
+                title: "博多運河城 (Canal City)",
+                mapQuery: "Canal City Hakata",
+                content: "一條運河貫穿其中的大型複合商場，建築色彩繽紛。中央的太陽廣場每天定時會有音樂水舞秀，晚上配合燈光更為精彩。"
             },
             {
                 title: "沖繩自駕小撇步",
@@ -453,16 +555,14 @@
             memo: localStorage.getItem('tripMemo') || ""
         };
 
-        // --- Functions ---
+        // --- Render Functions ---
 
         function init() {
             render();
             // Calculate Day number based on today
-            const start = new Date("2025-01-28");
+            const start = new Date("2026-01-28");
             const now = new Date();
             const diffTime = now - start;
-            // Add check to not show negative days or crazy numbers if checking way before/after
-            // Simple logic: if within trip range or shortly after
             const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
             if(diffDays >= 1 && diffDays <= 12) {
                 document.getElementById('current-day-display').innerText = diffDays;
@@ -473,14 +573,13 @@
 
         function switchTab(tabName) {
             STATE.tab = tabName;
-            // Update UI
             document.querySelectorAll('.nav-btn').forEach(btn => {
                 if(btn.dataset.target === tabName) {
-                    btn.classList.add('text-muji-primary');
-                    btn.classList.remove('text-muji-secondary');
+                    btn.classList.add('bg-journal-bg', 'text-journal-accent');
+                    btn.classList.remove('text-journal-brown');
                 } else {
-                    btn.classList.remove('text-muji-primary');
-                    btn.classList.add('text-muji-secondary');
+                    btn.classList.remove('bg-journal-bg', 'text-journal-accent');
+                    btn.classList.add('text-journal-brown');
                 }
             });
             render();
@@ -491,44 +590,39 @@
             container.innerHTML = ''; // Clear
 
             switch(STATE.tab) {
-                case 'plan':
-                    renderPlan(container);
-                    break;
-                case 'guide':
-                    renderGuide(container);
-                    break;
-                case 'food':
-                    renderFoodMap(container);
-                    break;
-                case 'lists':
-                    renderLists(container);
-                    break;
-                case 'info':
-                    renderInfo(container);
-                    break;
+                case 'plan': renderPlan(container); break;
+                case 'guide': renderGuide(container); break;
+                case 'food': renderFoodMap(container); break;
+                case 'lists': renderLists(container); break;
+                case 'info': renderInfo(container); break;
             }
             window.scrollTo(0,0);
         }
 
         // --- Render: PLAN ---
         function renderPlan(container) {
-            let html = `<div class="space-y-6 fade-in pb-4">`;
+            let html = `<div class="space-y-8 fade-in">`;
             
             tripData.forEach((day, index) => {
                 const mapEmbedUrl = `https://maps.google.com/maps?q=${encodeURIComponent(day.mapFocus)}&t=&z=13&ie=UTF8&iwloc=&output=embed`;
                 
+                // Color Logic for days
+                let tapeClass = (index < 4 || index >= 9) ? 'washi-tape-blue' : 'washi-tape-green';
+                
                 html += `
-                    <div class="bg-white rounded-xl shadow-sm border border-muji-border overflow-hidden">
-                        <div class="bg-muji-bg px-4 py-3 border-b border-muji-border flex justify-between items-center sticky top-0 z-10">
+                    <div class="journal-card mt-4">
+                        <div class="washi-tape-top ${tapeClass}"></div>
+                        
+                        <div class="px-5 py-4 border-b border-journal-line flex justify-between items-end bg-white rounded-t-xl">
                             <div>
-                                <h3 class="font-bold text-muji-text text-lg">${day.date}</h3>
-                                <p class="text-xs text-muji-primary">${day.title}</p>
+                                <h3 class="font-bold text-journal-ink text-xl">${day.date}</h3>
+                                <p class="text-sm text-journal-brown mt-1">${day.title}</p>
                             </div>
-                            <span class="text-[10px] bg-white border border-muji-border px-2 py-1 rounded text-muji-secondary">${day.area}</span>
+                            <span class="text-[10px] bg-journal-bg border border-journal-line px-2 py-1 rounded text-journal-brown font-bold tracking-wide">${day.area}</span>
                         </div>
                         
-                        <!-- Small Map Section -->
-                        <div class="relative w-full h-32 bg-gray-100 border-b border-muji-border group">
+                        <!-- Map Preview -->
+                        <div class="relative w-full h-32 bg-gray-100 group border-b border-journal-line border-dashed">
                             <iframe 
                                 width="100%" 
                                 height="100%" 
@@ -538,37 +632,38 @@
                                 marginwidth="0" 
                                 src="${mapEmbedUrl}"
                                 loading="lazy"
-                                class="opacity-80 group-hover:opacity-100 transition-opacity"
+                                class="opacity-90 group-hover:opacity-100 transition-opacity pointer-events-none"
                             ></iframe>
-                            <a href="${day.route}" target="_blank" class="absolute bottom-2 right-2 bg-white/90 backdrop-blur text-muji-primary text-xs px-3 py-1.5 rounded-full shadow-sm hover:bg-muji-primary hover:text-white transition flex items-center border border-gray-200">
-                                <i class="fa-solid fa-diamond-turn-right mr-1.5"></i> 查看今日路線
+                            <a href="${day.route}" target="_blank" class="btn-hand absolute bottom-2 right-2 bg-white/90 backdrop-blur text-journal-ink text-xs px-3 py-1.5 rounded-lg shadow-md hover:text-journal-accent flex items-center border border-journal-line">
+                                <i class="fa-solid fa-diamond-turn-right mr-1.5"></i> 查看路線
                             </a>
                         </div>
 
-                        <div class="p-4 relative">
-                            <!-- Timeline items -->
+                        <div class="p-5 relative">
+                            <!-- Timeline -->
                 `;
 
                 day.events.forEach((event, idx) => {
                     const isLast = idx === day.events.length - 1;
-                    const highlightClass = event.highlight ? 'bg-orange-50 border-orange-100' : 'bg-white border-transparent';
-                    const alertText = event.alert === 'important' ? 'text-muji-accent font-bold' : 'text-muji-text';
-                    const linkBtn = event.link ? `<button onclick="openMap('${event.link}')" class="mt-2 text-xs flex items-center text-muji-primary hover:text-muji-accent transition-colors"><i class="fa-solid fa-map-location-dot mr-1"></i> Google Maps</button>` : '';
+                    const highlightClass = event.highlight ? 'bg-journal-bg border-journal-accent/30' : 'bg-white border-transparent';
+                    const alertText = event.alert === 'important' ? 'text-journal-accent font-bold' : 'text-journal-ink';
+                    const linkBtn = event.link ? `<button onclick="openMap('${event.link}')" class="mt-2 text-xs flex items-center text-journal-brown hover:text-journal-accent transition-colors"><i class="fa-solid fa-map-location-dot mr-1"></i> Google Maps</button>` : '';
 
                     html += `
                         <div class="relative pl-8 pb-6 ${isLast ? 'last-item' : 'timeline-line'}">
                             <div class="absolute left-0 top-0 w-8 flex justify-center">
-                                <div class="w-8 h-8 rounded-full bg-muji-bg border border-muji-border flex items-center justify-center text-muji-secondary z-10">
-                                    <i class="fa-solid ${event.icon} text-xs"></i>
-                                </div>
+                                <div class="w-2.5 h-2.5 rounded-full bg-journal-line border-2 border-white mt-1.5 z-10 box-content"></div>
                             </div>
-                            <div class="rounded-lg p-3 border ${event.highlight ? 'border-orange-200 bg-orange-50/50' : 'border-muji-border bg-white'}">
-                                <div class="flex justify-between items-start">
-                                    <span class="font-mono text-sm font-bold text-muji-primary bg-muji-bg px-1 rounded">${event.time}</span>
+                            <div class="flex items-start">
+                                <span class="font-mono text-sm font-bold text-journal-brown mr-3 min-w-[45px]">${event.time}</span>
+                                <div class="flex-1">
+                                    <div class="flex items-center space-x-2">
+                                        <i class="fa-solid ${event.icon} text-xs text-journal-brown/50"></i>
+                                        <h4 class="font-medium ${alertText}">${event.title}</h4>
+                                    </div>
+                                    <p class="text-xs text-gray-500 mt-1 leading-relaxed pl-5 border-l-2 border-journal-bg ml-1.5">${event.desc}</p>
+                                    <div class="pl-6">${linkBtn}</div>
                                 </div>
-                                <h4 class="font-medium mt-1 ${alertText}">${event.title}</h4>
-                                <p class="text-xs text-gray-500 mt-1 leading-relaxed">${event.desc}</p>
-                                ${linkBtn}
                             </div>
                         </div>
                     `;
@@ -580,39 +675,35 @@
             container.innerHTML = html;
         }
 
-        function openMap(query) {
-            window.open(`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`, '_blank');
-        }
-
         // --- Render: FOOD MAP ---
         function renderFoodMap(container) {
-             let html = `<div class="fade-in space-y-6">`;
+             let html = `<div class="fade-in space-y-8 pb-4">`;
              
              foodData.forEach(region => {
                  html += `
-                    <div class="space-y-3">
-                        <h3 class="font-bold text-muji-primary text-lg px-2 border-l-4 border-muji-accent flex items-center">
-                            ${region.area}
+                    <div class="journal-card p-5">
+                        <h3 class="font-bold text-journal-ink text-lg pb-3 border-b-2 border-dashed border-journal-line mb-4 flex items-center">
+                            <i class="fa-solid fa-utensils text-journal-accent mr-2"></i> ${region.area}
                         </h3>
-                        <div class="grid grid-cols-1 gap-3">
+                        <div class="space-y-4">
                  `;
                  
                  region.spots.forEach(spot => {
                      html += `
-                        <div class="bg-white p-4 rounded-xl shadow-sm border border-muji-border flex justify-between items-center">
+                        <div class="flex justify-between items-start group">
                             <div class="flex items-start space-x-3">
-                                <div class="w-10 h-10 rounded bg-orange-50 flex items-center justify-center text-orange-400 shrink-0">
+                                <div class="w-8 h-8 rounded-full bg-journal-bg flex items-center justify-center text-journal-brown shrink-0 text-xs mt-0.5">
                                     <i class="fa-solid ${spot.icon}"></i>
                                 </div>
                                 <div>
-                                    <div class="flex items-center space-x-2">
-                                        <h4 class="font-bold text-muji-text text-sm">${spot.name}</h4>
-                                        <span class="text-[10px] bg-muji-bg border border-muji-border px-1.5 py-0.5 rounded text-gray-500">${spot.type}</span>
+                                    <div class="flex items-center space-x-2 flex-wrap">
+                                        <h4 class="font-bold text-journal-ink text-sm">${spot.name}</h4>
+                                        <span class="text-[10px] text-journal-brown bg-white border border-journal-line px-1 rounded">${spot.type}</span>
                                     </div>
-                                    <p class="text-xs text-gray-500 mt-1 leading-relaxed">${spot.desc}</p>
+                                    <p class="text-xs text-gray-500 mt-0.5">${spot.desc}</p>
                                 </div>
                             </div>
-                            <button onclick="openMap('${spot.link}')" class="ml-2 w-10 h-10 rounded-full bg-muji-bg text-muji-primary flex items-center justify-center hover:bg-muji-primary hover:text-white transition shadow-sm active:scale-90">
+                            <button onclick="openMap('${spot.link}')" class="text-journal-line hover:text-journal-accent transition-colors p-2">
                                 <i class="fa-solid fa-location-arrow text-sm"></i>
                             </button>
                         </div>
@@ -626,96 +717,21 @@
              container.innerHTML = html;
         }
 
-        // --- Render: LISTS ---
-        function renderLists(container) {
-            let html = `
-                <div class="fade-in space-y-6">
-                    <!-- CheckList -->
-                    <div class="bg-white rounded-xl shadow-sm border border-muji-border overflow-hidden">
-                        <div class="bg-muji-bg px-4 py-3 border-b border-muji-border">
-                            <h3 class="font-bold text-muji-text">行前清單</h3>
-                        </div>
-                        <div class="divide-y divide-muji-border">
-                            ${checklistData.map((item, idx) => `
-                                <label class="flex items-center px-4 py-3 cursor-pointer hover:bg-gray-50 transition">
-                                    <input type="checkbox" class="w-5 h-5 text-muji-primary rounded focus:ring-muji-primary border-gray-300" 
-                                        ${STATE.checklist[item] ? 'checked' : ''} 
-                                        onchange="toggleCheck('${item}')">
-                                    <span class="ml-3 text-sm ${STATE.checklist[item] ? 'text-gray-400 line-through' : 'text-muji-text'}">${item}</span>
-                                </label>
-                            `).join('')}
-                        </div>
-                    </div>
-
-                    <!-- Memo -->
-                    <div class="bg-white rounded-xl shadow-sm border border-muji-border overflow-hidden flex flex-col h-80">
-                         <div class="bg-muji-bg px-4 py-3 border-b border-muji-border flex justify-between items-center">
-                            <h3 class="font-bold text-muji-text">備忘錄</h3>
-                            <span class="text-[10px] text-gray-400">自動儲存・網址可點擊</span>
-                        </div>
-                        <textarea id="memo-area" class="flex-1 p-4 w-full resize-none focus:outline-none text-sm leading-relaxed" 
-                            placeholder="輸入筆記、網址連結..." oninput="saveMemo(this.value)">${STATE.memo}</textarea>
-                        
-                        <div class="bg-gray-50 px-4 py-2 border-t border-muji-border min-h-[40px] flex flex-wrap gap-2" id="memo-links">
-                            <!-- Links will appear here -->
-                        </div>
-                    </div>
-                </div>
-            `;
-            container.innerHTML = html;
-            updateMemoLinks(STATE.memo);
-        }
-
-        function toggleCheck(item) {
-            STATE.checklist[item] = !STATE.checklist[item];
-            localStorage.setItem('tripChecklist', JSON.stringify(STATE.checklist));
-            renderLists(document.getElementById('app-container'));
-        }
-
-        function saveMemo(val) {
-            STATE.memo = val;
-            localStorage.setItem('tripMemo', val);
-            updateMemoLinks(val);
-        }
-
-        function updateMemoLinks(text) {
-            const container = document.getElementById('memo-links');
-            if(!container) return;
-            
-            const urlRegex = /(https?:\/\/[^\s]+)/g;
-            const matches = text.match(urlRegex);
-            
-            if(matches) {
-                container.innerHTML = matches.map(url => `
-                    <a href="${url}" target="_blank" class="inline-flex items-center px-2 py-1 bg-white border border-muji-border rounded text-[10px] text-blue-600 truncate max-w-[150px]">
-                        <i class="fa-solid fa-link mr-1"></i> ${new URL(url).hostname}
-                    </a>
-                `).join('');
-            } else {
-                container.innerHTML = '';
-            }
-        }
-
         // --- Render: GUIDE ---
         function renderGuide(container) {
             let html = `
-                <div class="fade-in space-y-4">
-                    <div class="bg-white rounded-xl shadow-sm border border-muji-border overflow-hidden">
-                        <iframe width="100%" height="250" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.openstreetmap.org/export/embed.html?bbox=127.6083%2C26.1556%2C128.0848%2C26.7328&amp;layer=mapnik&amp;marker=26.2124%2C127.6809" style="border: 0"></iframe>
-                        <div class="p-2 text-center text-xs text-gray-400">沖繩全島概覽</div>
-                    </div>
-
+                <div class="fade-in space-y-6 pb-4">
                     ${guideContent.map(item => `
-                        <div class="bg-white rounded-xl shadow-sm border border-muji-border p-5">
-                            <div class="flex justify-between items-start mb-2">
-                                <h3 class="font-bold text-muji-primary text-lg border-l-4 border-muji-primary pl-3">${item.title}</h3>
+                        <div class="journal-card p-5 transform hover:rotate-0 transition duration-300">
+                            <div class="flex justify-between items-start mb-3">
+                                <h3 class="font-bold text-journal-ink text-lg border-b-4 border-journal-bg inline-block px-1">${item.title}</h3>
                                 ${item.mapQuery ? 
-                                    `<button onclick="openMap('${item.mapQuery}')" class="text-muji-secondary hover:text-muji-accent transition-colors flex items-center text-xs border border-muji-border px-2 py-1 rounded bg-gray-50 active:scale-95">
+                                    `<button onclick="openMap('${item.mapQuery}')" class="btn-hand bg-white border border-journal-line px-2 py-1 rounded text-xs text-journal-brown hover:text-journal-accent">
                                         <i class="fa-solid fa-map-location-dot mr-1"></i> 地圖
                                     </button>` : ''
                                 }
                             </div>
-                            <div class="text-sm leading-7 text-gray-600">
+                            <div class="text-sm leading-7 text-gray-600 font-sans">
                                 ${item.content}
                             </div>
                         </div>
@@ -725,200 +741,218 @@
             container.innerHTML = html;
         }
 
+        // --- Render: LISTS ---
+        function renderLists(container) {
+            let html = `
+                <div class="fade-in space-y-6 pb-4">
+                    <!-- CheckList -->
+                    <div class="journal-card overflow-hidden">
+                        <div class="bg-journal-bg px-5 py-3 border-b border-journal-line flex items-center">
+                            <i class="fa-solid fa-clipboard-check text-journal-accent mr-2"></i>
+                            <h3 class="font-bold text-journal-ink">行前清單</h3>
+                        </div>
+                        <div class="divide-y divide-journal-line/50">
+                            ${checklistData.map((item, idx) => `
+                                <label class="flex items-center px-5 py-3.5 cursor-pointer hover:bg-journal-bg/30 transition">
+                                    <input type="checkbox" class="w-5 h-5 text-journal-accent rounded border-gray-300 focus:ring-journal-accent" 
+                                        ${STATE.checklist[item] ? 'checked' : ''} 
+                                        onchange="toggleCheck('${item}')">
+                                    <span class="ml-3 text-sm ${STATE.checklist[item] ? 'text-gray-400 line-through' : 'text-journal-ink'}">${item}</span>
+                                </label>
+                            `).join('')}
+                        </div>
+                    </div>
+
+                    <!-- Memo -->
+                    <div class="journal-card flex flex-col h-80 relative">
+                        <div class="absolute -top-3 left-1/2 transform -translate-x-1/2 w-8 h-8 bg-journal-line rounded-full border-4 border-journal-bg shadow-inner"></div>
+                         <div class="px-5 py-4 border-b border-journal-line flex justify-between items-center bg-journal-bg/50 rounded-t-xl mt-2">
+                            <h3 class="font-bold text-journal-ink">備忘錄</h3>
+                            <span class="text-[10px] text-gray-400">自動儲存</span>
+                        </div>
+                        <textarea id="memo-area" class="flex-1 p-5 w-full resize-none focus:outline-none text-sm leading-relaxed bg-transparent" 
+                            placeholder="輸入筆記、網址連結..." oninput="saveMemo(this.value)">${STATE.memo}</textarea>
+                        
+                        <div class="bg-journal-bg/30 px-4 py-2 border-t border-journal-line min-h-[40px] flex flex-wrap gap-2 rounded-b-xl" id="memo-links">
+                            <!-- Links will appear here -->
+                        </div>
+                    </div>
+                </div>
+            `;
+            container.innerHTML = html;
+            updateMemoLinks(STATE.memo);
+        }
+
         // --- Render: INFO ---
         function renderInfo(container) {
             html = `
-                <div class="fade-in space-y-4">
+                <div class="fade-in space-y-6 pb-4">
                     <!-- Hotel Info -->
-                    <div class="bg-white rounded-xl shadow-sm border border-muji-border p-5">
-                        <h3 class="font-bold text-muji-text mb-4 flex items-center">
-                            <i class="fa-solid fa-hotel text-muji-primary mr-2"></i> 住宿資訊
+                    <div class="journal-card p-6">
+                        <h3 class="font-bold text-journal-ink mb-4 flex items-center text-lg">
+                            <i class="fa-solid fa-hotel text-journal-accent mr-2"></i> 住宿資訊
                         </h3>
-                        <div class="space-y-4">
-                            <div class="border-l-2 border-muji-secondary pl-3 relative">
-                                <p class="text-[10px] text-muji-accent font-bold mb-1">01/28-01/31 & 02/06-02/08</p>
-                                <p class="font-bold text-muji-text text-sm">THE NEST HOTEL NAHA</p>
-                                <button onclick="openMap('THE NEST HOTEL NAHA')" class="mt-2 text-xs flex items-center text-muji-secondary hover:text-muji-primary transition-colors">
-                                    <i class="fa-solid fa-location-dot mr-1"></i> 查看地圖
+                        <div class="space-y-6 relative pl-2">
+                            <div class="absolute left-0 top-2 bottom-2 w-0.5 bg-journal-line border-l-2 border-dashed border-journal-line"></div>
+                            
+                            <div class="pl-4 relative">
+                                <div class="absolute -left-[21px] top-1 w-3 h-3 rounded-full bg-journal-blue border-2 border-white"></div>
+                                <p class="text-[10px] text-journal-blue font-bold mb-0.5">01/28-01/31 & 02/06-02/08</p>
+                                <p class="font-bold text-journal-ink text-sm">THE NEST HOTEL NAHA</p>
+                                <button onclick="openMap('THE NEST HOTEL NAHA')" class="mt-1 text-xs text-gray-400 hover:text-journal-accent transition flex items-center">
+                                    <i class="fa-solid fa-location-dot mr-1"></i> 那霸
                                 </button>
                             </div>
-                            <div class="border-l-2 border-muji-secondary pl-3 relative">
-                                <p class="text-[10px] text-muji-accent font-bold mb-1">02/01 - 02/03</p>
-                                <p class="font-bold text-muji-text text-sm">AMANEK Beppu YULA-RE</p>
-                                <p class="text-[10px] text-gray-400">別府車站旁・頂樓泳池</p>
-                                <button onclick="openMap('AMANEK Beppu YULA-RE')" class="mt-2 text-xs flex items-center text-muji-secondary hover:text-muji-primary transition-colors">
-                                    <i class="fa-solid fa-location-dot mr-1"></i> 查看地圖
+                            
+                            <div class="pl-4 relative">
+                                <div class="absolute -left-[21px] top-1 w-3 h-3 rounded-full bg-journal-green border-2 border-white"></div>
+                                <p class="text-[10px] text-journal-green font-bold mb-0.5">02/01 - 02/03</p>
+                                <p class="font-bold text-journal-ink text-sm">AMANEK Beppu YULA-RE</p>
+                                <button onclick="openMap('AMANEK Beppu YULA-RE')" class="mt-1 text-xs text-gray-400 hover:text-journal-accent transition flex items-center">
+                                    <i class="fa-solid fa-location-dot mr-1"></i> 別府
                                 </button>
                             </div>
-                            <div class="border-l-2 border-muji-secondary pl-3 relative">
-                                <p class="text-[10px] text-muji-accent font-bold mb-1">02/03 - 02/05</p>
-                                <p class="font-bold text-muji-text text-sm">Richmond Hotel Fukuoka Tenjin</p>
-                                <p class="text-[10px] text-gray-400">福岡天神・購物方便</p>
-                                <button onclick="openMap('Richmond Hotel Fukuoka Tenjin')" class="mt-2 text-xs flex items-center text-muji-secondary hover:text-muji-primary transition-colors">
-                                    <i class="fa-solid fa-location-dot mr-1"></i> 查看地圖
+
+                            <div class="pl-4 relative">
+                                <div class="absolute -left-[21px] top-1 w-3 h-3 rounded-full bg-journal-brown border-2 border-white"></div>
+                                <p class="text-[10px] text-journal-brown font-bold mb-0.5">02/03 - 02/05</p>
+                                <p class="font-bold text-journal-ink text-sm">Richmond Hotel Fukuoka Tenjin</p>
+                                <button onclick="openMap('Richmond Hotel Fukuoka Tenjin')" class="mt-1 text-xs text-gray-400 hover:text-journal-accent transition flex items-center">
+                                    <i class="fa-solid fa-location-dot mr-1"></i> 福岡
                                 </button>
                             </div>
                         </div>
                     </div>
 
                     <!-- Flight Info -->
-                    <div class="bg-white rounded-xl shadow-sm border border-muji-border p-5">
-                        <h3 class="font-bold text-muji-text mb-3 flex items-center">
-                            <i class="fa-solid fa-plane text-muji-primary mr-2"></i> 航班行程
+                    <div class="journal-card p-6">
+                        <h3 class="font-bold text-journal-ink mb-4 flex items-center text-lg">
+                            <i class="fa-solid fa-plane text-journal-accent mr-2"></i> 航班行程
                         </h3>
-                        <div class="space-y-3">
-                            <div class="flex items-center text-sm border-b border-gray-50 pb-2">
-                                <div class="w-12 text-xs text-gray-400 font-mono">01/28</div>
-                                <div class="flex-1 font-medium text-muji-text ml-2">
-                                    <div class="flex justify-between items-center mb-1">
-                                        <span class="font-bold text-muji-accent">16:50 TPE</span>
-                                        <i class="fa-solid fa-arrow-right text-[10px] text-gray-300"></i>
-                                        <span class="font-bold text-muji-accent">19:20 OKA</span>
-                                    </div>
-                                    <span class="text-xs text-gray-400 bg-gray-100 px-2 py-0.5 rounded">CI 0122</span>
+                        <div class="space-y-4">
+                            <div class="bg-journal-bg rounded-lg p-3 border border-journal-line/50">
+                                <div class="flex justify-between items-center mb-1">
+                                    <span class="font-bold text-journal-ink text-sm">01/28</span>
+                                    <span class="text-xs text-white bg-journal-blue px-2 py-0.5 rounded-full">去程</span>
+                                </div>
+                                <div class="flex justify-between text-xs text-gray-500">
+                                    <span>16:50 TPE <i class="fa-solid fa-arrow-right mx-1"></i> 19:20 OKA</span>
+                                    <span class="font-mono">CI 0122</span>
                                 </div>
                             </div>
-                            <div class="flex items-center text-sm border-b border-gray-50 pb-2">
-                                <div class="w-12 text-xs text-gray-400 font-mono">02/01</div>
-                                <div class="flex-1 font-medium text-muji-text ml-2">
-                                    <div class="flex justify-between items-center mb-1">
-                                        <span class="font-bold text-muji-accent">10:10 OKA</span>
-                                        <i class="fa-solid fa-arrow-right text-[10px] text-gray-300"></i>
-                                        <span class="font-bold text-muji-accent">12:00 FUK</span>
-                                    </div>
-                                    <span class="text-xs text-gray-400 bg-gray-100 px-2 py-0.5 rounded">MM282</span>
+                            <div class="bg-journal-bg rounded-lg p-3 border border-journal-line/50">
+                                <div class="flex justify-between items-center mb-1">
+                                    <span class="font-bold text-journal-ink text-sm">02/01</span>
+                                    <span class="text-xs text-white bg-journal-green px-2 py-0.5 rounded-full">國內</span>
+                                </div>
+                                <div class="flex justify-between text-xs text-gray-500">
+                                    <span>10:10 OKA <i class="fa-solid fa-arrow-right mx-1"></i> 12:00 FUK</span>
+                                    <span class="font-mono">MM282</span>
                                 </div>
                             </div>
-                            <div class="flex items-center text-sm border-b border-gray-50 pb-2">
-                                <div class="w-12 text-xs text-gray-400 font-mono">02/06</div>
-                                <div class="flex-1 font-medium text-muji-text ml-2">
-                                    <div class="flex justify-between items-center mb-1">
-                                        <span class="font-bold text-muji-accent">17:55 FUK</span>
-                                        <i class="fa-solid fa-arrow-right text-[10px] text-gray-300"></i>
-                                        <span class="font-bold text-muji-accent">19:50 OKA</span>
-                                    </div>
-                                    <span class="text-xs text-gray-400 bg-gray-100 px-2 py-0.5 rounded">MM289</span>
+                            <div class="bg-journal-bg rounded-lg p-3 border border-journal-line/50">
+                                <div class="flex justify-between items-center mb-1">
+                                    <span class="font-bold text-journal-ink text-sm">02/06</span>
+                                    <span class="text-xs text-white bg-journal-green px-2 py-0.5 rounded-full">國內</span>
+                                </div>
+                                <div class="flex justify-between text-xs text-gray-500">
+                                    <span>17:55 FUK <i class="fa-solid fa-arrow-right mx-1"></i> 19:50 OKA</span>
+                                    <span class="font-mono">MM289</span>
                                 </div>
                             </div>
-                             <div class="flex items-center text-sm">
-                                <div class="w-12 text-xs text-gray-400 font-mono">02/08</div>
-                                <div class="flex-1 font-medium text-muji-text ml-2">
-                                    <div class="flex justify-between items-center mb-1">
-                                        <span class="font-bold text-muji-accent">11:55 OKA</span>
-                                        <i class="fa-solid fa-arrow-right text-[10px] text-gray-300"></i>
-                                        <span class="font-bold text-muji-accent">12:35 TPE</span>
-                                    </div>
-                                    <span class="text-xs text-gray-400 bg-gray-100 px-2 py-0.5 rounded">CI 0121</span>
+                             <div class="bg-journal-bg rounded-lg p-3 border border-journal-line/50">
+                                <div class="flex justify-between items-center mb-1">
+                                    <span class="font-bold text-journal-ink text-sm">02/08</span>
+                                    <span class="text-xs text-white bg-journal-accent px-2 py-0.5 rounded-full">回程</span>
+                                </div>
+                                <div class="flex justify-between text-xs text-gray-500">
+                                    <span>11:55 OKA <i class="fa-solid fa-arrow-right mx-1"></i> 12:35 TPE</span>
+                                    <span class="font-mono">CI 0121</span>
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     <!-- Rental Car Info -->
-                    <div class="bg-white rounded-xl shadow-sm border border-muji-border p-5">
-                        <h3 class="font-bold text-muji-text mb-3 flex items-center">
-                            <i class="fa-solid fa-car text-muji-primary mr-2"></i> 租車資訊
+                    <div class="journal-card p-6">
+                        <h3 class="font-bold text-journal-ink mb-4 flex items-center text-lg">
+                            <i class="fa-solid fa-car text-journal-accent mr-2"></i> 租車資訊
                         </h3>
                         <div class="space-y-6">
                             <!-- OTS Okinawa -->
-                            <div class="border-l-2 border-muji-primary pl-3 relative">
-                                <div class="flex justify-between items-start">
-                                    <div>
-                                        <p class="text-[10px] text-muji-secondary font-bold mb-1">沖繩 (臨空豐崎營業所)</p>
-                                        <p class="font-bold text-muji-text text-sm">OTS Rent-a-car (HC級別)</p>
-                                    </div>
-                                    <span class="bg-orange-100 text-orange-600 text-[10px] px-2 py-1 rounded border border-orange-200 font-bold">當地支付</span>
+                            <div class="relative bg-journal-bg/30 p-4 rounded-xl border border-dashed border-journal-line">
+                                <div class="absolute -top-2 left-4 px-2 bg-white text-xs text-journal-blue font-bold border border-journal-line rounded">沖繩</div>
+                                <div class="flex justify-between items-start mt-1">
+                                    <p class="font-bold text-journal-ink text-sm">OTS Rent-a-car</p>
+                                    <span class="bg-white text-journal-accent text-[10px] px-2 py-1 rounded border border-journal-line">當地支付</span>
                                 </div>
                                 
-                                <div class="mt-2 text-xs text-gray-600 space-y-1.5 font-mono bg-gray-50 p-3 rounded border border-gray-100">
+                                <div class="mt-3 text-xs text-gray-600 space-y-2 font-mono">
                                     <div class="flex justify-between">
                                         <span class="text-gray-400">預約號碼</span>
-                                        <span class="font-bold text-lg text-muji-text">OTS1382312</span>
+                                        <span class="font-bold text-base text-journal-ink">OTS1382312</span>
                                     </div>
                                     <div class="flex justify-between">
-                                        <span class="text-gray-400">取車時間</span>
-                                        <span>01/29 08:30</span>
+                                        <span class="text-gray-400">取還時間</span>
+                                        <span>01/29 08:30 - 01/31 19:00</span>
                                     </div>
-                                    <div class="flex justify-between">
-                                        <span class="text-gray-400">還車時間</span>
-                                        <span>01/31 19:00</span>
-                                    </div>
-                                    <div class="flex justify-between border-t border-dashed border-gray-300 pt-1 mt-1">
+                                    <div class="flex justify-between border-t border-dashed border-journal-line pt-2">
                                         <span class="text-gray-400">支付金額</span>
                                         <span class="font-bold">¥23,130</span>
                                     </div>
-                                    <div class="text-[10px] text-gray-400 pt-1">
-                                        *含豪華安心險、定額ETC
-                                    </div>
                                 </div>
-                                <button onclick="openMap('OTS Rent-a-car Rinku Toyosaki')" class="mt-2 text-xs flex items-center text-muji-primary hover:text-muji-accent transition-colors w-full justify-center py-2 bg-muji-bg rounded border border-muji-border">
-                                    <i class="fa-solid fa-location-arrow mr-1.5"></i> 導航至臨空豐崎
+                                <button onclick="openMap('OTS Rent-a-car Rinku Toyosaki')" class="btn-hand mt-3 w-full py-2 bg-white rounded-lg border border-journal-line text-xs text-journal-brown hover:text-journal-accent transition">
+                                    <i class="fa-solid fa-location-arrow mr-1"></i> 導航至臨空豐崎
                                 </button>
                             </div>
 
                             <!-- Toyota Fukuoka -->
-                            <div class="border-l-2 border-muji-accent pl-3 relative">
-                                <div class="flex justify-between items-start">
-                                    <div>
-                                        <p class="text-[10px] text-muji-secondary font-bold mb-1">九州 (福岡機場店)</p>
-                                        <p class="font-bold text-muji-text text-sm">TOYOTA Rent a Car</p>
-                                    </div>
-                                    <span class="bg-muji-bg text-muji-accent text-[10px] px-2 py-1 rounded border border-muji-border font-bold">已結算</span>
+                            <div class="relative bg-journal-bg/30 p-4 rounded-xl border border-dashed border-journal-line">
+                                <div class="absolute -top-2 left-4 px-2 bg-white text-xs text-journal-green font-bold border border-journal-line rounded">九州</div>
+                                <div class="flex justify-between items-start mt-1">
+                                    <p class="font-bold text-journal-ink text-sm">TOYOTA Rent a Car</p>
+                                    <span class="bg-white text-journal-brown text-[10px] px-2 py-1 rounded border border-journal-line">已結算</span>
                                 </div>
                                 
-                                <div class="mt-2 text-xs text-gray-600 space-y-1.5 font-mono bg-gray-50 p-3 rounded border border-gray-100">
+                                <div class="mt-3 text-xs text-gray-600 space-y-2 font-mono">
                                     <div class="flex justify-between">
                                         <span class="text-gray-400">預約號碼</span>
-                                        <span class="font-bold text-lg text-muji-text">99903633500</span>
+                                        <span class="font-bold text-base text-journal-ink">99903633500</span>
                                     </div>
                                     <div class="flex justify-between">
-                                        <span class="text-gray-400">取車時間</span>
-                                        <span>02/01 13:30</span>
+                                        <span class="text-gray-400">取還時間</span>
+                                        <span>02/01 13:30 - 02/03 18:00</span>
                                     </div>
-                                    <div class="flex justify-between">
-                                        <span class="text-gray-400">還車時間</span>
-                                        <span>02/03 18:00</span>
-                                    </div>
-                                    <div class="flex justify-between border-t border-dashed border-gray-300 pt-1 mt-1">
+                                    <div class="flex justify-between border-t border-dashed border-journal-line pt-2">
                                         <span class="text-gray-400">結算金額</span>
                                         <span class="font-bold">¥47,932</span>
                                     </div>
                                 </div>
-                                <button onclick="openMap('Toyota Rent a Car Fukuoka Airport')" class="mt-2 text-xs flex items-center text-muji-primary hover:text-muji-accent transition-colors w-full justify-center py-2 bg-muji-bg rounded border border-muji-border">
+                                <button onclick="openMap('Toyota Rent a Car Fukuoka Airport')" class="btn-hand mt-3 w-full py-2 bg-white rounded-lg border border-journal-line text-xs text-journal-brown hover:text-journal-accent transition">
                                     <i class="fa-solid fa-location-arrow mr-1.5"></i> 導航至福岡機場店
                                 </button>
                             </div>
                         </div>
                     </div>
 
+                    <!-- Weather & Emergency Numbers -->
                     <div class="grid grid-cols-2 gap-4">
-                         <a href="https://www.jma.go.jp/bosai/forecast/" target="_blank" class="bg-white p-4 rounded-xl shadow-sm border border-muji-border flex flex-col items-center justify-center space-y-2 active:bg-gray-50">
-                            <i class="fa-solid fa-cloud-sun text-3xl text-sky-500"></i>
-                            <span class="font-bold text-sm">天氣預報</span>
+                         <a href="https://www.jma.go.jp/bosai/forecast/" target="_blank" class="journal-card p-4 flex flex-col items-center justify-center space-y-2 hover:bg-journal-bg/50 transition cursor-pointer">
+                            <i class="fa-solid fa-cloud-sun text-3xl text-journal-blue"></i>
+                            <span class="font-bold text-journal-ink text-sm">天氣預報</span>
                         </a>
-                        <div class="bg-white p-4 rounded-xl shadow-sm border border-muji-border flex flex-col items-center justify-center space-y-2">
-                             <i class="fa-solid fa-phone text-3xl text-red-500"></i>
-                            <span class="font-bold text-sm">緊急: 110/119</span>
+                        <div class="journal-card p-4 flex flex-col items-center justify-center space-y-2">
+                             <i class="fa-solid fa-phone-volume text-3xl text-journal-accent"></i>
+                            <span class="font-bold text-journal-ink text-sm">緊急: 110 / 119</span>
                         </div>
                     </div>
 
-                    <div class="bg-white rounded-xl shadow-sm border border-muji-border p-5">
-                        <h3 class="font-bold text-muji-text mb-3">台北駐日經濟文化代表處</h3>
+                    <div class="bg-white rounded-xl shadow-sm border border-journal-line p-5">
+                        <h3 class="font-bold text-journal-ink mb-3 text-sm">緊急聯絡 (TECO)</h3>
                         <ul class="space-y-3 text-sm text-gray-600">
-                            <li class="flex items-start"><i class="fa-solid fa-location-dot mt-1 mr-2 text-muji-secondary"></i> 福岡分處：福岡市中央區櫻坂 3-12-42</li>
-                            <li class="flex items-start"><i class="fa-solid fa-phone mt-1 mr-2 text-muji-secondary"></i> 急難救助：090-1922-9740</li>
-                            <li class="flex items-start"><i class="fa-solid fa-location-dot mt-1 mr-2 text-muji-secondary"></i> 那霸分處：那霸市久茂地 3-15-9</li>
-                             <li class="flex items-start"><i class="fa-solid fa-phone mt-1 mr-2 text-muji-secondary"></i> 急難救助：090-1942-1107</li>
+                            <li class="flex items-center"><i class="fa-solid fa-phone w-6 text-journal-accent"></i> 福岡急難：090-1922-9740</li>
+                             <li class="flex items-center"><i class="fa-solid fa-phone w-6 text-journal-accent"></i> 那霸急難：090-1942-1107</li>
                         </ul>
-                    </div>
-
-                     <div class="bg-muji-bg rounded-xl p-5 border border-muji-border">
-                        <h3 class="font-bold text-muji-text mb-2 text-sm">旅遊備註</h3>
-                        <p class="text-xs text-gray-500 leading-relaxed">
-                            1. 日本電壓 100V，插座為雙平腳，台灣電器通常可直接用。<br>
-                            2. 購物滿 5000 日圓 (未稅) 可退稅，需出示護照正本。<br>
-                            3. 垃圾請分類，路邊垃圾桶較少，建議自備塑膠袋帶回飯店。
-                        </p>
                     </div>
                 </div>
             `;
@@ -927,6 +961,34 @@
 
         // Start
         init();
+        switchTab('plan'); // Init Tab
+
+        function openMap(query) {
+            window.open(`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`, '_blank');
+        }
+        function toggleCheck(item) {
+            STATE.checklist[item] = !STATE.checklist[item];
+            localStorage.setItem('tripChecklist', JSON.stringify(STATE.checklist));
+            renderLists(document.getElementById('app-container'));
+        }
+        function saveMemo(val) {
+            STATE.memo = val;
+            localStorage.setItem('tripMemo', val);
+            updateMemoLinks(val);
+        }
+        function updateMemoLinks(text) {
+            const container = document.getElementById('memo-links');
+            if(!container) return;
+            const urlRegex = /(https?:\/\/[^\s]+)/g;
+            const matches = text.match(urlRegex);
+            if(matches) {
+                container.innerHTML = matches.map(url => `
+                    <a href="${url}" target="_blank" class="inline-flex items-center px-2 py-1 bg-white border border-journal-line rounded text-[10px] text-journal-blue truncate max-w-[150px]">
+                        <i class="fa-solid fa-link mr-1"></i> 連結
+                    </a>
+                `).join('');
+            } else { container.innerHTML = ''; }
+        }
 
     </script>
 </body>
