@@ -59,7 +59,7 @@
         /* Journal Card Effect */
         .journal-card {
             background: #fff;
-            border-radius: 12px; /* 圓角稍大 */
+            border-radius: 12px;
             box-shadow: 2px 3px 10px rgba(0,0,0,0.05);
             border: 1px solid rgba(0,0,0,0.02);
             position: relative;
@@ -73,7 +73,7 @@
             transform: translateX(-50%) rotate(-1deg);
             width: 100px;
             height: 24px;
-            background-color: rgba(212, 136, 114, 0.3); /* 珊瑚粉半透明 */
+            background-color: rgba(212, 136, 114, 0.3);
             border-left: 2px dashed rgba(255,255,255,0.6);
             border-right: 2px dashed rgba(255,255,255,0.6);
             box-shadow: 0 1px 3px rgba(0,0,0,0.1);
@@ -89,8 +89,8 @@
             top: 2rem;
             bottom: -1rem;
             left: 1rem;
-            width: 0px; /* 虛線用 border */
-            border-left: 2px dashed #d1c7b7; /* 虛線顏色 */
+            width: 0px;
+            border-left: 2px dashed #d1c7b7;
             z-index: 0;
         }
         .last-item .timeline-line::before { display: none; }
@@ -112,7 +112,7 @@
 <body class="flex flex-col h-screen overflow-hidden text-journal-ink">
 
     <!-- Top Header -->
-    <header class="flex-none bg-journal-bg/95 backdrop-blur-sm border-b border-journal-line px-6 py-4 flex justify-between items-center z-20">
+    <header id="main-header" class="flex-none bg-journal-bg/95 backdrop-blur-sm border-b border-journal-line px-6 py-4 flex justify-between items-center z-20 transition-transform duration-300">
         <div>
             <h1 class="text-2xl font-bold tracking-widest text-journal-ink flex items-center">
                 <i class="fa-solid fa-plane-up mr-2 text-journal-accent text-sm"></i>
@@ -147,9 +147,9 @@
                 <i class="fa-solid fa-book-open text-lg"></i>
                 <span class="text-[10px] font-medium">景點</span>
             </button>
-            <button onclick="switchTab('food')" class="nav-btn w-full py-3 rounded-xl flex flex-col items-center justify-center space-y-1 text-journal-brown transition-colors hover:bg-journal-bg" data-target="food">
-                <i class="fa-solid fa-utensils text-lg"></i>
-                <span class="text-[10px] font-medium">美食</span>
+            <button onclick="switchTab('shops')" class="nav-btn w-full py-3 rounded-xl flex flex-col items-center justify-center space-y-1 text-journal-brown transition-colors hover:bg-journal-bg" data-target="shops">
+                <i class="fa-solid fa-shop text-lg"></i>
+                <span class="text-[10px] font-medium">好店</span>
             </button>
             <button onclick="switchTab('lists')" class="nav-btn w-full py-3 rounded-xl flex flex-col items-center justify-center space-y-1 text-journal-brown transition-colors hover:bg-journal-bg" data-target="lists">
                 <i class="fa-solid fa-list-check text-lg"></i>
@@ -172,7 +172,6 @@
 
     <script>
         // --- Data ---
-        
         const tripData = [
             {
                 date: "01/28 (三)",
@@ -208,8 +207,8 @@
                 route: "https://www.google.com/maps/dir/THE+NEST+HOTEL+NAHA/Okinawa+Churaumi+Aquarium/Kouri+Shrimp/DINO+Dinosaur+Park+Yanbaru/Motobu+Ranch",
                 mapFocus: "Okinawa Churaumi Aquarium",
                 events: [
-                    { time: "09:00", title: "高速公路北上", desc: "車程約 1.5 - 2 小時", icon: "fa-road" },
-                    { time: "11:00", title: "美麗海水族館", desc: "黑潮之海 (鯨鯊餵食秀 13:00/15:00)、戶外海豚", icon: "fa-water", link: "Okinawa Churaumi Aquarium", highlight: true },
+                    { time: "08:00", title: "提早出發！高速公路北上", desc: "避開那霸上班車潮，車程約 2 小時", icon: "fa-road", alert: "important" },
+                    { time: "10:00", title: "美麗海水族館", desc: "建議先看 10:30 戶外海豚秀，再進館看黑潮之海鯨鯊", icon: "fa-water", link: "Okinawa Churaumi Aquarium", highlight: true },
                     { time: "13:30", title: "古宇利蝦蝦飯", desc: "蒜香奶油蝦，去橋下沙灘踩水看心形岩", icon: "fa-shrimp", link: "Kouri Shrimp" },
                     { time: "15:30", title: "DINO 恐龍公園", desc: "山原亞熱帶之森，找暴龍！(名護御菓子御殿旁)", icon: "fa-dragon", link: "DINO Dinosaur Park Yanbaru Subtropical Forest" },
                     { time: "晚餐", title: "燒肉本部牧場 / 琉球之牛", desc: "和牛推薦", icon: "fa-fire", link: "Motobu Ranch" }
@@ -342,28 +341,19 @@
             }
         ];
 
-        // --- Data: Checklist ---
-        const checklistData = [
-            "護照 (確認效期)", "日本駕照譯本", "台灣駕照正本", "VJW 登錄 (Visit Japan Web)",
-            "行動電源 & 線", "行動網卡 (eSIM)", 
-            "九州租車：確認雪胎 (Studless Tires)", "預約：African Safari Jungle Bus", 
-            "預約餐廳：敘敘苑, 本部牧場, 華味鳥", "保暖衣物 (九州2-10度/手套帽子)",
-            "泳衣 (別府飯店用)", "信用卡 & 日幣現金"
-        ];
-
         // --- Guide Content ---
         const guideContent = [
             {
                 title: "美麗海 vs DMM 水族館",
                 content: `這趟旅程安排了兩個截然不同的水族館：<br><br>
                 <div class="flex items-center justify-between mb-1">
-                    <b class="text-muji-text">1. 美麗海水族館 (北部)</b>
-                    <button onclick="openMap('Okinawa Churaumi Aquarium')" class="text-xs bg-gray-50 border border-muji-border px-2 py-1 rounded text-muji-secondary hover:text-muji-primary transition"><i class="fa-solid fa-map-location-dot mr-1"></i>地圖</button>
+                    <b class="text-journal-ink">1. 美麗海水族館 (北部)</b>
+                    <button onclick="openMap('Okinawa Churaumi Aquarium')" class="btn-hand text-xs bg-white border border-journal-line px-2 py-1 rounded text-journal-brown hover:text-journal-accent transition"><i class="fa-solid fa-map-location-dot mr-1"></i>地圖</button>
                 </div>
                 特色是「壯闊」。擁有世界級的「黑潮之海」巨大水槽與鯨鯊，戶外有免費海豚秀與海龜館，適合欣賞大自然的宏偉。<br><br>
                 <div class="flex items-center justify-between mb-1">
-                    <b class="text-muji-text">2. DMM Kariyushi 水族館 (南部)</b>
-                    <button onclick="openMap('DMM Kariyushi Aquarium')" class="text-xs bg-gray-50 border border-muji-border px-2 py-1 rounded text-muji-secondary hover:text-muji-primary transition"><i class="fa-solid fa-map-location-dot mr-1"></i>地圖</button>
+                    <b class="text-journal-ink">2. DMM Kariyushi 水族館 (南部)</b>
+                    <button onclick="openMap('DMM Kariyushi Aquarium')" class="btn-hand text-xs bg-white border border-journal-line px-2 py-1 rounded text-journal-brown hover:text-journal-accent transition"><i class="fa-solid fa-map-location-dot mr-1"></i>地圖</button>
                 </div>
                 特色是「互動與科技」。結合聲光投影，地板有透明玻璃可看下方水槽，還可以近距離觸摸與餵食樹懶、水豚等動物，體驗感更強。`
             },
@@ -478,6 +468,35 @@
             }
         ];
 
+        // --- Shopping Data ---
+        const shoppingData = [
+            {
+                brand: "HOKA",
+                icon: "fa-shoe-prints",
+                stores: [
+                    { area: "福岡", name: "HOKA Fukuoka (大名)", desc: "品牌專賣店，款式最齊全", link: "HOKA KA ONE ONE Fukuoka" },
+                    { area: "沖繩", name: "ABC-MART Grand Stage", desc: "Parco City 3F / Main Place 2F", link: "ABC-MART GRAND STAGE San-A Urasoe West Coast PARCO CITY" }
+                ]
+            },
+            {
+                brand: "On Running",
+                icon: "fa-cloud",
+                stores: [
+                    { area: "福岡", name: "ABC-MART Grand Stage", desc: "天神大名店，貨源充足", link: "ABC-MART GRAND STAGE Fukuoka Daimyo" },
+                    { area: "福岡", name: "Step Sports", desc: "天神大名，專業跑鞋店", link: "Step Sports Fukuoka" },
+                    { area: "沖繩", name: "Sports Depo", desc: "Parco City / 豐崎 (近Outlet)", link: "Sports Depo Ameku" }
+                ]
+            },
+            {
+                brand: "COCA",
+                icon: "fa-shirt",
+                stores: [
+                    { area: "福岡", name: "Mina Tenjin (3F)", desc: "天神逛街必去，平價時尚", link: "Mina Tenjin Fukuoka" },
+                    { area: "沖繩", name: "Parco City (2F)", desc: "沖繩旗艦店，款式多", link: "COCA Parco City" }
+                ]
+            }
+        ];
+
         // --- Food Map Data ---
         const foodData = [
             {
@@ -548,6 +567,15 @@
             }
         ];
 
+        // --- Checklist Data (Restored) ---
+        const checklistData = [
+            "護照 (確認效期)", "日本駕照譯本", "台灣駕照正本", "VJW 登錄 (Visit Japan Web)",
+            "行動電源 & 線", "行動網卡 (eSIM)", 
+            "九州租車：確認雪胎 (Studless Tires)", "預約：African Safari Jungle Bus", 
+            "預約餐廳：敘敘苑, 本部牧場, 華味鳥", "保暖衣物 (九州2-10度/手套帽子)",
+            "泳衣 (別府飯店用)", "信用卡 & 日幣現金"
+        ];
+
         // --- State Management ---
         const STATE = {
             tab: 'plan',
@@ -592,7 +620,7 @@
             switch(STATE.tab) {
                 case 'plan': renderPlan(container); break;
                 case 'guide': renderGuide(container); break;
-                case 'food': renderFoodMap(container); break;
+                case 'shops': renderShops(container); break;
                 case 'lists': renderLists(container); break;
                 case 'info': renderInfo(container); break;
             }
@@ -675,15 +703,68 @@
             container.innerHTML = html;
         }
 
-        // --- Render: FOOD MAP ---
-        function renderFoodMap(container) {
-             let html = `<div class="fade-in space-y-8 pb-4">`;
+        // --- Render: SHOPS (Shopping + Food) ---
+        function renderShops(container) {
+             let html = `<div class="fade-in space-y-8 pb-4 relative pt-16">`; // Increased top padding
              
+             // Fixed Quick Jump Menu - Lowered top position
+             html += `
+                <div class="fixed top-[100px] left-0 right-0 z-10 flex justify-center space-x-4 pointer-events-none">
+                    <div class="bg-journal-bg/95 backdrop-blur px-4 py-2 rounded-full border border-journal-line shadow-sm pointer-events-auto flex space-x-4">
+                        <button onclick="document.getElementById('section-shopping').scrollIntoView({behavior: 'smooth'})" class="px-4 py-1.5 rounded-full bg-white border border-journal-accent text-journal-accent text-xs font-bold shadow-sm active:scale-95 transition">
+                            <i class="fa-solid fa-bag-shopping mr-1"></i> 必買購物
+                        </button>
+                        <button onclick="document.getElementById('section-food').scrollIntoView({behavior: 'smooth'})" class="px-4 py-1.5 rounded-full bg-white border border-journal-brown text-journal-brown text-xs font-bold shadow-sm active:scale-95 transition">
+                            <i class="fa-solid fa-utensils mr-1"></i> 美食地圖
+                        </button>
+                    </div>
+                </div>
+             `;
+             
+             // Shopping Section
+             html += `<div id="section-shopping" class="scroll-mt-40 journal-card p-5 border-2 border-journal-accent/20 bg-journal-bg/30">
+                        <h3 class="font-bold text-journal-accent text-lg mb-4 flex items-center">
+                            <i class="fa-solid fa-bag-shopping mr-2"></i> 必買購物清單
+                        </h3>
+                        <div class="space-y-4">`;
+             
+             shoppingData.forEach(brand => {
+                 html += `
+                    <div class="bg-white p-3 rounded-xl border border-journal-line">
+                        <div class="flex items-center mb-2">
+                            <div class="w-8 h-8 rounded-full bg-journal-accent/10 flex items-center justify-center text-journal-accent mr-3">
+                                <i class="fa-solid ${brand.icon}"></i>
+                            </div>
+                            <h4 class="font-bold text-journal-ink">${brand.brand}</h4>
+                        </div>
+                        <div class="space-y-2 pl-11">
+                            ${brand.stores.map(store => `
+                                <div class="flex justify-between items-start text-xs border-b border-journal-line/30 pb-2 last:border-0 last:pb-0">
+                                    <div>
+                                        <span class="inline-block px-1.5 py-0.5 rounded bg-gray-100 text-gray-500 mb-1 scale-90 origin-left">${store.area}</span>
+                                        <p class="font-bold text-journal-ink">${store.name}</p>
+                                        <p class="text-gray-400 mt-0.5">${store.desc}</p>
+                                    </div>
+                                    <button onclick="openMap('${store.link}')" class="text-journal-brown hover:text-journal-accent p-2">
+                                        <i class="fa-solid fa-location-arrow"></i>
+                                    </button>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                 `;
+             });
+             html += `</div></div>`;
+
+             // Food Section Header
+             html += `<div id="section-food" class="scroll-mt-40"></div>`; // Adjusted scroll margin
+
+             // Food Section Cards
              foodData.forEach(region => {
                  html += `
                     <div class="journal-card p-5">
                         <h3 class="font-bold text-journal-ink text-lg pb-3 border-b-2 border-dashed border-journal-line mb-4 flex items-center">
-                            <i class="fa-solid fa-utensils text-journal-accent mr-2"></i> ${region.area}
+                            <i class="fa-solid fa-utensils text-journal-brown mr-2"></i> ${region.area}
                         </h3>
                         <div class="space-y-4">
                  `;
@@ -902,7 +983,7 @@
                                     </div>
                                 </div>
                                 <button onclick="openMap('OTS Rent-a-car Rinku Toyosaki')" class="btn-hand mt-3 w-full py-2 bg-white rounded-lg border border-journal-line text-xs text-journal-brown hover:text-journal-accent transition">
-                                    <i class="fa-solid fa-location-arrow mr-1"></i> 導航至臨空豐崎
+                                    <i class="fa-solid fa-location-arrow mr-1.5"></i> 導航至臨空豐崎
                                 </button>
                             </div>
 
