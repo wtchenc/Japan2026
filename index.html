@@ -151,6 +151,10 @@
                 <i class="fa-solid fa-shop text-base"></i>
                 <span class="text-[9px] font-medium">好店</span>
             </button>
+            <button onclick="switchTab('info')" class="nav-btn flex-1 py-2 rounded-xl flex flex-col items-center justify-center space-y-0.5 text-journal-brown transition-colors hover:bg-journal-bg" data-target="info">
+                <i class="fa-solid fa-circle-info text-base"></i>
+                <span class="text-[9px] font-medium">資訊</span>
+            </button>
             <button onclick="switchTab('taxi')" class="nav-btn flex-1 py-2 rounded-xl flex flex-col items-center justify-center space-y-0.5 text-journal-brown transition-colors hover:bg-journal-bg" data-target="taxi">
                 <i class="fa-solid fa-taxi text-base"></i>
                 <span class="text-[9px] font-medium">交通</span>
@@ -158,10 +162,6 @@
             <button onclick="switchTab('lists')" class="nav-btn flex-1 py-2 rounded-xl flex flex-col items-center justify-center space-y-0.5 text-journal-brown transition-colors hover:bg-journal-bg" data-target="lists">
                 <i class="fa-solid fa-list-check text-base"></i>
                 <span class="text-[9px] font-medium">清單</span>
-            </button>
-            <button onclick="switchTab('info')" class="nav-btn flex-1 py-2 rounded-xl flex flex-col items-center justify-center space-y-0.5 text-journal-brown transition-colors hover:bg-journal-bg" data-target="info">
-                <i class="fa-solid fa-circle-info text-base"></i>
-                <span class="text-[9px] font-medium">資訊</span>
             </button>
         </nav>
     </div>
@@ -544,6 +544,24 @@
         // --- Shopping Data ---
         const shoppingData = [
             {
+                brand: "3COINS+Plus",
+                icon: "fa-coins",
+                stores: [
+                    { area: "沖繩", name: "那霸 Main Place 店 (1F)", desc: "新都心 San-A Naha Main Place", link: "3COINS+plus Naha Main Place" },
+                    { area: "沖繩", name: "永旺夢樂城來客夢店 (1F)", desc: "Aeon Mall Okinawa Rycom", link: "3COINS+plus Aeon Mall Okinawa Rycom" },
+                    { area: "沖繩", name: "浦添西海岸 Parco City 店 (1F)", desc: "SAN-A Parco City", link: "3COINS+plus Okinawa Parco City" }
+                ]
+            },
+            {
+                brand: "coca",
+                icon: "fa-shirt",
+                stores: [
+                    { area: "福岡", name: "Mina Tenjin (3F)", desc: "天神逛街必去，平價時尚", link: "Mina Tenjin Fukuoka" },
+                    { area: "沖繩", name: "浦添 Parco City 店 (2F)", desc: "SAN-A Parco City", link: "COCA Parco City" },
+                    { area: "沖繩", name: "永旺夢樂城來客夢店 (1F)", desc: "Aeon Mall Okinawa Rycom", link: "coca Aeon Mall Okinawa Rycom" }
+                ]
+            },
+            {
                 brand: "HOKA",
                 icon: "fa-shoe-prints",
                 stores: [
@@ -558,14 +576,6 @@
                     { area: "福岡", name: "ABC-MART Grand Stage", desc: "天神大名店，貨源充足", link: "ABC-MART GRAND STAGE Fukuoka Daimyo" },
                     { area: "福岡", name: "Step Sports", desc: "天神大名，專業跑鞋店", link: "Step Sports Fukuoka" },
                     { area: "沖繩", name: "Sports Depo", desc: "Parco City / 豐崎 (近Outlet)", link: "Sports Depo Ameku" }
-                ]
-            },
-            {
-                brand: "COCA",
-                icon: "fa-shirt",
-                stores: [
-                    { area: "福岡", name: "Mina Tenjin (3F)", desc: "天神逛街必去，平價時尚", link: "Mina Tenjin Fukuoka" },
-                    { area: "沖繩", name: "Parco City (2F)", desc: "沖繩旗艦店，款式多", link: "COCA Parco City" }
                 ]
             }
         ];
