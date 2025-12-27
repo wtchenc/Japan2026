@@ -137,27 +137,31 @@
     </main>
 
     <!-- Bottom Navigation (Floating) -->
-    <div class="fixed bottom-6 left-4 right-4 z-30">
-        <nav class="bg-white rounded-2xl shadow-[0_5px_20px_rgba(0,0,0,0.08)] border border-journal-line p-1.5 flex justify-around items-center">
-            <button onclick="switchTab('plan')" class="nav-btn w-full py-3 rounded-xl flex flex-col items-center justify-center space-y-1 text-journal-brown transition-colors hover:bg-journal-bg" data-target="plan">
-                <i class="fa-regular fa-calendar-check text-lg"></i>
-                <span class="text-[10px] font-medium">行程</span>
+    <div class="fixed bottom-6 left-2 right-2 z-30">
+        <nav class="bg-white/95 backdrop-blur rounded-2xl shadow-[0_5px_20px_rgba(0,0,0,0.1)] border border-journal-line p-1 flex justify-between items-center">
+            <button onclick="switchTab('plan')" class="nav-btn flex-1 py-2 rounded-xl flex flex-col items-center justify-center space-y-0.5 text-journal-brown transition-colors hover:bg-journal-bg" data-target="plan">
+                <i class="fa-regular fa-calendar-check text-base"></i>
+                <span class="text-[9px] font-medium">行程</span>
             </button>
-            <button onclick="switchTab('guide')" class="nav-btn w-full py-3 rounded-xl flex flex-col items-center justify-center space-y-1 text-journal-brown transition-colors hover:bg-journal-bg" data-target="guide">
-                <i class="fa-solid fa-book-open text-lg"></i>
-                <span class="text-[10px] font-medium">景點</span>
+            <button onclick="switchTab('guide')" class="nav-btn flex-1 py-2 rounded-xl flex flex-col items-center justify-center space-y-0.5 text-journal-brown transition-colors hover:bg-journal-bg" data-target="guide">
+                <i class="fa-solid fa-book-open text-base"></i>
+                <span class="text-[9px] font-medium">景點</span>
             </button>
-            <button onclick="switchTab('shops')" class="nav-btn w-full py-3 rounded-xl flex flex-col items-center justify-center space-y-1 text-journal-brown transition-colors hover:bg-journal-bg" data-target="shops">
-                <i class="fa-solid fa-shop text-lg"></i>
-                <span class="text-[10px] font-medium">好店</span>
+            <button onclick="switchTab('shops')" class="nav-btn flex-1 py-2 rounded-xl flex flex-col items-center justify-center space-y-0.5 text-journal-brown transition-colors hover:bg-journal-bg" data-target="shops">
+                <i class="fa-solid fa-shop text-base"></i>
+                <span class="text-[9px] font-medium">好店</span>
             </button>
-            <button onclick="switchTab('lists')" class="nav-btn w-full py-3 rounded-xl flex flex-col items-center justify-center space-y-1 text-journal-brown transition-colors hover:bg-journal-bg" data-target="lists">
-                <i class="fa-solid fa-list-check text-lg"></i>
-                <span class="text-[10px] font-medium">清單</span>
+            <button onclick="switchTab('taxi')" class="nav-btn flex-1 py-2 rounded-xl flex flex-col items-center justify-center space-y-0.5 text-journal-brown transition-colors hover:bg-journal-bg" data-target="taxi">
+                <i class="fa-solid fa-taxi text-base"></i>
+                <span class="text-[9px] font-medium">交通</span>
             </button>
-            <button onclick="switchTab('info')" class="nav-btn w-full py-3 rounded-xl flex flex-col items-center justify-center space-y-1 text-journal-brown transition-colors hover:bg-journal-bg" data-target="info">
-                <i class="fa-solid fa-circle-info text-lg"></i>
-                <span class="text-[10px] font-medium">資訊</span>
+            <button onclick="switchTab('lists')" class="nav-btn flex-1 py-2 rounded-xl flex flex-col items-center justify-center space-y-0.5 text-journal-brown transition-colors hover:bg-journal-bg" data-target="lists">
+                <i class="fa-solid fa-list-check text-base"></i>
+                <span class="text-[9px] font-medium">清單</span>
+            </button>
+            <button onclick="switchTab('info')" class="nav-btn flex-1 py-2 rounded-xl flex flex-col items-center justify-center space-y-0.5 text-journal-brown transition-colors hover:bg-journal-bg" data-target="info">
+                <i class="fa-solid fa-circle-info text-base"></i>
+                <span class="text-[9px] font-medium">資訊</span>
             </button>
         </nav>
     </div>
@@ -181,7 +185,7 @@
                 mapFocus: "Mikado Naha",
                 events: [
                     { time: "19:20", title: "抵達那霸機場 (OKA)", desc: "搭計程車前往飯店 (約20分)", icon: "fa-plane-arrival", highlight: true },
-                    { time: "20:30", title: "Check-in THE NEST", desc: "放行李，稍作休息", icon: "fa-hotel" },
+                    { time: "20:30", title: "Check-in THE NEST", desc: "放行李", icon: "fa-hotel" },
                     { time: "晚餐", title: "三笠食堂 / 88牛排 (辻本店)", desc: "Mikado 強棒飯離飯店近；88牛排營業至深夜 (Jack's 週三公休)", icon: "fa-utensils", link: "Steak House 88 Tsuji" }
                 ]
             },
@@ -902,7 +906,101 @@
             }
         ];
 
-        // --- Checklist Data (Restored) ---
+        // --- Taxi Logic ---
+        const taxiRates = {
+            okinawa: { base: 600, baseKm: 1.2, unitPrice: 100, unitKm: 0.36 },
+            fukuoka: { base: 670, baseKm: 1.6, unitPrice: 100, unitKm: 0.27 }
+        };
+
+        const commonRoutes = {
+            okinawa: [
+                { name: "那霸機場 ➔ 國際通", dist: 6 },
+                { name: "那霸機場 ➔ 美國村", dist: 20 },
+                { name: "那霸機場 ➔ 美麗海水族館", dist: 95 },
+                { name: "那霸市區 ➔ 港川外人住宅", dist: 8 }
+            ],
+            fukuoka: [
+                { name: "福岡機場 ➔ 博多車站", dist: 3.5 },
+                { name: "福岡機場 ➔ 天神", dist: 6 },
+                { name: "博多車站 ➔ 福岡塔", dist: 7 }
+            ]
+        };
+
+        function updateTaxiCalc(region, routeDist = 0) {
+            const select = document.getElementById('taxi-routes');
+            if (!select) return;
+
+            const distInput = document.getElementById('taxi-dist');
+            const resultArea = document.getElementById('taxi-result');
+            
+            // Update active state for region buttons
+            document.querySelectorAll('.taxi-region-btn').forEach(btn => {
+                if(btn.dataset.region === region) {
+                    btn.classList.add('bg-journal-accent', 'text-white', 'border-journal-accent');
+                    btn.classList.remove('bg-white', 'text-journal-brown', 'border-journal-line');
+                } else {
+                    btn.classList.remove('bg-journal-accent', 'text-white', 'border-journal-accent');
+                    btn.classList.add('bg-white', 'text-journal-brown', 'border-journal-line');
+                }
+            });
+
+            // Populate common routes dropdown
+            select.innerHTML = '<option value="0">選擇熱門路線 (自動帶入)</option>';
+            commonRoutes[region].forEach(r => {
+                const opt = document.createElement('option');
+                opt.value = r.dist;
+                opt.text = r.name;
+                select.appendChild(opt);
+            });
+
+            // Set current region for calculation
+            select.dataset.currentRegion = region;
+            
+            // If routeDist is provided (from dropdown change), update input
+            if(routeDist > 0) {
+                distInput.value = routeDist;
+                calculateTaxi();
+            }
+        }
+
+        function calculateTaxi() {
+            const distInput = document.getElementById('taxi-dist');
+            const select = document.getElementById('taxi-routes');
+            const resultArea = document.getElementById('taxi-result');
+            
+            if (!distInput || !select || !resultArea) return;
+
+            const region = select.dataset.currentRegion || 'okinawa';
+            const dist = parseFloat(distInput.value);
+
+            if (!dist || dist <= 0) {
+                resultArea.innerHTML = '<span class="text-gray-400">請輸入距離或選擇路線</span>';
+                return;
+            }
+
+            const rate = taxiRates[region];
+            let cost = rate.base;
+            
+            if (dist > rate.baseKm) {
+                const extraDist = dist - rate.baseKm;
+                const units = Math.ceil(extraDist / rate.unitKm);
+                cost += units * rate.unitPrice;
+            }
+
+            // Estimate range (Low: raw calc, High: +25% for traffic/waiting)
+            const low = Math.floor(cost / 10) * 10; // Round down to 10
+            const high = Math.ceil((cost * 1.25) / 10) * 10; // +25% buffer
+
+            resultArea.innerHTML = `
+                <div class="flex flex-col items-center">
+                    <span class="text-xs text-gray-500 mb-1">預估車資</span>
+                    <span class="text-2xl font-bold text-journal-accent">¥${low.toLocaleString()} ~ ¥${high.toLocaleString()}</span>
+                    <span class="text-[10px] text-gray-400 mt-1">*實際費用依跳表為準 (含塞車/夜間加成)</span>
+                </div>
+            `;
+        }
+
+        // --- Checklist Data ---
         const checklistData = [
             "護照 (確認效期)", "日本駕照譯本", "台灣駕照正本", "VJW 登錄 (Visit Japan Web)",
             "行動電源 & 線", "行動網卡 (eSIM)", 
@@ -956,6 +1054,7 @@
                 case 'plan': renderPlan(container); break;
                 case 'guide': renderGuide(container); break;
                 case 'shops': renderShops(container); break;
+                case 'taxi': renderTaxi(container); break;
                 case 'lists': renderLists(container); break;
                 case 'info': renderInfo(container); break;
             }
@@ -1140,6 +1239,85 @@
 
              html += `</div>`;
              container.innerHTML = html;
+        }
+
+        // --- Render: TAXI (New Tab) ---
+        function renderTaxi(container) {
+            let html = `
+                <div class="fade-in space-y-6 pb-4 pt-4">
+                    <!-- Header -->
+                    <div class="text-center mb-6">
+                        <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-journal-bg border-2 border-dashed border-journal-line mb-3">
+                            <i class="fa-solid fa-calculator text-3xl text-journal-accent"></i>
+                        </div>
+                        <h2 class="text-xl font-bold text-journal-ink">計程車資估算</h2>
+                        <p class="text-xs text-journal-brown mt-1">Okinawa & Kyushu Taxi Fare</p>
+                    </div>
+
+                    <!-- Taxi Estimator -->
+                    <div class="journal-card p-6 bg-white border border-journal-line shadow-sm relative overflow-hidden">
+                        <div class="relative z-10">
+                            <div class="flex space-x-2 mb-6">
+                                <button onclick="updateTaxiCalc('okinawa')" class="taxi-region-btn flex-1 py-2 rounded-lg border text-sm font-bold transition bg-journal-accent text-white border-journal-accent shadow-sm" data-region="okinawa">沖繩</button>
+                                <button onclick="updateTaxiCalc('fukuoka')" class="taxi-region-btn flex-1 py-2 rounded-lg border text-sm font-bold transition bg-white text-journal-brown border-journal-line shadow-sm" data-region="fukuoka">九州 (福岡)</button>
+                            </div>
+
+                            <div class="space-y-5">
+                                <div>
+                                    <label class="text-xs font-bold text-journal-ink block mb-2 flex items-center">
+                                        <i class="fa-solid fa-map-location-dot mr-1.5 text-journal-brown"></i> 快速選擇熱門路線
+                                    </label>
+                                    <div class="relative">
+                                        <select id="taxi-routes" onchange="updateTaxiCalc(this.dataset.currentRegion, this.value)" class="w-full text-sm p-3 rounded-xl border border-journal-line bg-gray-50 outline-none appearance-none text-gray-600 font-sans">
+                                            <!-- Options injected by JS -->
+                                        </select>
+                                        <div class="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none text-gray-400">
+                                            <i class="fa-solid fa-chevron-down text-xs"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <label class="text-xs font-bold text-journal-ink block mb-2 flex items-center">
+                                        <i class="fa-solid fa-ruler-horizontal mr-1.5 text-journal-brown"></i> 自訂距離 (公里)
+                                    </label>
+                                    <div class="flex items-center space-x-2">
+                                        <input type="number" id="taxi-dist" placeholder="0" class="flex-1 p-3 text-lg font-mono border border-journal-line rounded-xl outline-none focus:border-journal-accent bg-white shadow-inner">
+                                        <button onclick="calculateTaxi()" class="px-6 py-3 bg-journal-ink text-white rounded-xl text-sm font-bold shadow-md active:scale-95 transition hover:bg-journal-brown">
+                                            計算
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mt-8 relative">
+                                <div class="absolute left-0 right-0 top-1/2 border-t-2 border-dashed border-journal-line/30"></div>
+                                <div class="relative z-10 flex justify-center">
+                                    <span class="bg-white px-3 text-xs text-journal-brown/60">ESTIMATE</span>
+                                </div>
+                            </div>
+
+                            <div id="taxi-result" class="mt-4 p-5 bg-journal-bg rounded-xl border border-journal-line text-center min-h-[100px] flex flex-col items-center justify-center">
+                                <span class="text-sm text-gray-400 mb-1">請選擇路線或輸入距離</span>
+                                <i class="fa-solid fa-coins text-2xl text-journal-line mt-2"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tips -->
+                    <div class="bg-white/80 p-4 rounded-xl border border-journal-line/50 text-xs text-gray-500 leading-relaxed">
+                        <h4 class="font-bold text-journal-ink mb-2"><i class="fa-solid fa-circle-exclamation mr-1 text-journal-accent"></i> 注意事項</h4>
+                        <ul class="list-disc pl-4 space-y-1">
+                            <li>日本計程車車門為<b>自動開關</b>，請勿動手去拉。</li>
+                            <li>夜間加成 (22:00-05:00) 通常會增加 20%。</li>
+                            <li>此估算僅供參考，實際費用會受塞車停等時間影響。</li>
+                            <li>可使用 Uber 或 DiDi App 叫車，綁定信用卡付款更方便。</li>
+                        </ul>
+                    </div>
+                </div>
+            `;
+            container.innerHTML = html;
+            updateTaxiCalc('okinawa'); // Init logic
         }
 
         // --- Render: GUIDE ---
