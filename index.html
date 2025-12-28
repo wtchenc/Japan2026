@@ -253,9 +253,8 @@
                 date: "02/01 (日)",
                 title: "Day 5: 移動日 & 鬼滅地獄巡禮",
                 area: "九州別府",
-                // Updated route to include SAs
-                route: "https://www.google.com/maps/dir/Toyota+Rent+a+Car+Fukuoka+Airport/Kiyama+Parking+Area+(Down)/Yamada+Service+Area+Down/Beppu+Bay+Service+Area/AMANEK+Beppu+YULA-RE",
-                mapFocus: "Beppu Bay Service Area",
+                route: "https://www.google.com/maps/dir/Fukuoka+Airport/Yamada+SA/Kamado+Jigoku/Jigoku+Mushi+Kobo+Kannawa/AMANEK+Beppu+YULA-RE",
+                mapFocus: "Kamado Jigoku",
                 events: [
                     { time: "10:10", title: "起飛 OKA -> FUK", desc: "12:00 抵達福岡，領行李", icon: "fa-plane-departure" },
                     { time: "13:30", title: "博多取車 (Sienta)", desc: "🚇 接駁車：約 15 分<br>Toyota 福岡機場店取車，確認雪胎", icon: "fa-car", highlight: true, alert: "important" },
@@ -900,8 +899,16 @@
                 ]
             },
             {
-                area: "九州 - 別府 & 門司港 (Beppu & Mojiko)",
+                area: "九州 - 別府 & 北九州 (Beppu & Kitakyushu)",
                 spots: [
+                    { 
+                        name: "ShinShin 拉麵 (小倉店)", 
+                        type: "拉麵", 
+                        icon: "fa-bowl-rice", 
+                        desc: "Amu Plaza小倉 東館1F，北九州唯一分店", 
+                        link: "Hakata Ramen ShinShin Amu Plaza Kokura",
+                        price: "¥900 ~ ¥1,500"
+                    },
                     { 
                         name: "東洋軒 (Toyoken)", 
                         type: "炸雞", 
@@ -964,6 +971,22 @@
                 area: "福岡 - 天神 (Fukuoka Tenjin)",
                 spots: [
                     { 
+                        name: "ShinShin 拉麵 (天神本店)", 
+                        type: "拉麵", 
+                        icon: "fa-bowl-rice", 
+                        desc: "博多細麵，口味清甜，藝人最愛", 
+                        link: "ShinShin Ramen Tenjin",
+                        price: "¥900 ~ ¥1,500"
+                    },
+                    { 
+                        name: "ShinShin 拉麵 (福岡PARCO店)", 
+                        type: "拉麵", 
+                        icon: "fa-bowl-rice", 
+                        desc: "【分店】福岡PARCO本館 B1，逛街方便", 
+                        link: "Hakata Ramen Shin-Shin Fukuoka Parco",
+                        price: "¥900 ~ ¥1,500"
+                    },
+                    { 
                         name: "極味耶 (Kiwamiya)", 
                         type: "漢堡排", 
                         icon: "fa-fire", 
@@ -975,8 +998,8 @@
                         name: "Full Full (天神店)", 
                         type: "麵包", 
                         icon: "fa-bread-slice", 
-                        desc: "明太子法國麵包，逛街補給", 
-                        link: "Full Full Tenjin",
+                        desc: "天神站步行2-3分鐘，人潮較少。10:00–20:00（週二公休）", 
+                        link: "福岡市中央区天神3-3-5 FULL FULL BLD",
                         price: "¥300 ~ ¥1,000"
                     },
                     { 
@@ -996,14 +1019,6 @@
                         price: "¥2,000 ~ ¥5,000"
                     },
                     { 
-                        name: "ShinShin 拉麵", 
-                        type: "拉麵", 
-                        icon: "fa-bowl-rice", 
-                        desc: "博多細麵，口味清甜", 
-                        link: "ShinShin Ramen Tenjin",
-                        price: "¥900 ~ ¥1,500"
-                    },
-                    { 
                         name: "元祖博多明太重", 
                         type: "蓋飯", 
                         icon: "fa-bowl-rice", 
@@ -1018,6 +1033,30 @@
                 area: "福岡 - 博多 (Fukuoka Hakata)",
                 spots: [
                     { 
+                        name: "ShinShin 拉麵 (博多DEITOS店)", 
+                        type: "拉麵", 
+                        icon: "fa-bowl-rice", 
+                        desc: "【分店】博多站筑紫口 2F 博多麵街道內", 
+                        link: "Hakata Ramen ShinShin Hakata Deitos",
+                        price: "¥900 ~ ¥1,500"
+                    },
+                    { 
+                        name: "ShinShin 拉麵 (KITTE博多店)", 
+                        type: "拉麵", 
+                        icon: "fa-bowl-rice", 
+                        desc: "【分店】博多站博多口 KITTE B1", 
+                        link: "Hakata Ramen ShinShin KITTE Hakata",
+                        price: "¥900 ~ ¥1,500"
+                    },
+                    { 
+                        name: "ShinShin 拉麵 (古門戶町店)", 
+                        type: "拉麵", 
+                        icon: "fa-bowl-rice", 
+                        desc: "【分店】位子較多，本店排隊時的替代方案", 
+                        link: "Hakata Ramen ShinShin Komondomachi",
+                        price: "¥900 ~ ¥1,500"
+                    },
+                    { 
                         name: "Il Forno del Mignon", 
                         type: "可頌", 
                         icon: "fa-bread-slice", 
@@ -1029,16 +1068,8 @@
                         name: "Full Full (博多店)", 
                         type: "麵包", 
                         icon: "fa-bread-slice", 
-                        desc: "近博多運河城", 
-                        link: "The Full Full Hakata",
-                        price: "¥300 ~ ¥1,000"
-                    },
-                    { 
-                        name: "Full Full (機場店)", 
-                        type: "麵包", 
-                        icon: "fa-bread-slice", 
-                        desc: "國內線航廈，最後補貨", 
-                        link: "Full Full Fukuoka Airport",
+                        desc: "博多運河城旁，櫛田神社前站步行2分鐘。10:00–19:00（週二公休）", 
+                        link: "福岡市博多区祇園町9-3",
                         price: "¥300 ~ ¥1,000"
                     },
                     { 
