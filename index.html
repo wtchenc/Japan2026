@@ -1283,7 +1283,7 @@
                 // Extract simple date (e.g., "01/28")
                 const dateStr = day.date.split(' ')[0]; 
                 navHtml += `
-                    <button id="nav-btn-${index}" onclick="document.getElementById('day-${index}').scrollIntoView({behavior: 'smooth', block: 'center'})" 
+                    <button id="nav-btn-${index}" onclick="scrollToDay(${index})" 
                         class="flex-none px-3 py-1.5 rounded-lg border border-journal-line bg-white text-journal-ink text-xs font-bold shadow-sm whitespace-nowrap hover:bg-journal-accent hover:text-white transition">
                         <span class="block text-[10px] text-gray-400">Day ${index + 1}</span>
                         ${dateStr}
@@ -1365,15 +1365,19 @@
             html += `</div>`;
             container.innerHTML = html;
 
-            // Initialize ScrollSpy
+            // Initialize ScrollSpy with debounced or throttled updates
+            // Use IntersectionObserver on the cards
             setTimeout(() => {
                 const observerOptions = {
                     root: null,
-                    rootMargin: '-20% 0px -60% 0px',
+                    rootMargin: '-20% 0px -60% 0px', // Active area in viewport center
                     threshold: 0
                 };
 
                 const observer = new IntersectionObserver((entries) => {
+                    // Only update if not currently navigating via click (to prevent jumping)
+                    if (isNavigating) return;
+
                     entries.forEach(entry => {
                         if (entry.isIntersecting) {
                             const dayIndex = entry.target.id.split('-')[1];
@@ -1386,17 +1390,43 @@
                     const el = document.getElementById(`day-${index}`);
                     if (el) observer.observe(el);
                 });
-            }, 0);
+            }, 100);
+        }
+
+        // ScrollSpy Helpers
+        let isNavigating = false;
+        
+        function scrollToDay(index) {
+            isNavigating = true;
+            const target = document.getElementById(`day-${index}`);
+            if (target) {
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                updateActiveNav(index); // Manually set active state immediately
+                
+                // Release lock after scroll animation (approx)
+                setTimeout(() => {
+                    isNavigating = false;
+                }, 800);
+            }
         }
 
         function updateActiveNav(activeIndex) {
+            // Find the nav container to scroll it
+            const navContainer = document.querySelector('.overflow-x-auto');
+            
             tripData.forEach((_, index) => {
                 const btn = document.getElementById(`nav-btn-${index}`);
                 if (btn) {
                     if (index == activeIndex) {
                         btn.classList.remove('bg-white', 'text-journal-ink', 'border-journal-line');
                         btn.classList.add('bg-journal-accent', 'text-white', 'border-journal-accent');
-                        btn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                        
+                        // Scroll nav bar to keep active button in view
+                        if(navContainer) {
+                             const scrollLeft = btn.offsetLeft - (navContainer.clientWidth / 2) + (btn.clientWidth / 2);
+                             navContainer.scrollTo({ left: scrollLeft, behavior: 'smooth' });
+                        }
+
                     } else {
                         btn.classList.add('bg-white', 'text-journal-ink', 'border-journal-line');
                         btn.classList.remove('bg-journal-accent', 'text-white', 'border-journal-accent');
