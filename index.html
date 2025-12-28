@@ -1283,7 +1283,7 @@
                 // Extract simple date (e.g., "01/28")
                 const dateStr = day.date.split(' ')[0]; 
                 navHtml += `
-                    <button onclick="document.getElementById('day-${index}').scrollIntoView({behavior: 'smooth', block: 'center'})" 
+                    <button id="nav-btn-${index}" onclick="document.getElementById('day-${index}').scrollIntoView({behavior: 'smooth', block: 'center'})" 
                         class="flex-none px-3 py-1.5 rounded-lg border border-journal-line bg-white text-journal-ink text-xs font-bold shadow-sm whitespace-nowrap hover:bg-journal-accent hover:text-white transition">
                         <span class="block text-[10px] text-gray-400">Day ${index + 1}</span>
                         ${dateStr}
@@ -1364,6 +1364,45 @@
             });
             html += `</div>`;
             container.innerHTML = html;
+
+            // Initialize ScrollSpy
+            setTimeout(() => {
+                const observerOptions = {
+                    root: null,
+                    rootMargin: '-20% 0px -60% 0px',
+                    threshold: 0
+                };
+
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const dayIndex = entry.target.id.split('-')[1];
+                            updateActiveNav(dayIndex);
+                        }
+                    });
+                }, observerOptions);
+
+                tripData.forEach((_, index) => {
+                    const el = document.getElementById(`day-${index}`);
+                    if (el) observer.observe(el);
+                });
+            }, 0);
+        }
+
+        function updateActiveNav(activeIndex) {
+            tripData.forEach((_, index) => {
+                const btn = document.getElementById(`nav-btn-${index}`);
+                if (btn) {
+                    if (index == activeIndex) {
+                        btn.classList.remove('bg-white', 'text-journal-ink', 'border-journal-line');
+                        btn.classList.add('bg-journal-accent', 'text-white', 'border-journal-accent');
+                        btn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                    } else {
+                        btn.classList.add('bg-white', 'text-journal-ink', 'border-journal-line');
+                        btn.classList.remove('bg-journal-accent', 'text-white', 'border-journal-accent');
+                    }
+                }
+            });
         }
 
         // --- Render: SHOPS (Shopping + Food) ---
@@ -1933,7 +1972,7 @@
                                         <span class="font-bold">¥19,980</span>
                                     </div>
                                 </div>
-                                <button onclick="openMap('ORIX Rent-a-Car Asahibashi Station West')" class="btn-hand mt-3 w-full py-2 bg-white rounded-lg border border-journal-line text-xs text-journal-brown hover:text-journal-accent transition">
+                                <button onclick="openMap('ORIX Rent-a-Car Naha Asahibashi Station West')" class="btn-hand mt-3 w-full py-2 bg-white rounded-lg border border-journal-line text-xs text-journal-brown hover:text-journal-accent transition">
                                     <i class="fa-solid fa-location-arrow mr-1.5"></i> 導航至旭橋站西店
                                 </button>
                             </div>
