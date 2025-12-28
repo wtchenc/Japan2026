@@ -209,8 +209,7 @@
                 date: "01/29 (四)",
                 title: "Day 2: 敘敘苑海景午餐 & 中部",
                 area: "沖繩中部",
-                // Updated ORIX location to Japanese name for accuracy
-                route: "https://www.google.com/maps/dir/THE+NEST+HOTEL+NAHA/オリックスレンタカー那覇旭橋駅西店/PARCO+CITY/American+Village/Aeon+Mall+Okinawa+Rycom",
+                route: "https://www.google.com/maps/dir/THE+NEST+HOTEL+NAHA/ORIX+Rent-a-car+Asahibashi+Station+West/PARCO+CITY/American+Village/Aeon+Mall+Okinawa+Rycom",
                 mapFocus: "PARCO CITY",
                 events: [
                     { time: "09:00", title: "ORIX 取車 (旭橋站西店)", desc: "預約號碼: 247158145 (旭橋站步行5分)", icon: "fa-car", highlight: true, alert: "important", link: "ORIX Rent-a-Car Naha Asahibashi Station West" },
@@ -240,8 +239,7 @@
                 date: "01/31 (六)",
                 title: "Day 4: 南部探險 & DMM 水族館",
                 area: "沖繩南部",
-                // Updated ORIX location to Japanese name for accuracy
-                route: "https://www.google.com/maps/dir/THE+NEST+HOTEL+NAHA/Gyokusendo+Cave/Itoman+Fish+Market/DMM+Kariyushi+Aquarium/オリックスレンタカー那覇旭橋駅西店/Ramen+Danbo+Naha",
+                route: "https://www.google.com/maps/dir/THE+NEST+HOTEL+NAHA/Gyokusendo+Cave/Itoman+Fish+Market/DMM+Kariyushi+Aquarium/ORIX+Rent-a-car+Asahibashi+Station+West/Ramen+Danbo+Naha",
                 mapFocus: "Okinawa World",
                 events: [
                     { time: "09:30", title: "玉泉洞", desc: "🚗 交通：約 40 分<br>日本第二大鐘乳石洞", icon: "fa-mountain", link: "Okinawa World" },
@@ -258,11 +256,31 @@
                 route: "https://www.google.com/maps/dir/Fukuoka+Airport/Yamada+SA/Kamado+Jigoku/Jigoku+Mushi+Kobo+Kannawa/AMANEK+Beppu+YULA-RE",
                 mapFocus: "Kamado Jigoku",
                 events: [
-                    { time: "10:10", title: "起飛 OKA -> FUK", desc: "12:00 抵達福岡", icon: "fa-plane-departure" },
-                    { time: "13:30", title: "博多取車 (Sienta)", desc: "前往別府，中途停山田 SA 買優酪乳", icon: "fa-car", highlight: true, alert: "important" },
-                    { time: "16:00", title: "地獄巡禮", desc: "灶地獄 (鬼滅相關/喝溫泉水)、海地獄 (蒂芬妮藍)", icon: "fa-volcano", link: "Kamado Jigoku" },
-                    { time: "晚餐", title: "地獄蒸工房 鐵輪", desc: "體驗用溫泉蒸氣蒸熟食材", icon: "fa-carrot", link: "Jigoku Mushi Kobo Kannawa" },
-                    { time: "住宿", title: "AMANEK YULA-RE", desc: "頂樓無邊際溫泉泳池", icon: "fa-hotel" }
+                    { time: "10:10", title: "起飛 OKA -> FUK", desc: "12:00 抵達福岡，領行李", icon: "fa-plane-departure" },
+                    { time: "13:30", title: "博多取車 (Sienta)", desc: "🚇 接駁車：約 15 分<br>Toyota 福岡機場店取車，確認雪胎", icon: "fa-car", highlight: true, alert: "important" },
+                    { 
+                        time: "14:00", 
+                        title: "高速公路休息站 (自由停靠)", 
+                        desc: `前往別府車程約 2 小時，推薦中途休息：
+                        <div class="mt-2 space-y-2">
+                            <div class="flex justify-between items-start bg-journal-bg/50 p-2 rounded border border-journal-line/30">
+                                <div class="text-xs"><span class="font-bold text-journal-ink">1. 基山 PA (下行)</span><br><span class="text-gray-500">福岡最大級，必吃肉烏龍麵。</span></div>
+                                <button onclick="openMap('Kiyama Parking Area Down')" class="btn-hand bg-white border border-journal-line px-2 py-1 rounded text-journal-brown hover:text-journal-accent ml-2 shrink-0"><i class="fa-solid fa-location-arrow"></i></button>
+                            </div>
+                            <div class="flex justify-between items-start bg-journal-bg/50 p-2 rounded border border-journal-line/30">
+                                <div class="text-xs"><span class="font-bold text-journal-ink">2. 山田 SA (下行)</span><br><span class="text-gray-500">綠意盎然，必買農場優酪乳。</span></div>
+                                <button onclick="openMap('Yamada Service Area Down')" class="btn-hand bg-white border border-journal-line px-2 py-1 rounded text-journal-brown hover:text-journal-accent ml-2 shrink-0"><i class="fa-solid fa-location-arrow"></i></button>
+                            </div>
+                            <div class="flex justify-between items-start bg-journal-bg/50 p-2 rounded border border-journal-line/30">
+                                <div class="text-xs"><span class="font-bold text-journal-ink">3. 別府灣 SA (下行)</span><br><span class="text-gray-500">無敵海景，知名 Murata 蛋糕捲。</span></div>
+                                <button onclick="openMap('Beppu Bay Service Area')" class="btn-hand bg-white border border-journal-line px-2 py-1 rounded text-journal-brown hover:text-journal-accent ml-2 shrink-0"><i class="fa-solid fa-location-arrow"></i></button>
+                            </div>
+                        </div>`, 
+                        icon: "fa-mug-hot"
+                    },
+                    { time: "16:30", title: "地獄巡禮 (視時間)", desc: "🚗 交通：抵達別府<br>地獄 17:00 關門，若太晚到建議只去海地獄或灶地獄", icon: "fa-volcano", link: "Kamado Jigoku" },
+                    { time: "晚餐", title: "地獄蒸工房 鐵輪", desc: "🚗 交通：約 5 分<br>體驗用溫泉蒸氣蒸熟食材", icon: "fa-carrot", link: "Jigoku Mushi Kobo Kannawa" },
+                    { time: "住宿", title: "AMANEK YULA-RE", desc: "🚗 交通：約 20 分<br>頂樓無邊際溫泉泳池", icon: "fa-hotel" }
                 ]
             },
             {
@@ -272,11 +290,11 @@
                 route: "https://www.google.com/maps/dir/AMANEK+Beppu+YULA-RE/African+Safari/Beppu+Ropeway/Hachiman+Kamado+Shrine/Kamesho+Kururu+Sushi",
                 mapFocus: "African Safari Japan",
                 events: [
-                    { time: "09:30", title: "九州自然動物園", desc: "【已預約】Jungle Bus 餵獅子/熊/大象", icon: "fa-paw", link: "African Safari Japan", highlight: true },
-                    { time: "13:00", title: "午餐", desc: "園內餐廳 或 別府冷麵 胡月", icon: "fa-utensils" },
-                    { time: "14:30", title: "別府纜車 (鶴見岳)", desc: "上山看霧冰與玩雪 (備手套帽子)", icon: "fa-snowflake", link: "Beppu Ropeway" },
-                    { time: "17:00", title: "八幡竈門神社", desc: "鬼滅之刃發源地，看繪馬", icon: "fa-torii-gate", link: "Hachiman Kamado Shrine" },
-                    { time: "晚餐", title: "龜正壽司 / 東洋軒", desc: "龜正不能預約，建議 17:00 前抽號碼牌", icon: "fa-fish" }
+                    { time: "09:30", title: "九州自然動物園", desc: "🚗 交通：約 30 分<br>【已預約】Jungle Bus 餵獅子/熊/大象", icon: "fa-paw", link: "African Safari Japan", highlight: true },
+                    { time: "13:00", title: "午餐", desc: "園內餐廳 或 🚗 交通：約 30 分 回市區吃冷麵", icon: "fa-utensils" },
+                    { time: "14:30", title: "別府纜車 (鶴見岳)", desc: "🚗 交通：約 20 分<br>上山看霧冰與玩雪 (備手套帽子)", icon: "fa-snowflake", link: "Beppu Ropeway" },
+                    { time: "17:00", title: "八幡竈門神社", desc: "🚗 交通：約 25 分<br>鬼滅之刃發源地，看繪馬", icon: "fa-torii-gate", link: "Hachiman Kamado Shrine" },
+                    { time: "晚餐", title: "龜正壽司 / 東洋軒", desc: "🚗 交通：約 15 分<br>龜正不能預約，建議 17:00 前抽號碼牌", icon: "fa-fish" }
                 ]
             },
             {
@@ -286,11 +304,11 @@
                 route: "https://www.google.com/maps/dir/AMANEK+Beppu+YULA-RE/Kyushu+Railway+History+Museum/Mojiko+Retro/Hakata+Station/JR+Kyushu+Hotel+Blossom+Hakata+Central",
                 mapFocus: "Mojiko Retro",
                 events: [
-                    { time: "09:30", title: "前往門司港", desc: "車程約 1.5 - 2 小時", icon: "fa-car" },
+                    { time: "09:30", title: "前往門司港", desc: "🚗 交通：約 1 小時 40 分 (經高速公路)", icon: "fa-car" },
                     { time: "11:30", title: "九州鐵道紀念館", desc: "必玩：迷你火車駕駛體驗", icon: "fa-train", link: "Kyushu Railway History Museum" },
                     { time: "13:00", title: "午餐: 燒咖哩", desc: "Princess Phi Phi 或 Bear Fruits", icon: "fa-bowl-rice" },
                     { time: "14:30", title: "門司港懷舊區", desc: "藍翼橋開合、香蕉人合照", icon: "fa-camera", link: "Mojiko Retro" },
-                    { time: "18:00", title: "還車 (博多站東)", desc: "地址：福岡市博多区東光1-4-10", icon: "fa-check", alert: "important", link: "福岡市博多区東光1-4-10" },
+                    { time: "18:00", title: "還車 (博多站東)", desc: "🚗 交通：約 1 小時 30 分<br>地址：福岡市博多区東光1-4-10", icon: "fa-check", alert: "important", link: "福岡市博多区東光1-4-10" },
                     { time: "住宿", title: "JR Kyushu Hotel Blossom", desc: "博多中央 (博多站對面)", icon: "fa-hotel" }
                 ]
             },
@@ -301,9 +319,9 @@
                 route: "https://www.google.com/maps/dir/JR+Kyushu+Hotel+Blossom+Hakata+Central/Fukuoka+City+Science+Museum/Hyotan+Sushi/Mina+Tenjin/ShinShin+Ramen+Tenjin",
                 mapFocus: "Mina Tenjin",
                 events: [
-                    { time: "10:00", title: "福岡市科學館", desc: "六本松站。無重力訓練器、互動裝置", icon: "fa-flask", link: "Fukuoka City Science Museum" },
-                    { time: "12:30", title: "葫蘆壽司 (Hyotan)", desc: "午間套餐CP值高，活車蝦/星鰻", icon: "fa-sushi", link: "Hyotan Sushi" },
-                    { time: "14:30", title: "Mina Tenjin", desc: "Coca, Uniqlo, Loft (飯店對面)", icon: "fa-bag-shopping" },
+                    { time: "10:00", title: "福岡市科學館", desc: "🚇 地鐵：約 20 分 (六本松站)<br>無重力訓練器、互動裝置", icon: "fa-flask", link: "Fukuoka City Science Museum" },
+                    { time: "12:30", title: "葫蘆壽司 (Hyotan)", desc: "🚇 地鐵：約 15 分 (天神站)<br>午間套餐CP值高，活車蝦/星鰻", icon: "fa-sushi", link: "Hyotan Sushi" },
+                    { time: "14:30", title: "Mina Tenjin", desc: "🚶 步行：約 5 分<br>Coca, Uniqlo, Loft (飯店對面)", icon: "fa-bag-shopping" },
                     { time: "17:00", title: "天神地下街", desc: "Bake Cheese Tart, Salut! 雜貨", icon: "fa-store" },
                     { time: "晚餐", title: "ShinShin 拉麵", desc: "天神本店，細麵清甜湯頭", icon: "fa-bowl-rice" }
                 ]
@@ -315,10 +333,10 @@
                 route: "https://www.google.com/maps/dir/JR+Kyushu+Hotel+Blossom+Hakata+Central/LaLaport+Fukuoka/Kushida+Shrine/Canal+City+Hakata/Hanamidori+Hakata+Station",
                 mapFocus: "LaLaport Fukuoka",
                 events: [
-                    { time: "10:00", title: "LaLaport 福岡", desc: "1:1 RX-93ff 鋼彈 (整點會動)、Jump Shop", icon: "fa-robot", link: "LaLaport Fukuoka", highlight: true },
+                    { time: "10:00", title: "LaLaport 福岡", desc: "🚌 巴士/JR：約 25 分<br>1:1 RX-93ff 鋼彈 (整點會動)、Jump Shop", icon: "fa-robot", link: "LaLaport Fukuoka", highlight: true },
                     { time: "13:00", title: "午餐", desc: "LaLaport 美食街 (久留米拉麵/金子半之助)", icon: "fa-utensils" },
-                    { time: "15:00", title: "櫛田神社", desc: "看巨大山笠，逛川端通商店街", icon: "fa-torii-gate", link: "Kushida Shrine" },
-                    { time: "17:30", title: "博多運河城", desc: "看音樂水舞秀", icon: "fa-water" },
+                    { time: "15:00", title: "櫛田神社", desc: "🚌 巴士：約 25 分<br>看巨大山笠，逛川端通商店街", icon: "fa-torii-gate", link: "Kushida Shrine" },
+                    { time: "17:30", title: "博多運河城", desc: "🚶 步行：約 5 分<br>看音樂水舞秀", icon: "fa-water" },
                     { time: "晚餐", title: "博多華味鳥", desc: "水炊雞肉鍋，膠原蛋白滿滿", icon: "fa-pot-food", link: "Hanamidori" }
                 ]
             },
@@ -331,8 +349,8 @@
                 events: [
                     { time: "上午", title: "睡飽 / 博多站", desc: "買努努雞 (冷炸雞) 當點心", icon: "fa-bed" },
                     { time: "午餐", title: "博多站牛舌 / 牛腸鍋", desc: "Tanya HAKATA 或 Oyama", icon: "fa-utensils" },
-                    { time: "15:30", title: "前往福岡機場", desc: "國內線最後採買 (明太子仙貝)", icon: "fa-plane-departure" },
-                    { time: "17:55", title: "起飛 FUK -> OKA", desc: "19:50 抵達沖繩，搭計程車回飯店", icon: "fa-plane-arrival" },
+                    { time: "15:30", title: "前往福岡機場", desc: "🚇 地鐵：約 5-10 分<br>國內線最後採買 (明太子仙貝)", icon: "fa-plane-departure" },
+                    { time: "17:55", title: "起飛 FUK -> OKA", desc: "19:50 抵達沖繩，🚕 計程車回飯店 (約20分)", icon: "fa-plane-arrival" },
                     { time: "晚餐", title: "居酒屋 / A&W", desc: "飯店附近覓食", icon: "fa-beer" }
                 ]
             },
@@ -343,10 +361,10 @@
                 route: "https://www.google.com/maps/dir/THE+NEST+HOTEL+NAHA/Naminoue+Shrine/Makishi+Public+Market/Kokusai-dori/Umikaji+Terrace+Senagajima",
                 mapFocus: "Makishi Public Market",
                 events: [
-                    { time: "10:00", title: "波上宮", desc: "海邊神社，買書包御守", icon: "fa-torii-gate", link: "Naminoue Shrine" },
-                    { time: "12:00", title: "牧志公設市場", desc: "1F挑海鮮(夜光貝/刺身)，2F代客料理", icon: "fa-fish", link: "Makishi Public Market", highlight: true },
+                    { time: "10:00", title: "波上宮", desc: "🚕 計程車：約 10 分<br>海邊神社，買書包御守", icon: "fa-torii-gate", link: "Naminoue Shrine" },
+                    { time: "12:00", title: "牧志公設市場", desc: "🚕 計程車：約 10 分<br>1F挑海鮮(夜光貝/刺身)，2F代客料理", icon: "fa-fish", link: "Makishi Public Market", highlight: true },
                     { time: "14:30", title: "國際通", desc: "唐吉訶德、Calbee+ 現炸薯條", icon: "fa-bag-shopping" },
-                    { time: "17:00", title: "瀨長島", desc: "Umikaji Terrace 看飛機降落與夕陽", icon: "fa-plane" },
+                    { time: "17:00", title: "瀨長島", desc: "🚕 計程車：約 25 分<br>Umikaji Terrace 看飛機降落與夕陽", icon: "fa-plane" },
                     { time: "晚餐", title: "幸福鬆餅 / 傑克牛排", desc: "看夕陽吃鬆餅 或 回市區吃肉", icon: "fa-utensils" }
                 ]
             },
@@ -357,7 +375,7 @@
                 route: "https://www.google.com/maps/dir/THE+NEST+HOTEL+NAHA/Naha+Airport",
                 mapFocus: "Naha Airport",
                 events: [
-                    { time: "09:30", title: "退房前往機場", desc: "搭計程車", icon: "fa-taxi" },
+                    { time: "09:30", title: "退房前往機場", desc: "🚕 計程車：約 20 分", icon: "fa-taxi" },
                     { time: "10:30", title: "豬肉蛋飯糰 (Potama)", desc: "國內線航廈，必吃炸蝦口味", icon: "fa-rice-cracker" },
                     { time: "11:55", title: "起飛 CI 0121", desc: "OKA -> TPE", icon: "fa-plane-departure", highlight: true }
                 ]
@@ -457,8 +475,8 @@
                 ]
             },
             {
-                region: "九州 (Kyushu)",
-                anchor: "guide-kyushu",
+                region: "別府 & 門司港 (Beppu & Mojiko)",
+                anchor: "guide-beppu",
                 items: [
                     {
                         title: "九州自然動物園",
@@ -470,23 +488,94 @@
                     {
                         title: "別府纜車 (鶴見岳)",
                         mapQuery: "Beppu Ropeway",
-                        hours: "09:00 - 17:00",
-                        closed: "無休",
-                        content: "搭乘大型纜車只需 10 分鐘即可抵達標高 1300 公尺的山頂。冬天非常有機會看到樹枝上結滿「霧淞」的銀白世界。"
+                        hours: "通常 9:00-17:00 / 冬季(11/15-3/14) 9:00-16:30",
+                        closed: "夜間營運需確認",
+                        content: `搭乘大型纜車只需 10 分鐘即可抵達標高 1300 公尺的山頂。冬天非常有機會看到樹枝上結滿「霧淞」的銀白世界。<br><br>
+                        <div class="bg-journal-bg/50 p-2 rounded text-xs text-gray-600 border border-journal-line">
+                            <b>💰 票價：</b><br>
+                            大人：往返 ¥1,800 / 單程 ¥1,200<br>
+                            小孩：往返 ¥900 / 單程 ¥600
+                        </div>
+                        <div class="mt-2 text-xs flex space-x-3">
+                            <a href="http://www.beppu-ropeway.co.jp/" target="_blank" class="text-journal-blue hover:text-journal-accent flex items-center"><i class="fa-solid fa-globe mr-1"></i>日文官網</a>
+                            <a href="https://www.beppu-ropeway.co.jp/tw/" target="_blank" class="text-journal-blue hover:text-journal-accent flex items-center"><i class="fa-solid fa-language mr-1"></i>中文官網</a>
+                        </div>`
                     },
                     {
                         title: "別府地獄巡禮",
-                        mapQuery: "Umi Jigoku",
                         hours: "08:00 - 17:00",
                         closed: "無休",
-                        content: "推薦參觀：海地獄 (必去，規模最大)、灶地獄 (CP值高，可喝溫泉水)、血池地獄 (鮮紅色泉水)。"
+                        content: `
+                        <div class="mb-3 text-sm text-gray-600 bg-journal-bg/50 p-2 rounded border border-journal-line">
+                            <b>💰 票價資訊：</b><br>
+                            🎟️ <b>共通券 (7處通票)</b>：成人 ¥2,200 / 小學生 ¥1,000<br>
+                            🎫 <b>單一地獄</b>：成人 ¥450 / 小學生 ¥200<br>
+                            <span class="text-[10px] text-gray-400">*若只參觀 1-4 個地獄，建議買單券較划算。</span>
+                        </div>
+                        
+                        <button onclick="toggleHellDetails()" class="w-full flex items-center justify-between p-2.5 bg-journal-bg border border-journal-line rounded-lg text-journal-ink text-xs font-bold hover:bg-journal-line/50 transition">
+                            <span>🔥 展開 7 大地獄詳情 & 導航</span>
+                            <i id="hells-icon" class="fa-solid fa-chevron-down transition-transform duration-300"></i>
+                        </button>
+
+                        <div id="hells-list" class="hidden mt-3 space-y-3">
+                            <div class="bg-white p-3 rounded-lg border border-journal-line/30 flex justify-between items-start">
+                                <div>
+                                    <div class="text-journal-ink font-bold text-sm">1. 海地獄 (Umi Jigoku)</div>
+                                    <div class="text-gray-500 text-xs mt-1">【必去】國指定名勝，夢幻蒂芬妮藍泉水。</div>
+                                </div>
+                                <button onclick="openMap('Umi Jigoku')" class="text-journal-brown hover:text-journal-accent p-1"><i class="fa-solid fa-location-arrow"></i></button>
+                            </div>
+                            <div class="bg-white p-3 rounded-lg border border-journal-line/30 flex justify-between items-start">
+                                <div>
+                                    <div class="text-journal-ink font-bold text-sm">2. 灶地獄 (Kamado Jigoku)</div>
+                                    <div class="text-gray-500 text-xs mt-1">【CP值高】一處看多種顏色，可喝溫泉水。</div>
+                                </div>
+                                <button onclick="openMap('Kamado Jigoku')" class="text-journal-brown hover:text-journal-accent p-1"><i class="fa-solid fa-location-arrow"></i></button>
+                            </div>
+                            <div class="bg-white p-3 rounded-lg border border-journal-line/30 flex justify-between items-start">
+                                <div>
+                                    <div class="text-journal-ink font-bold text-sm">3. 血池地獄 (Chinoike Jigoku)</div>
+                                    <div class="text-gray-500 text-xs mt-1">最古老天然地獄，整池鮮紅如血。</div>
+                                </div>
+                                <button onclick="openMap('Chinoike Jigoku')" class="text-journal-brown hover:text-journal-accent p-1"><i class="fa-solid fa-location-arrow"></i></button>
+                            </div>
+                            <div class="bg-white p-3 rounded-lg border border-journal-line/30 flex justify-between items-start">
+                                <div>
+                                    <div class="text-journal-ink font-bold text-sm">4. 鬼石坊主地獄</div>
+                                    <div class="text-gray-500 text-xs mt-1">灰色熱泥漿冒泡，狀似和尚頭。</div>
+                                </div>
+                                <button onclick="openMap('Oniishibozu Jigoku')" class="text-journal-brown hover:text-journal-accent p-1"><i class="fa-solid fa-location-arrow"></i></button>
+                            </div>
+                            <div class="bg-white p-3 rounded-lg border border-journal-line/30 flex justify-between items-start">
+                                <div>
+                                    <div class="text-journal-ink font-bold text-sm">5. 白池地獄</div>
+                                    <div class="text-gray-500 text-xs mt-1">日式庭園風格，泉水呈青白色。</div>
+                                </div>
+                                <button onclick="openMap('Shiraike Jigoku')" class="text-journal-brown hover:text-journal-accent p-1"><i class="fa-solid fa-location-arrow"></i></button>
+                            </div>
+                            <div class="bg-white p-3 rounded-lg border border-journal-line/30 flex justify-between items-start">
+                                <div>
+                                    <div class="text-journal-ink font-bold text-sm">6. 鬼山地獄 (鱷魚地獄)</div>
+                                    <div class="text-gray-500 text-xs mt-1">利用溫泉熱飼養大量鱷魚。</div>
+                                </div>
+                                <button onclick="openMap('Oniyama Jigoku')" class="text-journal-brown hover:text-journal-accent p-1"><i class="fa-solid fa-location-arrow"></i></button>
+                            </div>
+                            <div class="bg-white p-3 rounded-lg border border-journal-line/30 flex justify-between items-start">
+                                <div>
+                                    <div class="text-journal-ink font-bold text-sm">7. 龍卷地獄</div>
+                                    <div class="text-gray-500 text-xs mt-1">間歇泉，約30-40分鐘噴發一次。</div>
+                                </div>
+                                <button onclick="openMap('Tatsumaki Jigoku')" class="text-journal-brown hover:text-journal-accent p-1"><i class="fa-solid fa-location-arrow"></i></button>
+                            </div>
+                        </div>`
                     },
                     {
                         title: "八幡竈門神社",
                         mapQuery: "Hachiman Kamado Shrine",
                         hours: "全日開放 (社務所 09:00-17:00)",
                         closed: "無",
-                        content: "位於別府，因與動漫《鬼滅之刃》主角姓氏相同，且有許多傳說與劇情吻合，成為粉絲朝聖地。"
+                        content: "位於別府，因與動漫《鬼滅之刃》主角姓氏相同，且有許多傳說與劇情吻合，成為粉絲朝聖地。神社內有許多鬼滅相關的繪馬與裝飾，風景也相當清幽。"
                     },
                     {
                         title: "九州鐵道紀念館",
@@ -501,7 +590,13 @@
                         hours: "全日開放",
                         closed: "無",
                         content: "充滿大正浪漫風格的紅磚建築群。必看門司港車站、藍翼橋 (整點會開合)。必吃燒咖哩 (Baked Curry)。"
-                    },
+                    }
+                ]
+            },
+            {
+                region: "福岡 (Fukuoka)",
+                anchor: "guide-fukuoka",
+                items: [
                     {
                         title: "LaLaport 福岡",
                         mapQuery: "LaLaport Fukuoka",
@@ -514,7 +609,7 @@
                         mapQuery: "Fukuoka City Science Museum",
                         hours: "09:30 - 18:00",
                         closed: "每週二 (遇假日則隔日休)、年末年初",
-                        content: "位於六本松蔦屋書店樓上。館內有許多關於太空、人體、物理的互動裝置，還有最新的天象儀。"
+                        content: "位於六本松蔦屋書店樓上。館內有許多關於太空、人體、物理的互動裝置，還有最新的天象儀。設計充滿未來感，非常適合小學生寓教於樂。"
                     },
                     {
                         title: "TeamLab Forest 福岡",
@@ -549,6 +644,7 @@
              {
                 region: "旅遊小貼士 (Tips)",
                 anchor: "guide-tips",
+                noCollapse: true,
                 items: [
                     {
                         title: "沖繩自駕小撇步",
@@ -562,12 +658,26 @@
         // --- Shopping Data ---
         const shoppingData = [
             {
+                brand: "Don Quijote (唐吉軻德)",
+                icon: "fa-cart-shopping", // Using a cart icon for variety
+                stores: [
+                    { area: "沖繩", name: "國際通店 (24H)", desc: "那霸市區最方便，B1-4F 超大賣場", link: "Don Quijote Kokusai Dori" },
+                    { area: "沖繩", name: "MEGA 宜野灣店", desc: "中部自駕推薦，停車方便且寬敞", link: "MEGA Don Quijote Ginowan" },
+                    { area: "福岡", name: "福岡天神本店 (24H)", desc: "位於天神核心區，貨源充足", link: "Don Quijote Fukuoka Tenjin Main Store" },
+                    { area: "福岡", name: "中洲店 (24H)", desc: "近博多/運河城，位於一蘭總店附近", link: "Don Quijote Nakasu" },
+                    { area: "九州", name: "別府店 (9:00-3:00)", desc: "別府自駕補貨點，有免費停車場", link: "Don Quijote Beppu" }
+                ]
+            },
+            {
                 brand: "3COINS+Plus",
                 icon: "fa-coins",
                 stores: [
                     { area: "沖繩", name: "那霸 Main Place 店 (1F)", desc: "新都心 San-A Naha Main Place", link: "3COINS+plus Naha Main Place" },
                     { area: "沖繩", name: "永旺夢樂城來客夢店 (1F)", desc: "Aeon Mall Okinawa Rycom", link: "3COINS+plus Aeon Mall Okinawa Rycom" },
-                    { area: "沖繩", name: "浦添西海岸 Parco City 店 (1F)", desc: "SAN-A Parco City", link: "3COINS+plus Okinawa Parco City" }
+                    { area: "沖繩", name: "浦添西海岸 Parco City 店 (1F)", desc: "SAN-A Parco City", link: "3COINS+plus Okinawa Parco City" },
+                    { area: "福岡", name: "米納天神店 (B1F)", desc: "Mina Tenjin B1F", link: "3COINS+plus Mina Tenjin" },
+                    { area: "福岡", name: "天神地下街店", desc: "西2番街 312号", link: "3COINS Tenjin Chikagai" },
+                    { area: "福岡", name: "LaLaport 福岡店 (1F)", desc: "LaLaport Fukuoka 1F", link: "3COINS+plus LaLaport Fukuoka" }
                 ]
             },
             {
@@ -597,6 +707,20 @@
                     { area: "沖繩", name: "永旺夢樂城來客夢店 (4F)", desc: "Aeon Mall Okinawa Rycom", link: "BREEZE Aeon Mall Okinawa Rycom" },
                     { area: "沖繩", name: "浦添 Parco City 店 (3F)", desc: "SAN-A Parco City", link: "BREEZE Okinawa Parco City" },
                     { area: "沖繩", name: "那霸 Main Place 店 (2F)", desc: "San-A Naha Main Place", link: "BREEZE Naha Main Place" }
+                ]
+            },
+            {
+                brand: "Alpen FUKUOKA",
+                icon: "fa-person-running",
+                stores: [
+                    { area: "福岡", name: "博多運河城店 (South Bldg 1-3F)", desc: "西日本最大級運動用品店，品項超全", link: "Alpen FUKUOKA Canal City" }
+                ]
+            },
+            {
+                brand: "Super Sports Xebio",
+                icon: "fa-basketball",
+                stores: [
+                    { area: "福岡", name: "天神 Solaria Plaza 店 (6F)", desc: "位於天神核心，運動品牌齊全", link: "Super Sports Xebio Fukuoka Tenjin" }
                 ]
             },
             {
@@ -1118,6 +1242,18 @@
                 icon.classList.remove('rotate-180');
             }
         }
+        
+        function toggleHellDetails() {
+            const el = document.getElementById('hells-list');
+            const icon = document.getElementById('hells-icon');
+            if (el.classList.contains('hidden')) {
+                el.classList.remove('hidden');
+                icon.classList.add('rotate-180');
+            } else {
+                el.classList.add('hidden');
+                icon.classList.remove('rotate-180');
+            }
+        }
 
         function render() {
             const container = document.getElementById('app-container');
@@ -1138,6 +1274,26 @@
         function renderPlan(container) {
             let html = `<div class="space-y-8 fade-in">`;
             
+            // 1. Date Navigation Bar
+            let navHtml = `
+                <div class="sticky top-0 z-10 bg-journal-bg/95 backdrop-blur border-b border-journal-line py-2 px-2 -mx-4 mb-4 overflow-x-auto hide-scrollbar flex space-x-2 shadow-sm">
+            `;
+            
+            tripData.forEach((day, index) => {
+                // Extract simple date (e.g., "01/28")
+                const dateStr = day.date.split(' ')[0]; 
+                navHtml += `
+                    <button onclick="document.getElementById('day-${index}').scrollIntoView({behavior: 'smooth', block: 'center'})" 
+                        class="flex-none px-3 py-1.5 rounded-lg border border-journal-line bg-white text-journal-ink text-xs font-bold shadow-sm whitespace-nowrap hover:bg-journal-accent hover:text-white transition">
+                        <span class="block text-[10px] text-gray-400">Day ${index + 1}</span>
+                        ${dateStr}
+                    </button>
+                `;
+            });
+            
+            navHtml += `</div>`;
+            html += navHtml;
+            
             tripData.forEach((day, index) => {
                 const mapEmbedUrl = `https://maps.google.com/maps?q=${encodeURIComponent(day.mapFocus)}&t=&z=13&ie=UTF8&iwloc=&output=embed`;
                 
@@ -1145,7 +1301,7 @@
                 let tapeClass = (index < 4 || index >= 9) ? 'washi-tape-blue' : 'washi-tape-green';
                 
                 html += `
-                    <div class="journal-card mt-4">
+                    <div id="day-${index}" class="journal-card mt-4 scroll-mt-24">
                         <div class="washi-tape-top ${tapeClass}"></div>
                         
                         <div class="px-5 py-4 border-b border-journal-line flex justify-between items-end bg-white rounded-t-xl">
@@ -1237,10 +1393,10 @@
              
              shoppingData.forEach((brand, index) => {
                  html += `
-                    <div class="bg-white rounded-xl border border-journal-line overflow-hidden">
+                    <div class="bg-white rounded-xl border border-journal-line overflow-hidden shadow-sm">
                         <button onclick="toggleShopDetails('shop-${index}')" class="w-full flex items-center justify-between p-3 bg-white hover:bg-gray-50 transition-colors">
                             <div class="flex items-center">
-                                <div class="w-8 h-8 rounded-full bg-journal-accent/10 flex items-center justify-center text-journal-accent mr-3">
+                                <div class="w-8 h-8 rounded-full bg-journal-accent/10 flex items-center justify-center text-journal-accent mr-3 text-sm">
                                     <i class="fa-solid ${brand.icon}"></i>
                                 </div>
                                 <h4 class="font-bold text-journal-ink text-left">${brand.brand}</h4>
@@ -1268,53 +1424,61 @@
              html += `</div></div>`;
 
              // Food Section Header
-             html += `<div id="section-food" class="scroll-mt-40"></div>`; // Adjusted scroll margin
-
-             // Food Section Cards
-             foodData.forEach(region => {
-                 html += `
-                    <div class="journal-card p-5">
-                        <h3 class="font-bold text-journal-ink text-lg pb-3 border-b-2 border-dashed border-journal-line mb-4 flex items-center">
-                            <i class="fa-solid fa-utensils text-journal-brown mr-2"></i> ${region.area}
+             html += `<div id="section-food" class="scroll-mt-40 p-1">
+                        <h3 class="font-bold text-journal-ink text-lg mb-4 flex items-center px-2">
+                            <i class="fa-solid fa-utensils text-journal-brown mr-2"></i> 美食地圖
                         </h3>
-                        <div class="space-y-4">
-                 `;
-                 
-                 region.spots.forEach(spot => {
-                     html += `
-                        <div class="flex justify-between items-start group">
-                            <div class="flex items-start space-x-3">
-                                <div class="w-8 h-8 rounded-full bg-journal-bg flex items-center justify-center text-journal-brown shrink-0 text-xs mt-0.5">
-                                    <i class="fa-solid ${spot.icon}"></i>
+                        <div class="space-y-3">`;
+
+             // Food Section Cards (Collapsible)
+             foodData.forEach((region, index) => {
+                 html += `
+                    <div class="bg-white rounded-xl border border-journal-line overflow-hidden shadow-sm">
+                        <button onclick="toggleShopDetails('food-${index}')" class="w-full flex items-center justify-between p-4 bg-white hover:bg-gray-50 transition-colors">
+                            <div class="flex items-center">
+                                <div class="w-8 h-8 rounded-full bg-journal-bg flex items-center justify-center text-journal-brown mr-3 text-sm">
+                                    <i class="fa-solid fa-utensils"></i>
                                 </div>
-                                <div class="flex-1">
-                                    <div class="flex items-center space-x-2 flex-wrap">
-                                        <h4 class="font-bold text-journal-ink text-sm">${spot.name}</h4>
-                                        <span class="text-[10px] text-journal-brown bg-white border border-journal-line px-1 rounded">${spot.type}</span>
-                                    </div>
-                                    <div class="flex items-center text-[10px] text-journal-accent mt-0.5 font-bold">
-                                        <i class="fa-solid fa-yen-sign mr-0.5"></i> ${spot.price}
-                                    </div>
-                                    <p class="text-xs text-gray-500 mt-0.5">${spot.desc}</p>
-                                    
-                                    ${spot.reserve ? `
-                                    <a href="${spot.reserve}" target="_blank" class="inline-flex items-center mt-1.5 px-2 py-1 bg-journal-accent/10 border border-journal-accent/30 rounded text-[10px] text-journal-accent hover:bg-journal-accent hover:text-white transition">
-                                        <i class="fa-solid fa-calendar-check mr-1"></i> 線上訂位
-                                    </a>
-                                    ` : ''}
-                                </div>
+                                <h4 class="font-bold text-journal-ink text-left text-sm">${region.area}</h4>
                             </div>
-                            <button onclick="openMap('${spot.link}')" class="text-journal-line hover:text-journal-accent transition-colors p-2 self-start">
-                                <i class="fa-solid fa-location-arrow text-sm"></i>
-                            </button>
+                            <i id="icon-food-${index}" class="fa-solid fa-chevron-down text-journal-brown text-sm transition-transform duration-300"></i>
+                        </button>
+                        
+                        <div id="food-${index}" class="hidden bg-journal-bg/30 border-t border-dashed border-journal-line p-4 space-y-4">
+                            ${region.spots.map(spot => `
+                                <div class="flex justify-between items-start group">
+                                    <div class="flex items-start space-x-3">
+                                        <div class="w-8 h-8 rounded-full bg-white border border-journal-line flex items-center justify-center text-journal-brown shrink-0 text-xs mt-0.5">
+                                            <i class="fa-solid ${spot.icon}"></i>
+                                        </div>
+                                        <div class="flex-1">
+                                            <div class="flex items-center space-x-2 flex-wrap">
+                                                <h4 class="font-bold text-journal-ink text-sm">${spot.name}</h4>
+                                                <span class="text-[10px] text-journal-brown bg-white border border-journal-line px-1 rounded">${spot.type}</span>
+                                            </div>
+                                            <div class="flex items-center text-[10px] text-journal-accent mt-0.5 font-bold">
+                                                <i class="fa-solid fa-yen-sign mr-0.5"></i> ${spot.price}
+                                            </div>
+                                            <p class="text-xs text-gray-500 mt-0.5 leading-relaxed">${spot.desc}</p>
+                                            
+                                            ${spot.reserve ? `
+                                            <a href="${spot.reserve}" target="_blank" class="inline-flex items-center mt-2 px-2 py-1 bg-white border border-journal-accent/30 rounded text-[10px] text-journal-accent hover:bg-journal-accent hover:text-white transition shadow-sm">
+                                                <i class="fa-solid fa-calendar-check mr-1"></i> 線上訂位
+                                            </a>
+                                            ` : ''}
+                                        </div>
+                                    </div>
+                                    <button onclick="openMap('${spot.link}')" class="text-journal-line hover:text-journal-accent transition-colors p-2 self-start">
+                                        <i class="fa-solid fa-location-arrow text-sm"></i>
+                                    </button>
+                                </div>
+                            `).join('<div class="border-b border-journal-line/30 my-2"></div>')}
                         </div>
-                     `;
-                 });
-                 
-                 html += `</div></div>`;
+                    </div>
+                 `;
              });
 
-             html += `</div>`;
+             html += `</div></div>`;
              container.innerHTML = html;
         }
 
@@ -1423,8 +1587,11 @@
                         <button onclick="document.getElementById('guide-okinawa').scrollIntoView({behavior: 'smooth'})" class="px-4 py-1.5 rounded-full bg-white border border-journal-blue text-journal-blue text-xs font-bold shadow-sm active:scale-95 transition">
                             <i class="fa-solid fa-water mr-1"></i> 沖繩
                         </button>
-                        <button onclick="document.getElementById('guide-kyushu').scrollIntoView({behavior: 'smooth'})" class="px-4 py-1.5 rounded-full bg-white border border-journal-green text-journal-green text-xs font-bold shadow-sm active:scale-95 transition">
-                            <i class="fa-solid fa-mountain-sun mr-1"></i> 九州
+                        <button onclick="document.getElementById('guide-beppu').scrollIntoView({behavior: 'smooth'})" class="px-4 py-1.5 rounded-full bg-white border border-journal-green text-journal-green text-xs font-bold shadow-sm active:scale-95 transition">
+                            <i class="fa-solid fa-mountain-sun mr-1"></i> 別府/門司
+                        </button>
+                         <button onclick="document.getElementById('guide-fukuoka').scrollIntoView({behavior: 'smooth'})" class="px-4 py-1.5 rounded-full bg-white border border-journal-brown text-journal-brown text-xs font-bold shadow-sm active:scale-95 transition">
+                            <i class="fa-solid fa-city mr-1"></i> 福岡
                         </button>
                     </div>
                 </div>
@@ -1433,14 +1600,33 @@
             guideData.forEach(section => {
                 const anchorId = section.anchor ? `id="${section.anchor}"` : '';
                 const scrollClass = section.anchor ? 'scroll-mt-40' : '';
+                const isCollapsible = !section.noCollapse;
+                
+                // Icon selection
+                const iconClass = section.region.includes('Tips') ? 'fa-lightbulb text-journal-accent' : 'fa-map-location-dot text-journal-green';
 
                 html += `
-                    <div ${anchorId} class="journal-card p-5 ${scrollClass}">
+                    <div ${anchorId} class="journal-card p-5 ${scrollClass}">`;
+                
+                if (isCollapsible) {
+                     html += `
+                        <button onclick="toggleShopDetails('${section.anchor}-details')" class="w-full flex items-center justify-between">
+                            <h3 class="font-bold text-journal-ink text-lg pb-3 border-b-2 border-dashed border-journal-line mb-4 flex items-center">
+                                <i class="fa-solid ${iconClass} mr-2"></i> ${section.region}
+                            </h3>
+                            <i id="icon-${section.anchor}-details" class="fa-solid fa-chevron-down text-journal-brown text-sm transition-transform duration-300"></i>
+                        </button>
+                        <div id="${section.anchor}-details" class="space-y-6 hidden">`;
+                } else {
+                    html += `
                         <h3 class="font-bold text-journal-ink text-lg pb-3 border-b-2 border-dashed border-journal-line mb-4 flex items-center">
-                            <i class="fa-solid fa-map-location-dot text-journal-green mr-2"></i> ${section.region}
+                            <i class="fa-solid ${iconClass} mr-2"></i> ${section.region}
                         </h3>
-                        <div class="space-y-6">
-                            ${section.items.map(item => `
+                        <div class="space-y-6">`;
+                }
+
+                // Items rendering
+                html += section.items.map(item => `
                                 <div class="transform transition duration-300">
                                     <div class="flex justify-between items-start mb-2">
                                         <h4 class="font-bold text-journal-ink text-base border-l-4 border-journal-bg pl-2">${item.title}</h4>
@@ -1462,10 +1648,9 @@
                                         ${item.content}
                                     </div>
                                 </div>
-                            `).join('<div class="border-b border-journal-line/30 my-4"></div>')}
-                        </div>
-                    </div>
-                `;
+                            `).join('<div class="border-b border-journal-line/30 my-4"></div>');
+
+                html += `</div></div>`;
             });
 
             html += `</div>`;
@@ -1748,7 +1933,7 @@
                                         <span class="font-bold">¥19,980</span>
                                     </div>
                                 </div>
-                                <button onclick="openMap('ORIX Rent-a-Car Naha Asahibashi Station West')" class="btn-hand mt-3 w-full py-2 bg-white rounded-lg border border-journal-line text-xs text-journal-brown hover:text-journal-accent transition">
+                                <button onclick="openMap('ORIX Rent-a-Car Asahibashi Station West')" class="btn-hand mt-3 w-full py-2 bg-white rounded-lg border border-journal-line text-xs text-journal-brown hover:text-journal-accent transition">
                                     <i class="fa-solid fa-location-arrow mr-1.5"></i> 導航至旭橋站西店
                                 </button>
                             </div>
