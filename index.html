@@ -253,8 +253,9 @@
                 date: "02/01 (日)",
                 title: "Day 5: 移動日 & 鬼滅地獄巡禮",
                 area: "九州別府",
-                route: "https://www.google.com/maps/dir/Fukuoka+Airport/Yamada+SA/Kamado+Jigoku/Jigoku+Mushi+Kobo+Kannawa/AMANEK+Beppu+YULA-RE",
-                mapFocus: "Kamado Jigoku",
+                // Updated route to include SAs
+                route: "https://www.google.com/maps/dir/Toyota+Rent+a+Car+Fukuoka+Airport/Kiyama+Parking+Area+(Down)/Yamada+Service+Area+Down/Beppu+Bay+Service+Area/AMANEK+Beppu+YULA-RE",
+                mapFocus: "Beppu Bay Service Area",
                 events: [
                     { time: "10:10", title: "起飛 OKA -> FUK", desc: "12:00 抵達福岡，領行李", icon: "fa-plane-departure" },
                     { time: "13:30", title: "博多取車 (Sienta)", desc: "🚇 接駁車：約 15 分<br>Toyota 福岡機場店取車，確認雪胎", icon: "fa-car", highlight: true, alert: "important" },
@@ -971,6 +972,39 @@
                 area: "福岡 - 天神 (Fukuoka Tenjin)",
                 spots: [
                     { 
+                        name: "かわ屋 警固店 (Kawaya Kego)", 
+                        type: "串燒", 
+                        icon: "fa-drumstick-bite", 
+                        desc: "【總本店】福岡雞皮串燒傳奇名店，需預約", 
+                        link: "Kawaya Kego",
+                        price: "¥2,000 ~ ¥4,000"
+                    },
+                    { 
+                        name: "麵屋兼虎 (天神本店)", 
+                        type: "沾麵", 
+                        icon: "fa-bowl-rice", 
+                        desc: "福岡No.1濃厚沾麵，排隊名店 (天神南)", 
+                        link: "Menya Kanetora Tenjin",
+                        price: "¥1,000 ~ ¥1,500"
+                    },
+                    { 
+                        name: "麵屋兼虎 (福岡PARCO店)", 
+                        type: "沾麵", 
+                        icon: "fa-bowl-rice", 
+                        desc: "【分店】福岡PARCO本館 B1，逛街用餐方便", 
+                        link: "Menya Kanetora Fukuoka Parco",
+                        price: "¥1,000 ~ ¥1,500"
+                    },
+                    { 
+                        name: "元祖博多明太重 (西中洲本店)", 
+                        type: "蓋飯", 
+                        icon: "fa-bowl-rice", 
+                        desc: "【本店】最經典整條明太子蓋飯，裝潢豪華", 
+                        link: "Ganso Hakata Mentaiju",
+                        price: "¥2,000 ~ ¥4,000",
+                        reserve: "https://www.mentaiju.com/reserve"
+                    },
+                    { 
                         name: "ShinShin 拉麵 (天神本店)", 
                         type: "拉麵", 
                         icon: "fa-bowl-rice", 
@@ -998,7 +1032,7 @@
                         name: "Full Full (天神店)", 
                         type: "麵包", 
                         icon: "fa-bread-slice", 
-                        desc: "天神站步行2-3分鐘，人潮較少。10:00–20:00（週二公休）", 
+                        desc: "天神站步行2-3分鐘。10:00–20:00（週二公休）", 
                         link: "福岡市中央区天神3-3-5 FULL FULL BLD",
                         price: "¥300 ~ ¥1,000"
                     },
@@ -1017,21 +1051,52 @@
                         desc: "排隊名店，活車蝦超鮮甜", 
                         link: "Hyotan Sushi",
                         price: "¥2,000 ~ ¥5,000"
-                    },
-                    { 
-                        name: "元祖博多明太重", 
-                        type: "蓋飯", 
-                        icon: "fa-bowl-rice", 
-                        desc: "豪華整條明太子蓋飯", 
-                        link: "Ganso Hakata Mentaiju",
-                        price: "¥2,000 ~ ¥4,000",
-                        reserve: "https://www.mentaiju.com/reserve"
                     }
                 ]
             },
             {
                 area: "福岡 - 博多 (Fukuoka Hakata)",
                 spots: [
+                    { 
+                        name: "博多かわ屋 祇園店 (Kawaya Gion)", 
+                        type: "串燒", 
+                        icon: "fa-drumstick-bite", 
+                        desc: "博多名物雞皮串，口感酥脆，近博多站/櫛田神社", 
+                        link: "Hakata Kawaya Gion",
+                        price: "¥2,000 ~ ¥4,000"
+                    },
+                    { 
+                        name: "Super Mario (博多明太子生義大利麵)", 
+                        type: "義麵", 
+                        icon: "fa-utensils", 
+                        desc: "近期爆紅排隊店，Q彈生義大利麵", 
+                        link: "Hakata Mentaiko Nama Pasta Super Mario",
+                        price: "¥1,000 ~ ¥2,000"
+                    },
+                    { 
+                        name: "麵屋兼虎 (博多DEITOS店)", 
+                        type: "沾麵", 
+                        icon: "fa-bowl-rice", 
+                        desc: "【分店】博多站筑紫口 2F 博多麵街道內", 
+                        link: "Menya Kanetora Hakata Deitos",
+                        price: "¥1,000 ~ ¥1,500"
+                    },
+                    { 
+                        name: "元祖博多明太重 (博多站店)", 
+                        type: "便當", 
+                        icon: "fa-box-open", 
+                        desc: "【外帶專門】位於博多站內，適合買回飯店吃", 
+                        link: "Ganso Hakata Mentaiju Hakata Station",
+                        price: "¥1,500 ~ ¥2,500"
+                    },
+                    { 
+                        name: "博多雞皮大臣 (KITTE博多店)", 
+                        type: "串燒", 
+                        icon: "fa-drumstick-bite", 
+                        desc: "博多名物雞皮串，外酥內軟必吃。KITTE博多 B1", 
+                        link: "Hakata Torikawa Daijin KITTE Hakata",
+                        price: "¥1,500 ~ ¥3,000"
+                    },
                     { 
                         name: "ShinShin 拉麵 (博多DEITOS店)", 
                         type: "拉麵", 
@@ -1068,7 +1133,7 @@
                         name: "Full Full (博多店)", 
                         type: "麵包", 
                         icon: "fa-bread-slice", 
-                        desc: "博多運河城旁，櫛田神社前站步行2分鐘。10:00–19:00（週二公休）", 
+                        desc: "博多運河城旁。10:00–19:00（週二公休）", 
                         link: "福岡市博多区祇園町9-3",
                         price: "¥300 ~ ¥1,000"
                     },
@@ -1222,7 +1287,7 @@
             "護照 (確認效期)", "日本駕照譯本", "台灣駕照正本", "VJW 登錄 (Visit Japan Web)",
             "行動電源 & 線", "行動網卡 (eSIM)", 
             "九州租車：確認雪胎 (Studless Tires)", "預約：African Safari Jungle Bus", 
-            "預約餐廳：敘敘苑, 本部牧場, 華味鳥", "保暖衣物 (九州2-10度/手套帽子)",
+            "預約餐廳：敘敘苑, 百年古家 大家", "保暖衣物 (九州2-10度/手套帽子)",
             "泳衣 (別府飯店用)", "信用卡 & 日幣現金"
         ];
 
@@ -1237,15 +1302,33 @@
 
         function init() {
             render();
-            // Calculate Day number based on today
-            const start = new Date("2026-01-28");
+            
+            // 設定出發日期：2026年1月28日
+            const start = new Date("2026-01-28T00:00:00");
             const now = new Date();
+            
+            // 計算差異時間
             const diffTime = now - start;
-            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
-            if(diffDays >= 1 && diffDays <= 12) {
-                document.getElementById('current-day-display').innerText = diffDays;
+            // 換算成天數 (向下取整，這樣 1/28 當天會是 0，我們顯示時 +1 變成 Day 1)
+            const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24)); 
+            
+            const displayEl = document.getElementById('current-day-display');
+            
+            if (diffDays >= 0 && diffDays < 12) {
+                // 旅程中 (Day 1 ~ Day 12)
+                displayEl.innerText = diffDays + 1;
+                displayEl.classList.remove('text-journal-blue', 'text-gray-400');
+                displayEl.classList.add('text-journal-accent');
+            } else if (diffDays >= 12) {
+                // 旅程結束
+                displayEl.innerText = "End";
+                displayEl.classList.remove('text-journal-accent', 'text-journal-blue');
+                displayEl.classList.add('text-gray-400');
             } else {
-                 document.getElementById('current-day-display').innerText = "-";
+                // 出發前倒數 (顯示負數)
+                displayEl.innerText = diffDays;
+                displayEl.classList.remove('text-journal-accent', 'text-gray-400');
+                displayEl.classList.add('text-journal-blue');
             }
         }
 
@@ -1486,16 +1569,16 @@
              `;
              
              // Shopping Section
-             html += `<div id="section-shopping" class="scroll-mt-40 p-1">
-                        <h3 class="font-bold text-journal-accent text-lg mb-4 flex items-center px-2">
+             html += `<div id="section-shopping" class="scroll-mt-40 journal-card p-5 border-2 border-journal-accent/20 bg-journal-bg/30">
+                        <h3 class="font-bold text-journal-accent text-lg mb-4 flex items-center">
                             <i class="fa-solid fa-bag-shopping mr-2"></i> 必買購物清單
                         </h3>
-                        <div class="space-y-3">`;
+                        <div class="space-y-4">`;
              
              shoppingData.forEach((brand, index) => {
                  html += `
                     <div class="bg-white rounded-xl border border-journal-line overflow-hidden shadow-sm">
-                        <button onclick="toggleShopDetails('shop-${index}')" class="w-full flex items-center justify-between p-4 bg-white hover:bg-gray-50 transition-colors">
+                        <button onclick="toggleShopDetails('shop-${index}')" class="w-full flex items-center justify-between p-3 bg-white hover:bg-gray-50 transition-colors">
                             <div class="flex items-center">
                                 <div class="w-8 h-8 rounded-full bg-journal-accent/10 flex items-center justify-center text-journal-accent mr-3 text-sm">
                                     <i class="fa-solid ${brand.icon}"></i>
@@ -1505,7 +1588,7 @@
                             <i id="icon-shop-${index}" class="fa-solid fa-chevron-down text-journal-brown text-sm transition-transform duration-300"></i>
                         </button>
                         
-                        <div id="shop-${index}" class="hidden bg-journal-bg/30 border-t border-dashed border-journal-line p-3 space-y-3">
+                        <div id="shop-${index}" class="hidden bg-journal-bg/20 border-t border-dashed border-journal-line p-3 space-y-3">
                             ${brand.stores.map(store => `
                                 <div class="flex justify-between items-start text-xs pb-2 border-b border-journal-line/30 last:border-0 last:pb-0">
                                     <div>
